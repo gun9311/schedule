@@ -24,7 +24,7 @@ import java.util.Calendar;
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/training")
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('USER') || hasRole('MODERATOR') || hasRole('COACH')")
 public class TrainingController {
     private final AuthService authService;
     private final UserService userService;

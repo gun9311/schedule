@@ -17,12 +17,13 @@ public class PersonalTrainingDto {
     private final FitUserFullNameDto fitUser;
 
     public PersonalTrainingDto(final Long id, final Date startDate, final Date endDate,final ETrainingStatus status,
-                               final Long coachId, final String name, final String surname, final String patronymic) {
+                               final Long coachId, final String name) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.status = status;
-        this.fitUser = new FitUserFullNameDto(coachId, name, surname, patronymic);
+        // this.fitUser = new FitUserFullNameDto(coachId, name, surname, patronymic);
+        this.fitUser = new FitUserFullNameDto(coachId, name);
     }
 
     public Long getId() {

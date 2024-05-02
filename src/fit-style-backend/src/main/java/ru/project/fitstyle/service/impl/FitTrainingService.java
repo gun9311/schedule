@@ -183,7 +183,7 @@ public class FitTrainingService implements TrainingService {
         for(GroupTraining groupTraining : groupTrainings) {
             List<FitUserFullNameDto> users = new ArrayList<>();
             for(FitUser fitUser : groupTraining.getFitUsers()) {
-                users.add(new FitUserFullNameDto(fitUser.getId(), fitUser.getName(), fitUser.getSurname(), fitUser.getPatronymic()));
+                users.add(new FitUserFullNameDto(fitUser.getId(), fitUser.getName()));
             }
             trainings.add(new GroupTrainingWithUsersDto(groupTraining.getId(), groupTraining.getStartDate(),
                     groupTraining.getEndDate(), groupTraining.getStatus(), groupTraining.getTraining().getName(), users, groupTraining.getFitUsers().size()));
@@ -201,10 +201,8 @@ public class FitTrainingService implements TrainingService {
         for(PersonalTraining personalTraining : personalTrainings) {
             trainings.add(new PersonalTrainingWithUsersDto(personalTraining.getId(), personalTraining.getStartDate(),
                     personalTraining.getEndDate(), personalTraining.getStatus(),
-                    new FitUserFullNameDto(personalTraining.getUser().getId(), personalTraining.getUser().getName(),
-                            personalTraining.getUser().getSurname(), personalTraining.getUser().getPatronymic())));
+                    new FitUserFullNameDto(personalTraining.getUser().getId(), personalTraining.getUser().getName())));
         }
-
         return trainings;
     }
 

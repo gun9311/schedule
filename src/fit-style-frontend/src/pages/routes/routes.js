@@ -56,4 +56,9 @@ export const routes = [
         Component: NewsBoard,
         reqRole: "ROLE_USER"
     },
+    {
+        path: [URL_NEWS, '/'],
+        Component: NewsBoard,
+        reqRole: "ROLE_MODERATOR"
+    },
 ]

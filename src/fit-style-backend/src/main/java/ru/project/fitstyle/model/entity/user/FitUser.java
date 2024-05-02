@@ -36,45 +36,45 @@ public class FitUser {
             nullable = false)
     private String name;
 
-    @Column(name = "surname", length = 20,
-            nullable = false)
-    private String surname;
+    // @Column(name = "surname", length = 20,
+    //         nullable = false)
+    // private String surname;
 
-    @Column(name = "patronymic", length = 20,
-            nullable = false)
-    private String patronymic;
+    // @Column(name = "patronymic", length = 20,
+    //         nullable = false)
+    // private String patronymic;
 
 
 
-    @Column(name = "age", length = 3,
-            nullable = false)
-    private String age;
+    // @Column(name = "age", length = 3,
+    //         nullable = false)
+    // private String age;
 
     @Column(name = "gender", length = 6,
-            nullable = false)
+            nullable = true)
     private String gender;
 
-    @Column(name = "birthdate",
-            nullable = false)
-    private Date birthdate;
+    // @Column(name = "birthdate",
+    //         nullable = false)
+    // private Date birthdate;
 
-    @Column(name = "telephone", length = 20,
-            nullable = false)
-    private String telephone;
+    // @Column(name = "telephone", length = 20,
+    //         nullable = false)
+    // private String telephone;
 
-    @Column(name = "passport", length = 16,
-            nullable = false)
-    private String passport;
+    // @Column(name = "passport", length = 16,
+    //         nullable = false)
+    // private String passport;
 
-    @Column(name = "address", length = 150,
-            nullable = false)
-    private String address;
+    // @Column(name = "address", length = 150,
+    //         nullable = false)
+    // private String address;
 
     @Column(name = "img_URL", length = 100)
     private String imgURL;
 
-    @Column(name = "balance")
-    private Long balance;
+    // @Column(name = "balance")
+    // private Long balance;
 
 
     @Column(name = "is_enabled", nullable = false)
@@ -103,24 +103,32 @@ public class FitUser {
     public FitUser() {
     }
 
-    public FitUser(String name, String surname, String patronymic,
-                   String email, String password, String age,
-                   String gender, Date birthdate, String telephone,
-                   String passport, String address) {
-        this.name = name;
-        this.surname=surname;
-        this.patronymic=patronymic;
-        this.email = email;
-        this.password = password;
-        this.age = age;
-        this.gender = gender;
-        this.birthdate = birthdate;
-        this.telephone = telephone;
-        this.passport = passport;
-        this.address = address;
-        this.balance = 0L;
-        this.isEnabled = true;
+    // public FitUser(String name, String surname, String patronymic,
+    //                String email, String password, String age,
+    //                String gender, Date birthdate, String telephone,
+    //                String passport, String address) {
+    //     this.name = name;
+    //     this.surname=surname;
+    //     this.patronymic=patronymic;
+    //     this.email = email;
+    //     this.password = password;
+    //     this.age = age;
+    //     this.gender = gender;
+    //     this.birthdate = birthdate;
+    //     this.telephone = telephone;
+    //     this.passport = passport;
+    //     this.address = address;
+    //     this.balance = 0L;
+    //     this.isEnabled = true;
+    // }
+    public FitUser(String name, String email, String password, String gender) {
+    this.name = name;
+    this.email = email;
+    this.password = password;
+    this.gender = gender;
+    this.isEnabled = true;
     }
+
 
     public Long getId() {
         return id;
@@ -154,29 +162,29 @@ public class FitUser {
         this.name = name;
     }
 
-    public String getSurname() {
-        return surname;
-    }
+    // public String getSurname() {
+    //     return surname;
+    // }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+    // public void setSurname(String surname) {
+    //     this.surname = surname;
+    // }
 
-    public String getPatronymic() {
-        return patronymic;
-    }
+    // public String getPatronymic() {
+    //     return patronymic;
+    // }
 
-    public void setPatronymic(String patronymic) {
-        this.patronymic = patronymic;
-    }
+    // public void setPatronymic(String patronymic) {
+    //     this.patronymic = patronymic;
+    // }
 
-    public String getAge() {
-        return age;
-    }
+    // public String getAge() {
+    //     return age;
+    // }
 
-    public void setAge(String age) {
-        this.age = age;
-    }
+    // public void setAge(String age) {
+    //     this.age = age;
+    // }
 
     public String getGender() {
         return gender;
@@ -186,37 +194,37 @@ public class FitUser {
         this.gender = gender;
     }
 
-    public Date getBirthdate() {
-        return birthdate;
-    }
+    // public Date getBirthdate() {
+    //     return birthdate;
+    // }
 
-    public void setBirthdate(Date birthdate) {
-        this.birthdate = birthdate;
-    }
+    // public void setBirthdate(Date birthdate) {
+    //     this.birthdate = birthdate;
+    // }
 
-    public String getTelephone() {
-        return telephone;
-    }
+    // public String getTelephone() {
+    //     return telephone;
+    // }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
+    // public void setTelephone(String telephone) {
+    //     this.telephone = telephone;
+    // }
 
-    public String getPassport() {
-        return passport;
-    }
+    // public String getPassport() {
+    //     return passport;
+    // }
 
-    public void setPassport(String passport) {
-        this.passport = passport;
-    }
+    // public void setPassport(String passport) {
+    //     this.passport = passport;
+    // }
 
-    public String getAddress() {
-        return address;
-    }
+    // public String getAddress() {
+    //     return address;
+    // }
 
-    public void setAddress(String address) {
-        this.address = address;
-    }
+    // public void setAddress(String address) {
+    //     this.address = address;
+    // }
 
     public String getImgURL() {
         return imgURL;
@@ -258,13 +266,13 @@ public class FitUser {
         this.subscription = subscription;
     }
 
-    public Long getBalance() {
-        return balance;
-    }
+    // public Long getBalance() {
+    //     return balance;
+    // }
 
-    public void setBalance(Long balance) {
-        this.balance = balance;
-    }
+    // public void setBalance(Long balance) {
+    //     this.balance = balance;
+    // }
 
     public Boolean getEnabled() {
         return isEnabled;

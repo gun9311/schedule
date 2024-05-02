@@ -50,11 +50,11 @@ public class ProfileController {
     /**
      * Change user balance
      * */
-    @PatchMapping("/change-balance")
-    public ResponseEntity<SuccessMessage> changeBalance(@RequestBody final ChangeBalanceRequest changeBalanceRequest) {
-        userService.changeBalance(userService.getUserByEmail(authService.getEmail()), changeBalanceRequest.getSummary());
-        return ResponseEntity.ok(
-                new SuccessMessage("Balance changed successfully!")
-        );
-    }
+    // @PatchMapping("/change-balance")
+    // public ResponseEntity<SuccessMessage> changeBalance(@RequestBody final ChangeBalanceRequest changeBalanceRequest) {
+    //     userService.changeBalance(userService.getUserByEmail(authService.getEmail()), changeBalanceRequest.getSummary());
+    //     return ResponseEntity.ok(
+    //             new SuccessMessage("Balance changed successfully!")
+    //     );
+    // }
 }

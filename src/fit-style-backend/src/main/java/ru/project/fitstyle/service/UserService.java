@@ -19,7 +19,7 @@ public interface UserService {
 
     void saveUser(FitUser fitUser, final List<Role> roles, final Subscription subscription);
 
-    void changeBalance(FitUser fitUser, final Long summary);
+    // void changeBalance(FitUser fitUser, final Long summary);
 
     void changePassword(final Long id, final String password);
 

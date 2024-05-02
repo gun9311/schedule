@@ -40,8 +40,9 @@ public class TestController {
             SubscriptionType subscriptionType = subscriptionTypeRepository.findById(1L).get();
             subscription.setSubscriptionType(subscriptionType);
             subscription.setContractNumber("3453453");
-            FitUser fitUser = new FitUser("test", "test", "test", "test" + Integer.toString(i) + "@gmail.com", "test11111",
-                    "32", "M", new Date(new Date().getTime()), "88005553535", "3543953953", "klfsldflsfla");
+            // FitUser fitUser = new FitUser("test", "test", "test", "test" + Integer.toString(i) + "@gmail.com", "test11111",
+            //         "32", "M", new Date(new Date().getTime()), "88005553535", "3543953953", "klfsldflsfla");
+            FitUser fitUser = new FitUser("name", "test" + Integer.toString(i) + "@gmail.com", "test11111", "M");
             fitUser.setSubscription(subscription);
             Role role = roleRepository.findById(1L).get();
             List<Role> roles = new ArrayList<>();

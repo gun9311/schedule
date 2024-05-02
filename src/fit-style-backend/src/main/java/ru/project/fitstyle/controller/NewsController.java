@@ -17,7 +17,7 @@ import javax.validation.Valid;
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/news")
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('USER') || hasRole('MODERATOR') || hasRole('COACH')")
 public class NewsController {
     private final NewsService newsService;
     private final StorageService imageStorageService;

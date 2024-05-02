@@ -181,12 +181,16 @@ public class UserController {
     /**
      * Help method. Used to create user
      * */
-    private FitUser createFitUser(final AddEditUserRequest request) {
-        return new FitUser(request.getName(), request.getSurname(),
-                request.getPatronymic(), request.getEmail(),
-                encoder.encode(request.getPassword()),
-                request.getAge(), request.getGender(),
-                request.getBirthdate(), request.getTelephone(),
-                request.getPassport(), request.getAddress());
+//     private FitUser createFitUser(final AddEditUserRequest request) {
+//         return new FitUser(request.getName(), request.getSurname(),
+//                 request.getPatronymic(), request.getEmail(),
+//                 encoder.encode(request.getPassword()),
+//                 request.getAge(), request.getGender(),
+//                 request.getBirthdate(), request.getTelephone(),
+//                 request.getPassport(), request.getAddress());
+//     }
+private FitUser createFitUser(final AddEditUserRequest request) {
+        return new FitUser(request.getName(), request.getEmail(),
+                encoder.encode(request.getPassword()), request.getGender());
     }
 }
