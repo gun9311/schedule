@@ -5,7 +5,7 @@ import { firebaseToken } from "../../packages/api";
 import { onMessage } from "firebase/messaging";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyARgEE70vWGD2eLjOovHzoMuogmx5PAiXY",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
   authDomain: "onboard-d43ee.firebaseapp.com",
   projectId: "onboard-d43ee",
   storageBucket: "onboard-d43ee.appspot.com",
