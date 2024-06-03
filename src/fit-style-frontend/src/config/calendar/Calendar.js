@@ -1,16 +1,16 @@
 export const messagesRu = {
-    allDay: 'Весь день',
+    allDay: '하루 종일',
     previous: '<',
     next: '>',
-    today: 'Сегодня',
-    month: 'Месяц',
-    week: 'Неделя',
-    day: 'День',
-    agenda: 'Список',
-    date: 'Дата',
-    time: 'Время',
-    event: 'Ивент',
-    showMore: total => `Показать больше (${total})`
+    today: '오늘',
+    month: '월',
+    week: '주',
+    day: '일',
+    agenda: '일정',
+    date: '날짜',
+    time: '시간',
+    event: '이벤트',
+    showMore: total => `더 보기  (${total})`
 };
 
 export const formats = {

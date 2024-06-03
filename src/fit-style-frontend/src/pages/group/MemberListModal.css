@@ -1,0 +1,84 @@
+/* 모달 배경 */
+.member-modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);  /* 더 어두운 반투명 배경 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999;
+}
+
+/* 모달 내용 */
+.member-modal-content {
+    background: #ffffff;
+    padding: 30px;  /* 더 넓은 패딩 */
+    border-radius: 15px;  /* 더 둥근 모서리 */
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);  /* 더 강한 그림자 효과 */
+    max-width: 600px;  /* 더 넓은 최대 폭 */
+    text-align: center;
+    position: relative;
+    animation: fadeIn 0.3s ease-out;  /* 등장 애니메이션 */
+}
+
+/* 닫기 버튼 */
+.member-modal-content .close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    cursor: pointer;
+    font-size: 25px;  /* 더 큰 글꼴 크기 */
+    color: #333;  /* 더 어두운 색상 */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 회원 목록 스타일 */
+.member-list {
+    list-style: none;
+    padding: 0;
+}
+
+.member-list li {
+    display: flex;
+    align-items: center;
+    background: #f9f9f9;
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+}
+
+.member-list li:hover {
+    transform: translateY(-5px);
+}
+
+.member-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.member-info {
+    text-align: left;
+}
+
+.member-info h4 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.member-info p {
+    margin: 0;
+    color: #666;
+}

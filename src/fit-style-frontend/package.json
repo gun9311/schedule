@@ -9,6 +9,7 @@
     "axios": "^0.22.0",
     "bootstrap": "^5.1.1",
     "cogo-toast": "^4.2.3",
+    "firebase": "^10.12.1",
     "moment": "^2.29.1",
     "payment": "^2.4.6",
     "react": "^17.0.2",

@@ -1,10 +1,20 @@
 import React from 'react';
-
 import "./Login.css";
 import {LoginBackGround} from "./LoginBackGround";
 import {Logo} from "./Logo";
 
-const Login = ({handleLogin, setModalActive, emailState , passwordState}) => {
+const Login = ({handleLogin, setModalActive, emailState , passwordState, oauthLogin, register}) => {
+
+    const handleOAuthLogin = (event) => {
+        event.preventDefault();
+        oauthLogin();
+    };
+
+    const handleRegister = (event) => {
+        event.preventDefault();
+        register();
+    };
+
     const handleRecoverPassword = (event) => {event.preventDefault(); setModalActive(true)}
     return (
       <div>
@@ -21,14 +31,27 @@ const Login = ({handleLogin, setModalActive, emailState , passwordState}) => {
                           <label htmlFor="password"/>
                           <input className="form-control form-control-auth" {...passwordState} autoComplete="on"/>
                       </div>
-                      <div className="d-flex justify-content-between mt-3">
-                          <button className="btn btn-secondary btn-entry"
+                      <div className="d-flex justify-content-center mt-3">
+                          <button className="btn btn-secondary btn-entry " style={{ width: '100%' }}
                                   onClick={handleLogin}>
-                              Войти
+                              로그인
+                          </button>
+                      </div>
+                      <div className="oauth-container">
+                          <button className="oauth-button"
+                                  onClick={handleOAuthLogin} >
+                              <img src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg" alt="Google logo" width="20" height="20" />
+                              Google 계정으로 로그인하기
+                          </button>
+                      </div>
+                      <div className="d-flex justify-content-between mt-3">
+                          <button className="btn text-white"
+                                  onClick={handleRegister}>
+                              회원가입
                           </button>
                           <button className="btn text-white"
                                   onClick={handleRecoverPassword}>
-                              Забыли пароль?
+                              비밀번호 찾기
                           </button>
                       </div>
                   </form>

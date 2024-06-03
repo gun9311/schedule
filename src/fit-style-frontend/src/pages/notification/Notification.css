@@ -1,0 +1,95 @@
+.notification-wrapper {
+    position: fixed;
+    top: 70px;
+    right: 100px;
+    z-index: 1000; /* Ensure it's on top of other elements */
+}
+
+.notification-icon {
+    cursor: pointer;
+    position: relative;
+    background-color: #f39c12;
+    color: white;
+    padding: 8px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.icon {
+    font-size: 24px;
+}
+
+.badge {
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 6px;
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    font-size: 12px;
+}
+
+.notification-dropdown {
+    position: absolute;
+    right: 0;
+    background: white;
+    border: 1px solid #ccc;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    margin-top: 10px;
+}
+
+.dropdown-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.clear-btn {
+    background: none;
+    border: none;
+    color: #f39c12;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.no-notifications {
+    text-align: center;
+    color: #999;
+    padding: 10px 0;
+}
+
+.notification-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-content h5 {
+    margin: 0;
+    font-size: 16px;
+}
+
+.notification-content p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.remove-btn {
+    background: none;
+    border: none;
+    color: #e74c3c;
+    cursor: pointer;
+    font-size: 14px;
+}

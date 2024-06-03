@@ -1,0 +1,98 @@
+/* 전체 레이아웃 및 스타일 */
+.container {
+  margin-top: 20px;
+  padding: 20px;
+  background: #f0f2f5;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* 버튼 스타일 */
+.group-button {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.button {
+  background: linear-gradient(135deg, #6e8efb, #a777e3);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  margin: 0 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.button:hover {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+}
+
+.button.active {
+  background: linear-gradient(135deg, #a777e3, #6e8efb);
+}
+
+/* 테이블 스타일 */
+.table-responsive {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 1rem;
+  color: #212529;
+  border-collapse: separate;
+  border-spacing: 0 15px;
+}
+
+.table th,
+.table td {
+  padding: 1rem;
+  vertical-align: middle;
+}
+
+.table th {
+  background-color: #e9ecef;
+  color: #495057;
+  font-weight: 600;
+  text-align: center;
+}
+
+.table td {
+  background: white;
+  border-top: none;
+  border-bottom: none;
+}
+
+.table .group-id {
+  text-align: center;
+}
+
+.table .group-info {
+  text-align: left;
+}
+
+.table .group-status {
+  text-align: center;
+}
+
+.table .group-status button {
+  background: #28a745;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.table .group-status button:hover {
+  background: #218838;
+}
+
+.table .group-status button:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}

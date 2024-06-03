@@ -9,3 +9,11 @@ export const makeRequest = ({
 }) => {
   return instance.request({url, method, data, ...configs});
 };
+// export const makeRequest = ({
+//   url ,
+//   method ,
+//   data ,
+//   ...configs
+// }) => {
+//   return instance.request({url, method, data, ...configs});
+// };

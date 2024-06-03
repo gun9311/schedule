@@ -3,6 +3,7 @@ import {URL_ROOT} from "../constants/urls";
 import {URL_AUTH, URL_REFRESHTOKEN} from "../constants/urls";
 import {REFRESH_NOT_VALID} from "../../../config/consts/ErrorCode";
 import {token} from "../../storage";
+import { removeItem, setItem } from "../../storage/storage";
 
 export const instance = axios.create({
   baseURL: URL_ROOT,
@@ -28,6 +29,7 @@ instance.interceptors.response.use(
   },
   error => {
     if (isTokenExpiredError(error)) {
+      // removeItem("userId")
       return resetTokenAndReattemptRequest(error);
     }
     return Promise.reject(error);
@@ -65,6 +67,7 @@ async function resetTokenAndReattemptRequest(error) {
     console.log(err.response)
     if (err.response.data.errorCode === REFRESH_NOT_VALID) {
       token.removeToken()
+      removeItem("userId")
       window.location.reload();
     }
     return Promise.reject(err);

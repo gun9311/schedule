@@ -10,27 +10,29 @@ import {useAuth} from "../packages/auth/useAuth";
 
 import {routes} from "../pages/routes/routes";
 import {URL_LOGIN} from "../config/consts/urlsPages";
+import Notification from '../pages/notification/Notification';
+import OAuth2RedirectHandler from '../packages/auth/OAuth2RedirectHandler';
 
 
 const AppRouter = () => {
   const {isAuth} = useAuth();
 
-  if (!isAuth) {
-    return <Route path={[URL_LOGIN, '/']} render={props => <LoginContainer {...props}/>}/>;
-  }
-
   return (
-    <Background>
-      <NavbarContainer/>
-      <Switch>
-        {routes.map(({
-            path,
-            Component,
-            reqRole
-          }) => <PrivateRoute key={path} path={path} reqRole={reqRole} component={Component}/>
-        )}
-      </Switch>
-    </Background>
+    <Switch>
+      <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
+      {!isAuth && <Route path={[URL_LOGIN, '/']} render={props => <LoginContainer {...props} />} />}
+      {isAuth && (
+        <Background>
+          <NavbarContainer />
+          <Notification />
+          <Switch>
+            {routes.map(({ path, Component, reqRole }) => (
+              <PrivateRoute key={path} path={path} reqRole={reqRole} component={Component} />
+            ))}
+          </Switch>
+        </Background>
+      )}
+    </Switch>
   );
 };
 

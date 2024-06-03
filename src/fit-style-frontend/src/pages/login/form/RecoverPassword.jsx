@@ -19,7 +19,7 @@ export const RecoverPassword = ({setActive}) => {
         event.preventDefault();
         if (isStepOne) {
             if (isEmpty(email)) {
-                ToastMessages.error("Введите Email", TOP_CENTER);
+                ToastMessages.error("이메일을 입력하세요", TOP_CENTER);
                 return
             }
             const {hide} = ToastMessages.loading("Отправка письма", { hideAfter: 0 });
@@ -89,7 +89,7 @@ export const RecoverPassword = ({setActive}) => {
 
     return (
         <div>
-            <h4>Восстановление пароля</h4>
+            <h4>비밀번호 찾기</h4>
             <form className="form-div">
                 <div className="form-group">
                     <label htmlFor="email"/>
@@ -99,7 +99,7 @@ export const RecoverPassword = ({setActive}) => {
                            type="text"
                            onChange={(e) => setEmail(e.target.value)}
                            value={email}
-                           placeholder={"Введите Email"}
+                           placeholder={"Email 입력"}
                            readOnly={!isStepOne}
                     />
                 </div>
@@ -150,7 +150,7 @@ export const RecoverPassword = ({setActive}) => {
                 <div className="d-flex justify-content-between mt-3">
                     <button className="btn btn-primary"
                             onClick={handleSubmit}>
-                        {isStepOne ? "Восстановить пароль" : "Изменить пароль"}
+                        {isStepOne ? "제출" : "Изменить пароль"}
                     </button>
                 </div>
             </form>

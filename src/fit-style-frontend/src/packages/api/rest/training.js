@@ -1,5 +1,5 @@
 import {makeRequest} from "../makeRequest";
-import {GET, POST} from "../constants/methods";
+import {GET, POST, PUT} from "../constants/methods";
 import {
   URL_OCCUPIED_COACH_TRAININGS,
   URL_TRAINING,
@@ -11,7 +11,15 @@ import {
   URL_DELETE_TRAINING_PERSONAL,
   URL_SIGN_TRAINING_GROUP,
   URL_SIGN_TRAINING_PERSONAL,
-  URL_TRAINING_TYPES
+  URL_TRAINING_TYPES,
+  URL_TRAINING_DETAIL,
+  URL_APPLY_TRAINING_GROUP,
+  URL_CHECK_APPLY,
+  URL_MY_TRAINING,
+  URL_GROUP_SUBSCRIPTION,
+  URL_SUBSCRIPTION_ACCEPT,
+  URL_SUBSCRIPTION_REFUSE,
+  URL_UPDATE_TRAINING_GROUP
 } from "../constants/urls";
 
 
@@ -28,6 +36,15 @@ export const getTrainings = () => {
     method: GET,
   })
 }
+
+export const getTrainingDetail = () => {
+  return makeRequest({
+    url: URL_TRAINING_DETAIL,
+    method: GET,
+  })
+}
+
+
 
 export const getCoachTrainings = (id = "") => {
   return makeRequest({
@@ -72,6 +89,48 @@ export const deleteGroupTraining = (id) => {
   })
 }
 
+export const applyGroupTraining = (id) => {
+  return makeRequest({
+    url : URL_APPLY_TRAINING_GROUP + id,
+    method: POST,
+  })
+}
+
+export const getMytrainings = () => {
+  return makeRequest({
+    url : URL_MY_TRAINING,
+    method: GET,
+  })
+}
+
+export const checkApply = () => {
+  return makeRequest({
+    url : URL_CHECK_APPLY,
+    method: GET,
+  })
+}
+
+export const getGroupSubscription = (groupId) => {
+  return makeRequest({
+    url : URL_GROUP_SUBSCRIPTION+groupId,
+    method: GET,
+  })
+}
+
+export const acceptSubscription = (subscriptionId) => {
+  return makeRequest({
+    url : URL_SUBSCRIPTION_ACCEPT+subscriptionId,
+    method: POST,
+  })
+}
+
+export const refuseSubscription = (subscriptionId) => {
+  return makeRequest({
+    url : URL_SUBSCRIPTION_REFUSE+subscriptionId,
+    method: POST,
+  })
+}
+
 export const signGroupTraining = (id) => {
   return makeRequest({
     url: URL_SIGN_TRAINING_GROUP + id,
@@ -90,6 +149,14 @@ export const addGroupTraining = (data) => {
   return makeRequest({
     url: URL_ADD_TRAINING_GROUP,
     method: POST,
+    data,
+  })
+}
+
+export const updateGroupTraining = (groupId, data) => {
+  return makeRequest({
+    url: URL_UPDATE_TRAINING_GROUP+groupId,
+    method: PUT,
     data,
   })
 }

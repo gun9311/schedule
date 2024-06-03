@@ -67,16 +67,25 @@ export const NewsBoard = () => {
         else setRowNum(1);
     }
 
-    const deleteNews = (id) => {
-        news.deleteNews(id).then(
-            response => {
-                updateNews();
-                ToastMessages.success("Новость удалена!", TOP_RIGHT);
-            },
-            error => {
-                console.log(error.response)
-            }
-        )
+    // const deleteNews = (id) => {
+    //     news.deleteNews(id).then(
+    //         response => {
+    //             console.log(response)
+    //             updateNews();
+    //             ToastMessages.success("Новость удалена!", TOP_RIGHT);
+    //         },
+    //         error => {
+    //             console.log(error.response)
+    //         }
+    //     )
+    // }
+    const deleteNews = async (id) => {
+        try {
+            let response = await news.deleteNews(id)
+            console.log(response);
+            updateNews();
+            ToastMessages.success("삭제되었습니다!", TOP_RIGHT);
+        }catch (error) {console.log(error.response)}
     }
 
     return(
@@ -86,7 +95,7 @@ export const NewsBoard = () => {
                     {isModer &&
                         <button className={deleteActive ? 'select' : 'noselect'}
                                 onClick={() => setDeleteActive((prev) => !prev)}>
-                            <span className='text'>Удалить</span>
+                            <span className='text'>삭제</span>
                             <span className="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
                                     <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/>
@@ -94,10 +103,10 @@ export const NewsBoard = () => {
                             </span>
                         </button>
                     }
-                    <h1 className="news-title">Новостная лента</h1>
+                    <h1 className="news-title">ON THE BOARD</h1>
                     {isModer &&
                         <button className="add-news" onClick={() => setModalActive(true)}>
-                            <span className='text'>Добавить</span>
+                            <span className='text'>추가</span>
                             <span className="icon">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" transform="rotate(45)" viewBox="0 0 24 24">
                                     <path d="M24 20.188l-8.315-8.209 8.2-8.282-3.697-3.697-8.212 8.318-8.31-8.203-3.666 3.666 8.321 8.24-8.206 8.313 3.666 3.666 8.237-8.318 8.285 8.203z"/>

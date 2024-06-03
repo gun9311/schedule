@@ -9,8 +9,8 @@ export const LoginBackGround = () => {
                 <li className="list-inline-item head3">Limits</li>
             </ul>
             <ul className="list-inline">
-                <li className="list-inline-item head2">Fit</li>
-                <li className="list-inline-item head3">Style</li>
+                <li className="list-inline-item head2">On</li>
+                <li className="list-inline-item head3">Board</li>
             </ul>
             <div className="bg"/>
             <div className="bg bg2"/>

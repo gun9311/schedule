@@ -1,7 +1,7 @@
 import React from 'react';
 import { Calendar, momentLocalizer } from 'react-big-calendar'
 import moment from 'moment'
-import localization from 'moment/locale/ru'
+import localization from 'moment/locale/ko'
 import * as custom from "../../config/calendar/Calendar";
 
 import "react-big-calendar/lib/css/react-big-calendar.css"

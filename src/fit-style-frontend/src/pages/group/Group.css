@@ -1,0 +1,54 @@
+/* 개별 그룹 스타일 */
+.group-id {
+    width: 5%;
+    text-align: center;
+  }
+  
+  .group-info {
+    width: 40%;
+    padding-left: 10px;
+    text-align: left;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .group-status button {
+    padding: 5px 10px;
+    font-size: 14px;
+    background: #28a745;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  .group-status button:hover {
+    background: #218838;
+  }
+  
+  .group-status button:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+  }
+  
+  /* 반응형 디자인 */
+  @media (max-width: 768px) {
+    .group-info {
+      width: 30%;
+      padding-left: 5px;
+    }
+  
+    .group-id,
+    .text-center {
+      font-size: 14px;
+    }
+  
+    .group-status button {
+      font-size: 12px;
+      padding: 3px 6px;
+    }
+  }
+  

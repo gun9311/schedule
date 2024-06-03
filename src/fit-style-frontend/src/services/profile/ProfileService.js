@@ -1,11 +1,11 @@
 class ProfileService {
     getRoleView(roleArray) {
         if (roleArray.includes("ROLE_MODERATOR"))
-            return "Администратор";
+            return "관리자";
         if (roleArray.includes("ROLE_COACH"))
-            return "Тренер";
+            return "코치";
         if (roleArray.includes("ROLE_USER"))
-            return "Пользователь";
+            return "사용자";
     }
     declinationRuble(num) {
         const ruble = ['рубль', 'рубля', 'рублей'];

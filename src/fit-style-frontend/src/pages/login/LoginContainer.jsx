@@ -9,11 +9,13 @@ import Modal from "../../components/modal/Modal";
 import {RecoverPassword} from "./form/RecoverPassword";
 import {useInput} from "../../customHooks/useInput";
 import {useAuth} from "../../packages/auth/useAuth";
+import { RegisterModal } from "./form/RegisterModal";
 
 
 export const LoginContainer = () => {
     const [modalActive, setModalActive] = useState(false);
     const {login} = useAuth();
+    const [registerModalActive, setRegisterModalActive] = useState(false);
     const email = useInput("","Email","text")
     const password = useInput("","Password", "password")
 
@@ -26,11 +28,19 @@ export const LoginContainer = () => {
         // login({email, password});
 
         if (isEmpty(email.value) || isEmpty(password.value)) {
-            const errorMsg = "Заполните поля";
+            const errorMsg = "이메일과 비밀번호를 모두 입력하세요";
             ToastMessages.error(errorMsg, TOP_CENTER);
             return;
         }
         login({email: email.value, password: password.value});
+    }
+
+    const handleOAuthLogin = () => {
+        window.location.href = "http://localhost:8080/oauth2/authorization/google"; // 실제 백엔드 URL로 리디렉션합니다.
+    };
+
+    const handleRegister = () => {
+        setRegisterModalActive(true)
     }
 
     return (
@@ -40,10 +50,13 @@ export const LoginContainer = () => {
                 setModalActive={setModalActive}
                 emailState={email}
                 passwordState={password}
+                oauthLogin={handleOAuthLogin}
+                register={handleRegister}
             />
-            <Modal active={modalActive} setActive={setModalActive} options={{closeBackground: false}}>
+            <Modal active={modalActive} setActive={setModalActive} options={{closeBackground: true}}>
                 <RecoverPassword setActive={setModalActive}/>
             </Modal>
+            <RegisterModal isActive={registerModalActive} setIsActive={setRegisterModalActive} />
         </div>
     );
 }

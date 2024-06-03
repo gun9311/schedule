@@ -16,6 +16,7 @@ export const URL_LOGOUT = "auth/logout"; //auth
 export const URL_ALL_USERS = "users/all"; //users
 // PROFILE //
 export const URL_PROFILE_INFO = "profile"; //profile
+export const URL_PROFILE_UPDATE = "profile/update/"; //profile
 export const URL_CHANGE_BALANCE = "profile/change-balance"; //profile
 // IMAGE //
 export const URL_PROFILE_IMG = "get-image/user"; //profile
@@ -24,19 +25,39 @@ export const URL_ROLES = "permission/roles"; // permission
 // NEWS //
 export const URL_NEWS = "news/"; //news
 export const URL_NEWS_IMG = "get-image/news/" //news
+// ARTICLE //
+export const URL_ARTICLE = "article/"; //article
+export const URL_ARTICLE_IMG = "get-image/article/" //article
 // SCHEDULE //
-export const URL_TRAINING = "training/user"; //training
+export const URL_TRAINING = "training"; //training
+export const URL_TRAINING_DETAIL = "training/detail"
 export const URL_COACHES = "coach"; //training
 export const URL_COACH_TRAININGS = "training/coach/"; //training
 export const URL_TRAINING_TYPES = "training"; //training
 export const URL_ADD_TRAINING_PERSONAL = "training/personal"; //training
 export const URL_ADD_TRAINING_GROUP = "training/group"; //training
+export const URL_UPDATE_TRAINING_GROUP = "training/group/"; //training
 export const URL_DELETE_TRAINING_PERSONAL = "training/delete/personal/"; //training
 export const URL_DELETE_TRAINING_GROUP = "training/delete/group/"; //training
+export const URL_APPLY_TRAINING_GROUP = "training/apply/group/"; //training
 export const URL_SIGN_TRAINING_PERSONAL = "training/sign/personal/"; //training
 export const URL_SIGN_TRAINING_GROUP ="training/sign/group/"; //training
 export const URL_OCCUPIED_COACH_TRAININGS = "training/coach/trainings" //training
 // USERS //
+export const URL_MY_TRAINING = "users/group/"; //users
 export const URL_IMG_USER = "get-image/user/"; //users
 export const URL_DISABLE_USER = "users/disable/"; //users
 export const URL_ENABLE_USER = "users/enable/"; //users
+export const URL_GET_GROUP_USER = "users/"; //users
+// Subscription //
+export const URL_CHECK_APPLY = "subscription/check" // subscription
+export const URL_GROUP_SUBSCRIPTION = "subscription/group/" // subscription
+export const URL_SUBSCRIPTION_ACCEPT = "subscription/accept/" // subscription
+export const URL_SUBSCRIPTION_REFUSE = "subscription/refuse/" // subscription
+
+// Schedule //
+export const URL_ADD_SCHEDULE = "schedule" // schedule
+export const URL_GET_SCHEDULE = "schedule/" // schedule
+// Firebase //
+export const URL_SAVE_TOKEN = "firebase" // firebase
+
