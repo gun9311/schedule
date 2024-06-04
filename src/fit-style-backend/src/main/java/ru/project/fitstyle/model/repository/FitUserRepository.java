@@ -7,8 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-import ru.project.fitstyle.model.dto.user.FitUserFullNameDto;
+
 import ru.project.fitstyle.model.dto.user.FitUserDto;
+import ru.project.fitstyle.model.dto.user.FitUserFullNameDto;
 import ru.project.fitstyle.model.dto.user.RoleDto;
 import ru.project.fitstyle.model.dto.user.SubscriptionDto;
 import ru.project.fitstyle.model.entity.user.FitUser;
@@ -34,7 +35,7 @@ public interface FitUserRepository extends JpaRepository<FitUser, Long> {
     Optional<List<RoleDto>> findRolesWithId(@Param("id") final Long id);
 
 
-    @Query("select new ru.project.fitstyle.model.dto.user.FitUserDto(v.id, v.email, v.name, v.gender, v.imgURL, v.isEnabled) " +
+    @Query("select new ru.project.fitstyle.model.dto.user.FitUserDto(v.id, v.email, v.name, v.gender, v.imgURL, v.phoneNumber, v.isEnabled) " +
             "from FitUser v " +
             "where v.id=:id")
     Optional<FitUserDto> findFitUserInfoWithId(@Param("id") final Long id);
@@ -44,7 +45,7 @@ public interface FitUserRepository extends JpaRepository<FitUser, Long> {
             "where v.id=:id")
     Optional<SubscriptionDto> findSubscriptionResponseInfoWithId(@Param("id") final Long id);
 
-    @Query("select new ru.project.fitstyle.model.dto.user.FitUserDto(v.id, v.email, v.name, v.gender, v.imgURL, v.isEnabled) " +
+    @Query("select new ru.project.fitstyle.model.dto.user.FitUserDto(v.id, v.email, v.name, v.gender, v.imgURL, v.phoneNumber, v.isEnabled) " +
             "from FitUser v " +
             "where v.email=:email")
     Optional<FitUserDto> findFitUserInfoWithEmail(@Param("email") final String email);
