@@ -17,7 +17,7 @@ public interface UserService {
 
     List<FitUserFullInfoDto> getAllUsers();
 
-    void saveUser(FitUser fitUser, final List<Role> roles, final Subscription subscription);
+    void saveUser(FitUser fitUser, final List<Role> roles);
 
     // void changeBalance(FitUser fitUser, final Long summary);
 

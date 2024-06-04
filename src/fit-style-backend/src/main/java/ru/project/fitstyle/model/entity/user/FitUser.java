@@ -54,10 +54,12 @@ public class FitUser {
             nullable = true)
     private String gender;
 
-    @Column(name = "img_URL", length = 5000)
+    @Column(name = "img_URL", length = 5000,
+            nullable = true)
     private String imgURL;
     
-    @Column(name = "phone_number", length = 100)
+    @Column(name = "phone_number", length = 100,
+            nullable = true)
     private String phoneNumber;
 
     @Column(name = "is_enabled", nullable = false)

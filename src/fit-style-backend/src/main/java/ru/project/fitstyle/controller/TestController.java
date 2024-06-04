@@ -1,10 +1,15 @@
 package ru.project.fitstyle.controller;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
 import ru.project.fitstyle.model.entity.subscription.Subscription;
 import ru.project.fitstyle.model.entity.subscription.SubscriptionType;
 import ru.project.fitstyle.model.entity.user.FitUser;
@@ -12,10 +17,6 @@ import ru.project.fitstyle.model.entity.user.Role;
 import ru.project.fitstyle.model.repository.FitUserRepository;
 import ru.project.fitstyle.model.repository.RoleRepository;
 import ru.project.fitstyle.model.repository.SubscriptionTypeRepository;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 @CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
@@ -42,8 +43,8 @@ public class TestController {
             subscription.setContractNumber("3453453");
             // FitUser fitUser = new FitUser("test", "test", "test", "test" + Integer.toString(i) + "@gmail.com", "test11111",
             //         "32", "M", new Date(new Date().getTime()), "88005553535", "3543953953", "klfsldflsfla");
-            FitUser fitUser = new FitUser("name", "test" + Integer.toString(i) + "@gmail.com", "test11111", "M");
-            fitUser.setSubscription(subscription);
+            FitUser fitUser = new FitUser("name", "test" + Integer.toString(i) + "@gmail.com", "test11111", "M", "img", "01012345678");
+            // fitUser.setSubscription(subscription);
             Role role = roleRepository.findById(1L).get();
             List<Role> roles = new ArrayList<>();
             roles.add(role);

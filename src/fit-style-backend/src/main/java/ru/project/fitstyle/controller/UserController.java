@@ -1,5 +1,7 @@
 package ru.project.fitstyle.controller;
 
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.ResponseEntity;
@@ -7,11 +9,14 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 import ru.project.fitstyle.controller.request.user.*;
 import ru.project.fitstyle.controller.response.SuccessMessage;
 import ru.project.fitstyle.controller.response.user.AllUsersResponse;
 import ru.project.fitstyle.model.entity.user.FitUser;
 import ru.project.fitstyle.service.*;
+
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -61,18 +66,15 @@ public class UserController {
      * Add new user
      * */
     @PostMapping("/add")
-    @PreAuthorize("hasRole('MODERATOR')")
-    public ResponseEntity<SuccessMessage> add(@Valid @RequestPart(value = "request") final AddEditUserRequest request,
-                                                       @RequestPart(value = "image", required = false) final MultipartFile image) {
+    public ResponseEntity<SuccessMessage> add(@Valid @RequestBody final AddEditUserRequest request) {
         userService.validateEmailForRegister(request.getEmail());
 
         FitUser fitUser = createFitUser(request);
+        
+        List<String> userRole = new ArrayList<>();
+        userRole.add("user");
 
-        fitUser.setImgURL(imageStorageService.store(image));
-
-        userService.saveUser(fitUser, roleService.createRoles(request.getRoles()),
-                subscriptionTypeService.createFitUserSubscription(request.getSubscriptionTypeInfo().getSubscriptionTypeId(),
-                        request.getSubscriptionTypeInfo().getContractNumber()));
+        userService.saveUser(fitUser, roleService.createRoles(userRole));
 
         return ResponseEntity.ok(
                 new SuccessMessage("User registered successfully!"));
@@ -82,19 +84,21 @@ public class UserController {
      * Update user info (currently not used)
      * */
     @PatchMapping("/update/{id}")
-    @PreAuthorize("hasRole('MODERATOR')")
-    public ResponseEntity<SuccessMessage> update(@Valid @RequestPart(value = "request") final AddEditUserRequest request,
-                                                 @RequestPart(value = "image", required = false) final MultipartFile image,
+    @PreAuthorize("hasRole('USER')")
+    public ResponseEntity<SuccessMessage> update(@Valid @RequestBody final UpdateEditUserRequest request,
                                                  @PathVariable("id") final Long id) {
-        userService.validateEmailForRegister(request.getEmail());
 
         FitUser fitUser = userService.getUserById(id);
 
-        fitUser.setImgURL(imageStorageService.store(image));
+        fitUser.setName(request.getName());
+        fitUser.setGender(request.getGender());
+        fitUser.setImgURL(request.getImgURL());
+        fitUser.setPhoneNumber(request.getPhoneNumber());
+        
+        List<String> userRole = new ArrayList<>();
+        userRole.add("user");
 
-        userService.saveUser(fitUser, roleService.createRoles(request.getRoles()),
-                subscriptionTypeService.createFitUserSubscription(request.getSubscriptionTypeInfo().getSubscriptionTypeId(),
-                        request.getSubscriptionTypeInfo().getContractNumber()));
+        userService.saveUser(fitUser, roleService.createRoles(userRole));
 
         return ResponseEntity.ok(
                 new SuccessMessage("User updated successfully!"));
@@ -190,7 +194,7 @@ public class UserController {
 //                 request.getPassport(), request.getAddress());
 //     }
 private FitUser createFitUser(final AddEditUserRequest request) {
-        return new FitUser(request.getName(), request.getEmail(),
-                encoder.encode(request.getPassword()), request.getGender());
+        return new FitUser(request.getName(), request.getEmail(), encoder.encode(request.getPassword()),
+                                request.getGender(), request.getImgURL(),request.getPhoneNumber());
     }
 }
