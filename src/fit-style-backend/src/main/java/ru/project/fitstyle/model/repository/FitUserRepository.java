@@ -40,20 +40,20 @@ public interface FitUserRepository extends JpaRepository<FitUser, Long> {
             "where v.id=:id")
     Optional<FitUserDto> findFitUserInfoWithId(@Param("id") final Long id);
 
-    @Query("select new ru.project.fitstyle.model.dto.user.SubscriptionDto(v.subscription.subscriptionType.name, v.subscription.endDate) " +
-            "from FitUser v " +
-            "where v.id=:id")
-    Optional<SubscriptionDto> findSubscriptionResponseInfoWithId(@Param("id") final Long id);
+//     @Query("select new ru.project.fitstyle.model.dto.user.SubscriptionDto(v.subscription.subscriptionType.name, v.subscription.endDate) " +
+//             "from FitUser v " +
+//             "where v.id=:id")
+//     Optional<SubscriptionDto> findSubscriptionResponseInfoWithId(@Param("id") final Long id);
 
     @Query("select new ru.project.fitstyle.model.dto.user.FitUserDto(v.id, v.email, v.name, v.gender, v.imgURL, v.phoneNumber, v.isEnabled) " +
             "from FitUser v " +
             "where v.email=:email")
     Optional<FitUserDto> findFitUserInfoWithEmail(@Param("email") final String email);
 
-    @Query("select new ru.project.fitstyle.model.dto.user.SubscriptionDto(v.subscription.subscriptionType.name, v.subscription.endDate) " +
-            "from FitUser v " +
-            "where v.email=:email")
-    Optional<SubscriptionDto> findSubscriptionResponseInfoWithEmail(@Param("email") final String email);
+//     @Query("select new ru.project.fitstyle.model.dto.user.SubscriptionDto(v.subscription.subscriptionType.name, v.subscription.endDate) " +
+//             "from FitUser v " +
+//             "where v.email=:email")
+//     Optional<SubscriptionDto> findSubscriptionResponseInfoWithEmail(@Param("email") final String email);
 
     Boolean existsByEmail(final String email);
 }
