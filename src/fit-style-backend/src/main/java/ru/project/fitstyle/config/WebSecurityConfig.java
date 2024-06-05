@@ -13,8 +13,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 import ru.project.fitstyle.security.AuthEntryPointJwt;
 import ru.project.fitstyle.security.AuthTokenFilter;
+import ru.project.fitstyle.service.impl.details.CustomOAuth2AuthenticationSuccessHandler;
 import ru.project.fitstyle.service.impl.details.FitUserDetailsService;
 
 
@@ -27,11 +29,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final AuthEntryPointJwt unauthorizedHandler;
 
+    private final CustomOAuth2AuthenticationSuccessHandler customOAuth2AuthenticationSuccessHandler;
+
     @Autowired
     public WebSecurityConfig(
-            FitUserDetailsService userDetailsService, AuthEntryPointJwt unauthorizedHandler) {
+            FitUserDetailsService userDetailsService, AuthEntryPointJwt unauthorizedHandler,
+            CustomOAuth2AuthenticationSuccessHandler customOAuth2AuthenticationSuccessHandler) {
         this.userDetailsService = userDetailsService;
         this.unauthorizedHandler = unauthorizedHandler;
+        this.customOAuth2AuthenticationSuccessHandler = customOAuth2AuthenticationSuccessHandler;
     }
 
     @Bean
@@ -73,7 +79,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/users/ask-for-recover-with-email").permitAll()
                 .antMatchers("/api/users/confirm-recovery").permitAll()
                 .antMatchers("/api/test/**").permitAll()
-                .anyRequest().authenticated();
+                .anyRequest().authenticated()
+                .and()
+                .oauth2Login()
+                .successHandler(customOAuth2AuthenticationSuccessHandler)
+                .failureUrl("/loginFailure");
 
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
     }

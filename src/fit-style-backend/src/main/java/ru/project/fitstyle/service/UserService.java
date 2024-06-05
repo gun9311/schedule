@@ -35,9 +35,9 @@ public interface UserService {
 
     FitUserDto getFitUserInfoById(final Long id);
 
-    SubscriptionDto getSubscriptionInfoByEmail(final String email);
+    // SubscriptionDto getSubscriptionInfoByEmail(final String email);
 
-    SubscriptionDto getSubscriptionInfoById(final Long id);
+    // SubscriptionDto getSubscriptionInfoById(final Long id);
 
     List<RoleDto> getUserRolesByEmail(final String email);
 

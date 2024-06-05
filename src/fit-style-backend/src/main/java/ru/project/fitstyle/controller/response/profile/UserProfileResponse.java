@@ -10,22 +10,15 @@ public class UserProfileResponse {
 
     private final FitUserDto fitUserInfo;
 
-    private final SubscriptionDto subscriptionInfo;
-
     private final List<RoleDto> roles;
 
-    public UserProfileResponse(FitUserDto fitUserInfo, SubscriptionDto subscriptionInfo, List<RoleDto> roles) {
+    public UserProfileResponse(FitUserDto fitUserInfo, List<RoleDto> roles) {
         this.fitUserInfo = fitUserInfo;
-        this.subscriptionInfo = subscriptionInfo;
         this.roles = roles;
     }
 
     public FitUserDto getFitUserInfo() {
         return fitUserInfo;
-    }
-
-    public SubscriptionDto getSubscriptionInfo() {
-        return subscriptionInfo;
     }
 
     public List<RoleDto> getRoles() {

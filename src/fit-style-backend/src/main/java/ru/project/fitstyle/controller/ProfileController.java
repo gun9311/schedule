@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.project.fitstyle.controller.request.profile.ChangeBalanceRequest;
 import ru.project.fitstyle.controller.response.SuccessMessage;
 import ru.project.fitstyle.controller.response.profile.UserProfileResponse;
+import ru.project.fitstyle.model.entity.user.FitUser;
 import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.UserService;
 
@@ -34,18 +35,18 @@ public class ProfileController {
     @GetMapping()
     public ResponseEntity<UserProfileResponse> getUserProfileInfo() {
         return ResponseEntity.ok(new UserProfileResponse(userService.getFitUserInfoByEmail(authService.getEmail()),
-                userService.getSubscriptionInfoByEmail(authService.getEmail()), userService.getUserRolesByEmail(authService.getEmail())));
+                                userService.getUserRolesByEmail(authService.getEmail())));
     }
 
     /**
      * Get user profile info by its id
      * */
-    @GetMapping("/{id}")
-    @PreAuthorize("hasRole('MODERATOR')")
-    public ResponseEntity<UserProfileResponse> getUserProfileInfoById(@PathVariable("id") final Long id) {
-        return ResponseEntity.ok(new UserProfileResponse(userService.getFitUserInfoById(id),
-                userService.getSubscriptionInfoById(id), userService.getUserRolesById(id)));
-    };
+    // @GetMapping("/{id}")
+    // @PreAuthorize("hasRole('MODERATOR')")
+    // public ResponseEntity<UserProfileResponse> getUserProfileInfoById(@PathVariable("id") final Long id) {
+    //     return ResponseEntity.ok(new UserProfileResponse(userService.getFitUserInfoById(id),
+    //             userService.getSubscriptionInfoById(id), userService.getUserRolesById(id)));
+    // };
 
     /**
      * Change user balance

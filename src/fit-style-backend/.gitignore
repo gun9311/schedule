@@ -1,4 +1,4 @@
 *
 !.gitignore
 
-/resources/application-secret.yml
+/resources/application.yml
