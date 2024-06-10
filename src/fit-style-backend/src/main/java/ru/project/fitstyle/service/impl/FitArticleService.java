@@ -52,5 +52,9 @@ public class FitArticleService implements ArticleService{
         articleRepository.delete(article);
     }
 
+    @Override
+    public boolean existsByTitleAndHref(String title, String href) {
+        return articleRepository.existsByTitleAndHref(title, href);
+    }
 
 }

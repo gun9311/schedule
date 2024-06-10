@@ -7,9 +7,11 @@ import java.util.Date;
 import java.util.List;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
@@ -22,7 +24,7 @@ import ru.project.fitstyle.service.CrawlingService;
 @Slf4j
 public class FitCrawlingService implements CrawlingService {
 
-    private final WebDriver webDriver;
+    private WebDriver webDriver;
     private final ArticleService articleService;
     private final String surfingUrl;
     private final String snowboardingUrl;
@@ -30,9 +32,10 @@ public class FitCrawlingService implements CrawlingService {
 
     private static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
     private static final String WEB_DRIVER_PATH = "src/main/resources/static/chromedriver_win32/chromedriver.exe";
-
-    private static final String crawlTitleAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.n0jPhd.ynAwRc.MBeu0.nDgy9d";
+    
+    private static final String crawlTitleAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.n0jPhd.ynAwRc.MBeuO.nDgy9d";
     private static final String crawlContentAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.GI74Re.nDgy9d";
+    private static final String crawlImgAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.gpjNTe > div > div";
     private static final String crawlTimeAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.OSrXXb.rbYSKb.LfVVr > span";
     private static final String crawlHrefAddress = "#rso > div > div > div:nth-child(%d) > div > div > a";
     private static final String crawlSourceAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.MgUUmf.NUnG9d > span";
@@ -40,11 +43,11 @@ public class FitCrawlingService implements CrawlingService {
     public FitCrawlingService(ArticleService articleService, CrawlerProperties crawlerProperties) {
         System.setProperty(WEB_DRIVER_ID, WEB_DRIVER_PATH);
 
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("headless");
-        this.webDriver = new ChromeDriver(options);
+        // ChromeOptions options = new ChromeOptions();
+        // options.addArguments("--start-maximized");
+        // options.addArguments("--disable-popup-blocking");
+        // options.addArguments("headless");
+        // this.webDriver = new ChromeDriver(options);
         this.articleService = articleService;
         this.surfingUrl = crawlerProperties.getSurfingUrl();
         this.snowboardingUrl = crawlerProperties.getSnowboardingUrl();
@@ -52,43 +55,60 @@ public class FitCrawlingService implements CrawlingService {
     }
 
     @Override
+    @Scheduled(cron = "00 00 03 * * ?")
     public List<Article> crawling() {
         List<Article> articles = new ArrayList<>();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        options.addArguments("--disable-popup-blocking");
+        options.addArguments("headless");
+        webDriver = new ChromeDriver(options);
         for (String url : new String[]{surfingUrl, snowboardingUrl, skateboardingUrl}) {
             try {
                 log.info("페이지 접속: {}", url);
                 webDriver.get(url);
                 Thread.sleep(2000);  // 페이지 로딩 대기
+                String type = url.contains(surfingUrl) ? "surfing" : url.contains(snowboardingUrl) ? "snowboarding" : "skateboarding";
 
                 // List<WebElement> newsElements = webDriver.findElements(By.cssSelector(crawlTitleAddress));
                 for (int i = 1; i < 10; i++) {
+                    try{
                     String title = webDriver.findElement(By.cssSelector(String.format(crawlTitleAddress, i))).getText();
                     String content = webDriver.findElement(By.cssSelector(String.format(crawlContentAddress, i))).getText();
+                    String img = webDriver.findElement(By.cssSelector(String.format(crawlImgAddress, i))).getAttribute("src");
                     String time = webDriver.findElement(By.cssSelector(String.format(crawlTimeAddress, i))).getText();
                     String href = webDriver.findElement(By.cssSelector(String.format(crawlHrefAddress, i))).getAttribute("href");
                     String source = webDriver.findElement(By.cssSelector(String.format(crawlSourceAddress, i))).getText();
-                    String type = url.contains("surfing") ? "surfing" : url.contains("snowboarding") ? "snowboarding" : "skateboarding";
+                    // String type = url.contains("surfing") ? "surfing" : url.contains("snowboarding") ? "snowboarding" : "skateboarding";
 
                     Date absoluteDate = convertRelativeTimeToDate(time);
+
+                    log.info("제목: {}", title);
 
                     // Article 객체 생성 및 저장
                     Article article = new Article();
                     article.setTitle(title);
-                    article.setContent(content);  // 기사의 내용을 가져올 수 없으므로 placeholder
+                    article.setContent(content);
+                    article.setImgUrl(img);
                     article.setHref(href);
                     article.setTime(absoluteDate);
                     article.setSource(source);
                     article.setType(type);
 
-                    articles.add(article);
-                    articleService.save(article);  // Article 엔터티 저장
+                      // 중복 기사 확인 및 저장
+                    if (!articleService.existsByTitleAndHref(title, href)) {
+                        articles.add(article);
+                        articleService.save(article); // Article 엔터티 저장
+                    }
+                } catch (NoSuchElementException e) {
+                    log.warn("요소를 찾을 수 없음: {}", e.getMessage());
+                }
                 }
             } catch (Exception e) {
                 log.error("크롤링 중 오류 발생: {}", e.getMessage());
-            } finally {
-                webDriver.quit();
-            }
+            } 
         }
+        webDriver.quit();
         return articles;
     }
     // 상대적인 시간을 절대적인 시간으로 변환하는 메소드

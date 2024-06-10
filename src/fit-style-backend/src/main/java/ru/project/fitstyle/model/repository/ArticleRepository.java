@@ -16,6 +16,8 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
     @Query("select new ru.project.fitstyle.model.dto.article.ArticleDto(v.id, v.title, v.content, v.time, v.imgUrl, v.href, v.source, v.type) " +
             "from Article v")
     Optional<List<ArticleDto>> findArticlePage(final Pageable page);
+
+    boolean existsByTitleAndHref(String title, String href);
 }
 
 
