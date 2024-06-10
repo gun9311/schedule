@@ -1,5 +1,2 @@
-*
-!.gitignore
-
-/resources/application.yml
-/resources/serviceAccountKey.json
+src/fit-style-backend/src/main/resources/application.yml
+src/fit-style-backend/src/main/resources/serviceAccountKey.json
