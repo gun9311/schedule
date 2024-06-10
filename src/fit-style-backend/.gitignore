@@ -2,3 +2,4 @@
 !.gitignore
 
 /resources/application.yml
+/resources/serviceAccountKey.json
