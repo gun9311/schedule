@@ -25,7 +25,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        working-directory: src/fit-style-backend/
+        working-directory: src/fit-style-backend
         run: |
           chmod 777 ./mvnw
           ./mvnw clean package -Dtestskip
