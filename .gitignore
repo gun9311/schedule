@@ -33,3 +33,5 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+src/fit-style-backend/src/main/resources/application.yml
+src/fit-style-backend/src/main/resources/serviceAccountKey.json

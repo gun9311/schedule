@@ -28,9 +28,9 @@ public class FitArticleService implements ArticleService{
     }
 
     @Override
-    public List<ArticleDto> getNewsPage(final int number) {
+    public List<ArticleDto> getArticlePage(final int number) {
         return articleRepository
-                .findArticlePage(PageRequest.of(number - 1, pageNumber, Sort.by(Sort.Direction.DESC, "dateTime")))
+                .findArticlePage(PageRequest.of(number - 1, pageNumber, Sort.by(Sort.Direction.DESC, "time")))
                 .filter(list -> list.size() != 0)
                 .orElseThrow(() -> new NewsPageNotFoundException("There are no news on that page!"));
     }

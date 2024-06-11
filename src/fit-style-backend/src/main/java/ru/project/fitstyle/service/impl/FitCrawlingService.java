@@ -35,7 +35,7 @@ public class FitCrawlingService implements CrawlingService {
     
     private static final String crawlTitleAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.n0jPhd.ynAwRc.MBeuO.nDgy9d";
     private static final String crawlContentAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.GI74Re.nDgy9d";
-    private static final String crawlImgAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.gpjNTe > div > div";
+    private static final String crawlImgAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.gpjNTe > div > div > img";
     private static final String crawlTimeAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.OSrXXb.rbYSKb.LfVVr > span";
     private static final String crawlHrefAddress = "#rso > div > div > div:nth-child(%d) > div > div > a";
     private static final String crawlSourceAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.MgUUmf.NUnG9d > span";
@@ -55,7 +55,7 @@ public class FitCrawlingService implements CrawlingService {
     }
 
     @Override
-    @Scheduled(cron = "00 00 03 * * ?")
+    @Scheduled(cron = "30 41 11 * * ?")
     public List<Article> crawling() {
         List<Article> articles = new ArrayList<>();
         ChromeOptions options = new ChromeOptions();

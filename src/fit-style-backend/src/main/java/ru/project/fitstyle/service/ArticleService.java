@@ -8,7 +8,7 @@ import ru.project.fitstyle.model.entity.aritcle.Article;
 public interface ArticleService {
 
     
-    List<ArticleDto> getNewsPage(final int number);
+    List<ArticleDto> getArticlePage(final int number);
 
     Article getArticleById(final Long id);
 
