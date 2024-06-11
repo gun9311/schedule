@@ -26,7 +26,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          cd src/fit-style-backend
+          cd src/fit-style-backend/
           chmod 777 ./mvnw
           ./mvnw clean package -Dtestskip
 
