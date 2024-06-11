@@ -17,7 +17,7 @@ public interface UserService {
 
     List<FitUserFullInfoDto> getAllUsers();
 
-    void saveUser(FitUser fitUser, final List<Role> roles, final Subscription subscription);
+    void saveUser(FitUser fitUser, final List<Role> roles);
 
     // void changeBalance(FitUser fitUser, final Long summary);
 
@@ -35,9 +35,9 @@ public interface UserService {
 
     FitUserDto getFitUserInfoById(final Long id);
 
-    SubscriptionDto getSubscriptionInfoByEmail(final String email);
+    // SubscriptionDto getSubscriptionInfoByEmail(final String email);
 
-    SubscriptionDto getSubscriptionInfoById(final Long id);
+    // SubscriptionDto getSubscriptionInfoById(final Long id);
 
     List<RoleDto> getUserRolesByEmail(final String email);
 

@@ -9,9 +9,9 @@ const OAuth2RedirectHandler = () => {
     const { handleOAuthLogin } = useAuth();
 
     useEffect(() => {
-        const params = new URLSearchParams(location.search);
-        const token = params.get('token');
-        console.log(params.get('token'));
+        const params = new URLSearchParams(window.location.search);
+        const token = params.get('accessToken');
+        console.log(params.get('accessToken'));
         const userId = params.get('id');
         const userEmail = params.get('email');
         const roles = params.get('roles');

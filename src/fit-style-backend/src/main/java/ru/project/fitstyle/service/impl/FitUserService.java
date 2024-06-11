@@ -67,16 +67,14 @@ public class FitUserService implements UserService {
             // allUsers.add(new FitUserFullInfoDto(new FitUserDto(fitUser.getId(), fitUser.getEmail(), fitUser.getName(), fitUser.getSurname(), fitUser.getPatronymic(),
             //         fitUser.getAge(), fitUser.getGender(), fitUser.getBirthdate(), fitUser.getTelephone(), fitUser.getPassport(), fitUser.getAddress(), fitUser.getImgURL(), fitUser.getBalance(), fitUser.getEnabled()),
             //         new SubscriptionDto(fitUser.getSubscription().getSubscriptionType().getName(), fitUser.getSubscription().getEndDate()), roles));
-            allUsers.add(new FitUserFullInfoDto(new FitUserDto(fitUser.getId(), fitUser.getEmail(), fitUser.getName(), fitUser.getGender(), fitUser.getImgURL(), fitUser.getEnabled()),
-                    new SubscriptionDto(fitUser.getSubscription().getSubscriptionType().getName(), fitUser.getSubscription().getEndDate()), roles));
+            allUsers.add(new FitUserFullInfoDto(new FitUserDto(fitUser.getId(), fitUser.getEmail(), fitUser.getName(), fitUser.getGender(), fitUser.getImgURL(), fitUser.getPhoneNumber(), fitUser.getEnabled()), roles));
         }
         return allUsers;
     }
 
     @Override
-    public void saveUser(FitUser fitUser, final List<Role> roles, final Subscription subscription) {
+    public void saveUser(FitUser fitUser, final List<Role> roles) {
         fitUser.setRoles(roles);
-        fitUser.setSubscription(subscription);
         fitUserRepository.save(fitUser);
     }
 
@@ -149,17 +147,17 @@ public class FitUserService implements UserService {
                 .orElseThrow(() -> new UserNotFoundException("User with that id cannot be found!"));
     }
 
-    @Override
-    public SubscriptionDto getSubscriptionInfoByEmail(final String email) {
-        return fitUserRepository.findSubscriptionResponseInfoWithEmail(email)
-                .orElseThrow(() -> new UserNotFoundException("User with that email cannot be found!"));
-    }
+    // @Override
+    // public SubscriptionDto getSubscriptionInfoByEmail(final String email) {
+    //     return fitUserRepository.findSubscriptionResponseInfoWithEmail(email)
+    //             .orElseThrow(() -> new UserNotFoundException("User with that email cannot be found!"));
+    // }
 
-    @Override
-    public SubscriptionDto getSubscriptionInfoById(final Long id) {
-        return fitUserRepository.findSubscriptionResponseInfoWithId(id)
-                .orElseThrow(() -> new UserNotFoundException("User with that id cannot be found!"));
-    }
+    // @Override
+    // public SubscriptionDto getSubscriptionInfoById(final Long id) {
+    //     return fitUserRepository.findSubscriptionResponseInfoWithId(id)
+    //             .orElseThrow(() -> new UserNotFoundException("User with that id cannot be found!"));
+    // }
 
     @Override
     public List<RoleDto> getUserRolesByEmail(final String email) {
