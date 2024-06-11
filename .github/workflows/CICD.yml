@@ -3,6 +3,9 @@ name: CICD
 on:
   push:
     branches: [ "main" ]
+    paths: 
+      - 'src/fit-style-frontend/**' # 프론트엔드 디렉토리에 변경 사항이 있을 때만 실행
+      - 'src/fit-style-backend/**' # 백엔드 디렉토리에 변경 사항이 있을 때만 실행
   pull_request:
     branches: [ "main" ]
 
@@ -12,6 +15,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startsWith(github.event.head_commit.modified, 'src/fit-style-backend/')
     steps:
       - uses: actions/checkout@v3
       - name: Install JDK 17
@@ -22,6 +26,7 @@ jobs:
 
       - name: Build with Maven
         run: |
+          cd src/fit-style-backend
           chmod 777 ./mvnw
           ./mvnw clean package -Dtestskip
 
