@@ -15,10 +15,7 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./src/fit-style-backend
-    if: github.event_name == 'push' && startsWith(github.event.head_commit.modified, 'src/fit-style-backend/')
+    if: contains(github.event.head_commit.message, 'backend')
     steps:
       - uses: actions/checkout@v3
       - name: Install JDK 17
@@ -28,6 +25,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
+        working-directory: src/fit-style-backend
         run: |
           chmod 777 ./mvnw
           ./mvnw clean package -Dtestskip
