@@ -55,7 +55,7 @@ public class FitCrawlingService implements CrawlingService {
     }
 
     @Override
-    @Scheduled(cron = "30 41 11 * * ?")
+    @Scheduled(cron = "00 00 03 * * ?")
     public List<Article> crawling() {
         List<Article> articles = new ArrayList<>();
         ChromeOptions options = new ChromeOptions();
