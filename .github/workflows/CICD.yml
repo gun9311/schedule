@@ -35,13 +35,22 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      # - name: Build with Maven
+      #   if: steps.changes.outputs.back == 'true'
+      #   working-directory: src/fit-style-backend
+      #   run: |
+      #     echo ${{secrets.APPLICATION_SECTRET}} | base64 --decode > ./src/fit-style-backend/src/main/resources/application-secret.yml
+      #     chmod 777 ./mvnw
+      #     ./mvnw clean package -Dtestskip
+
       - name: Build with Maven
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         working-directory: src/fit-style-backend
         run: |
-          echo ${{secrets.APPLICATION_SECTRET}} | base64 --decode > ./src/fit-style-backend/src/main/resources/application-secret.yml
-          chmod 777 ./mvnw
-          ./mvnw clean package -Dtestskip
+          echo "Current working directory:"
+          pwd
+          echo "Listing files in the current directory:"
+          ls -al
 
       - name: Login to DockerHub
         if: steps.changes.outputs.back == 'true'
