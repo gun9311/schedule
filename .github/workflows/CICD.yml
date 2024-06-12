@@ -40,7 +40,7 @@ jobs:
         # if: steps.changes.outputs.back == 'true'
         working-directory: src/fit-style-backend
         run: |
-          echo ${{secrets.APPLICATION_SECTRET}} | base64 --decode > ./src/main/resources/application-secret.yml
+          echo ${{secrets.APPLICATION_SECRET}} | base64 --decode > ./src/main/resources/application-secret.yml
           chmod 777 ./mvnw
           ./mvnw clean package -Dtestskip
 
