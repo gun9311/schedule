@@ -17,16 +17,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-        with:
-          path: src/fit-style-backend
-      - uses: dorny/paths-filter@v2.11.1
-        id: changes
-        with:
-          filters: |
-            back:
-              - 'src/fit-style-backend/**'
-            front:
-              - 'src/fit-style-frontend/**'
+        # with:
+          # path: src/fit-style-backend
+      # - uses: dorny/paths-filter@v2.11.1
+        # id: changes
+        # with:
+          # filters: |
+            # back:
+              # - 'src/fit-style-backend/**'
+            # front:
+              # - 'src/fit-style-frontend/**'
               
       - name: Install JDK 17
         if: steps.changes.outputs.back == 'true'
