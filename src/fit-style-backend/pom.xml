@@ -7,10 +7,7 @@
     <groupId>ru.project.fitstyle</groupId>
     <artifactId>FitStyle</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>war</packaging>
-
-    <name>FitStyle</name>
-    <url>https://www.fitstyle.ru</url>
+    <packaging>jar</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -37,27 +34,6 @@
             <version>9.2.0</version>
         </dependency>
 
-            <!-- Selenium Java -->
-    <!-- <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-java</artifactId>
-        <version>4.4.0</version>
-    </dependency> -->
-    
-    <!-- Selenium Chrome Driver -->
-    <!-- <dependency>
-        <groupId>org.seleniumhq.selenium</groupId>
-        <artifactId>selenium-chrome-driver</artifactId>
-        <version>4.4.0</version>
-    </dependency> -->
-    
-    <!-- WebDriverManager -->
-    <!-- <dependency>
-        <groupId>io.github.bonigarcia</groupId>
-        <artifactId>webdrivermanager</artifactId>
-        <version>5.0.3</version>
-    </dependency> -->
-
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -69,13 +45,11 @@
             <version>3.141.59</version>
         </dependency>
         
-        <!-- Spring Security OAuth2 Client -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
         
-        <!-- Spring Security OAuth2 Resource Server -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
@@ -178,7 +152,6 @@
 
     <build>
         <finalName>FitStyle</finalName>
-        <pluginManagement>
             <plugins>
                 <plugin>
                     <artifactId>maven-clean-plugin</artifactId>
@@ -197,8 +170,20 @@
                     <version>2.22.1</version>
                 </plugin>
                 <plugin>
-                    <artifactId>maven-war-plugin</artifactId>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin>
+                <plugin>
+                    <artifactId>maven-jar-plugin</artifactId>
                     <version>3.2.2</version>
+                    <configuration>
+                        <archive>
+                            <manifest>
+                                <addClasspath>true</addClasspath>
+                                <mainClass>ru.project.fitstyle.FitStyleApplication</mainClass>
+                            </manifest>
+                        </archive>
+                    </configuration>
                 </plugin>
                 <plugin>
                     <artifactId>maven-install-plugin</artifactId>
@@ -209,6 +194,5 @@
                     <version>2.8.2</version>
                 </plugin>
             </plugins>
-        </pluginManagement>
     </build>
 </project>

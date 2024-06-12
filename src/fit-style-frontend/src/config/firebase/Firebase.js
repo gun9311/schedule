@@ -23,7 +23,7 @@ export const getFirebaseToken = async () => {
     const serviceWorkerRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
     const currentToken = await messaging.getToken({
       vapidKey:
-        "BHLu6ZhlJIIn7NsUocED4WPqN0msixh78ckorbM2W4aRfA7CpPObO5ag3ZA-LGPUXRgkdvzQdBs5pEcRsD4ZTDE", serviceWorkerRegistration
+          process.env.REACT_APP_FIREBASE_VAPID_KEY, serviceWorkerRegistration
     });
     if (currentToken) {
       // Send the token to your server and update the UI if necessary
