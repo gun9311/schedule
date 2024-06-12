@@ -3,9 +3,9 @@ name: CICD
 on:
   push:
     branches: [ "main" ]
-    # paths: 
-      # - 'src/fit-style-frontend/**'
-      # - 'src/fit-style-backend/**'
+    paths: 
+      - 'src/fit-style-frontend/**'
+      - 'src/fit-style-backend/**'
   pull_request:
     branches: [ "main" ]
 
@@ -19,14 +19,14 @@ jobs:
       - uses: actions/checkout@v3
         # with:
           # path: src/fit-style-backend
-      # - uses: dorny/paths-filter@v2.11.1
-        # id: changes
-        # with:
-          # filters: |
-            # back:
-              # - 'src/fit-style-backend/**'
-            # front:
-              # - 'src/fit-style-frontend/**'
+      - uses: dorny/paths-filter@v2.11.1
+        id: changes
+        with:
+          filters: |
+            back:
+              - 'src/fit-style-backend/**'
+            front:
+              - 'src/fit-style-frontend/**'
               
       - name: Install JDK 17
         if: steps.changes.outputs.back == 'true'
@@ -35,16 +35,16 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      # - name: Build with Maven
-      #   if: steps.changes.outputs.back == 'true'
-      #   working-directory: src/fit-style-backend
-      #   run: |
-      #     echo ${{secrets.APPLICATION_SECTRET}} | base64 --decode > ./src/fit-style-backend/src/main/resources/application-secret.yml
-      #     chmod 777 ./mvnw
-      #     ./mvnw clean package -Dtestskip
+      - name: Build with Maven
+        if: steps.changes.outputs.back == 'true'
+        working-directory: src/fit-style-backend
+        run: |
+          echo ${{secrets.APPLICATION_SECTRET}} | base64 --decode > ./src/main/resources/application-secret.yml
+          chmod 777 ./mvnw
+          ./mvnw clean package -Dtestskip
 
       - name: Build with Maven
-        # if: steps.changes.outputs.back == 'true'
+        if: steps.changes.outputs.back == 'true'
         working-directory: src/fit-style-backend
         run: |
           echo "Current working directory:"
@@ -63,7 +63,7 @@ jobs:
         if: steps.changes.outputs.back == 'true'
         run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/schedule .
       - name: Push Docker
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/live_server:latest
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/schedule:latest
         
   deploy:
     needs: build
