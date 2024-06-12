@@ -3,9 +3,9 @@ name: CICD
 on:
   push:
     branches: [ "main" ]
-    paths: 
-      - 'src/fit-style-frontend/**'
-      - 'src/fit-style-backend/**'
+    # paths: 
+      # - 'src/fit-style-frontend/**'
+      # - 'src/fit-style-backend/**'
   pull_request:
     branches: [ "main" ]
 
