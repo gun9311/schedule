@@ -1,9 +1,15 @@
 # 베이스 이미지로 node를 사용
-FROM node:20 AS build
+FROM node:20.14.0 AS build
 WORKDIR /app
 COPY . .
 RUN npm install --legacy-peer-deps
-RUN export NODE_OPTIONS=--openssl-legacy-provider
+ENV NODE_OPTIONS=--openssl-legacy-provider
+
+# 빌드 인수를 환경 변수로 설정
+ARG REACT_APP_FIREBASE_API_KEY
+ARG REACT_APP_FIREBASE_VAPID_KEY
+ENV REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY
+ENV REACT_APP_FIREBASE_VAPID_KEY=$REACT_APP_FIREBASE_VAPID_KEY
 RUN npm run build
 
 # Nginx를 사용하여 빌드 결과를 서빙
