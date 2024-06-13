@@ -3,6 +3,7 @@ FROM node:20 AS build
 WORKDIR /app
 COPY . .
 RUN npm install --legacy-peer-deps
+RUN export NODE_OPTIONS=--openssl-legacy-provider
 RUN npm run build
 
 # Nginx를 사용하여 빌드 결과를 서빙
