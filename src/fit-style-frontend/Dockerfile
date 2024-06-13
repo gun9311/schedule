@@ -20,9 +20,6 @@ FROM nginx:alpine
 COPY service-env.inc /etc/nginx/conf.d/service-env.inc
 COPY default.conf /etc/nginx/conf.d/default.conf
 COPY --from=build /app/build /usr/share/nginx/html
-COPY /etc/letsencrypt/live/gunryul.store /etc/letsencrypt/live/gunryul.store
-COPY /etc/letsencrypt/options-ssl-nginx.conf /etc/letsencrypt/options-ssl-nginx.conf
-COPY /etc/letsencrypt/ssl-dhparams.pem /etc/letsencrypt/ssl-dhparams.pem
 EXPOSE 80
 EXPOSE 443
 CMD ["nginx", "-g", "daemon off;"]
