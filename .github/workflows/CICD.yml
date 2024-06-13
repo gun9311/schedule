@@ -28,7 +28,7 @@ jobs:
               - 'src/fit-style-frontend/**'
               
       - name: Install JDK 17
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         uses: actions/setup-java@v3
         with:
           java-version: '17'
@@ -55,7 +55,7 @@ jobs:
         run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/schedule .
       
       - name: Push Docker
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/schedule:latest
 
 
