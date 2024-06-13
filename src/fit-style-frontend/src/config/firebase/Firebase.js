@@ -14,52 +14,43 @@ const firebaseConfig = {
   measurementId: "G-R511GDMSBY",
 };
 
+console.log("Initializing Firebase with config:", firebaseConfig);
 firebase.initializeApp(firebaseConfig);
 
-const messaging = firebase.messaging();
+let messaging;
+try {
+  messaging = firebase.messaging();
+  console.log("Firebase messaging initialized:", messaging);
+} catch (error) {
+  console.error("Error initializing Firebase messaging:", error);
+}
 
 export const getFirebaseToken = async () => {
   try {
+    console.log("Registering service worker...");
     const serviceWorkerRegistration = await navigator.serviceWorker.register('/firebase-messaging-sw.js');
+    console.log("Service worker registered:", serviceWorkerRegistration);
+
     const currentToken = await messaging.getToken({
-      vapidKey:
-          process.env.REACT_APP_FIREBASE_VAPID_KEY, serviceWorkerRegistration
+      vapidKey: process.env.REACT_APP_FIREBASE_VAPID_KEY,
+      serviceWorkerRegistration
     });
     if (currentToken) {
-      // Send the token to your server and update the UI if necessary
       console.log("Token acquired:", currentToken);
-      // Send token to server
       await firebaseToken.saveToken({ token: currentToken }).then(
         (response) => {
           console.log(response);
         },
         (error) => {
           console.log(error);
-          // ToastMessages.error("토큰 저장 실패");
         }
       );
     } else {
-      console.log("등록된 토큰이 없습니다");
+      console.log("No registration token available.");
     }
   } catch (error) {
-    console.error("getToken 에러", error);
+    console.error("getToken error:", error);
   }
-  
 };
 
 export { messaging };
-
-// // Handle foreground messages
-// onMessage(messaging, (payload) => {
-//   console.log('Message received. ', payload);
-//   // Customize notification here
-//   const notificationTitle = payload.notification.title;
-//   const notificationOptions = {
-//       body: payload.notification.body,
-//       icon: '/firebase-logo.png'
-//   };
-
-//   if (Notification.permission === 'granted') {
-//       new Notification(notificationTitle, notificationOptions);
-//   }
-// });
