@@ -10,7 +10,7 @@ const envVars = {
 console.log('Environment Variables:', envVars);
 
 // 서비스 워커 파일 경로를 지정합니다.
-const swFilePath = path.join(__dirname, 'public', 'firebase-messaging-sw.js');
+const swFilePath = path.join(__dirname, 'build', 'firebase-messaging-sw.js');
 let swFileContent = fs.readFileSync(swFilePath, 'utf8');
 
 // 디버깅 로그: 원본 파일 내용 출력
