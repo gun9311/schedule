@@ -10,7 +10,7 @@ import ru.project.fitstyle.model.entity.user.FitUser;
 import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.UserService;
 import ru.project.fitstyle.service.impl.token.FirebaseTokenService;
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
 @RequestMapping("/api/firebase")
 

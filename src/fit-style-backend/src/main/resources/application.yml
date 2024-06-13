@@ -39,7 +39,7 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "http://15.164.125.231/login/oauth2/code/google"
+            redirect-uri: "http://gunryul.store/login/oauth2/code/google"
 server:
   port: 8080
   serverAddress: 15.164.125.231
@@ -57,7 +57,7 @@ spring:
       client:
         registration:
           google:
-            redirect-uri: "http://15.164.125.231/login/oauth2/code/google"
+            redirect-uri: "http://gunryul.store/login/oauth2/code/google"
 
 server:
   port: 8081

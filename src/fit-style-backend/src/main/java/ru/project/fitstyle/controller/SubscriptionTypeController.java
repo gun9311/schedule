@@ -10,7 +10,7 @@ import ru.project.fitstyle.model.entity.subscription.SubscriptionType;
 import ru.project.fitstyle.service.SubscriptionTypeService;
 
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
 @RequestMapping("/api/subscription-type")
 @PreAuthorize("hasRole('MODERATOR')")

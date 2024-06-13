@@ -79,7 +79,7 @@ public class CustomOAuth2AuthenticationSuccessHandler implements AuthenticationS
         // response.sendRedirect("http://localhost:3000/oauth2/redirect");
         // URL에 쿼리 매개변수로 데이터 추가
         Long id = user.getId();
-        String redirectUrl = "http://localhost:3000/oauth2/redirect"
+        String redirectUrl = "http://gunryul.store/oauth2/redirect"
                 + "?accessToken=" + accessToken
                 + "&id=" + id
                 + "&email=" + email
