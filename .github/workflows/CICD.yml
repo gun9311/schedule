@@ -35,7 +35,7 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Maven
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         working-directory: src/fit-style-backend
         run: |
           echo ${{secrets.APPLICATION_SECRET}} | base64 --decode > ./src/main/resources/application-secret.yml
@@ -51,7 +51,7 @@ jobs:
 
       - name: Build Docker
         working-directory: src/fit-style-backend
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/schedule .
       
       - name: Push Docker
@@ -76,7 +76,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Set target IP
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         run: |
           STATUS=$(curl -o /dev/null -w "%{http_code}" "http://${{ secrets.SCHEDULE_IP }}/env")
           echo $STATUS
@@ -100,7 +100,7 @@ jobs:
           fi
           
       - name: Docker compose
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         uses: appleboy/ssh-action@master
         with:
           username: ubuntu
@@ -128,7 +128,7 @@ jobs:
 
 
       - name: Check deploy server URL
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         uses: jtalk/url-health-check-action@v3
         with:
           url: http://${{ secrets.SCHEDULE_IP }}:${{env.STOPPED_PORT}}/env
@@ -136,7 +136,7 @@ jobs:
           retry-delay: 10s
 
       - name: Change nginx upstream
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         uses: appleboy/ssh-action@master
         with:
           username: ubuntu
@@ -147,7 +147,7 @@ jobs:
             sudo docker exec -i nginxserver bash -c 'echo "set \$service_url ${{ env.TARGET_UPSTREAM }};" > /etc/nginx/conf.d/service-env.inc && nginx -s reload' 
 
       - name: Stop current server
-        if: steps.changes.outputs.back == 'true'
+        # if: steps.changes.outputs.back == 'true'
         uses: appleboy/ssh-action@master
         with:
           username: ubuntu
