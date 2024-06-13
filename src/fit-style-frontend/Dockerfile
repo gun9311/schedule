@@ -12,6 +12,9 @@ ENV REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY
 ENV REACT_APP_FIREBASE_VAPID_KEY=$REACT_APP_FIREBASE_VAPID_KEY
 RUN npm run build
 
+# 환경 변수 주입 스크립트 실행
+RUN node inject-env.js
+
 # Nginx를 사용하여 빌드 결과를 서빙
 FROM nginx:alpine
 COPY service-env.inc /etc/nginx/conf.d/service-env.inc

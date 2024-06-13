@@ -3,8 +3,9 @@ importScripts('https://www.gstatic.com/firebasejs/9.0.0/firebase-messaging-compa
 
 // Initialize the Firebase app in the service worker by passing in the messagingSenderId.
 firebase.initializeApp({
-    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
-    authDomain: "onboard-d43ee.firebaseapp.com",
+  // apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  apiKey: 'REPLACE_WITH_FIREBASE_API_KEY',
+  authDomain: "onboard-d43ee.firebaseapp.com",
     projectId: "onboard-d43ee",
     storageBucket: "onboard-d43ee.appspot.com",
     messagingSenderId: "637225936636",

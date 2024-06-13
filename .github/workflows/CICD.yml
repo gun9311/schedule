@@ -65,7 +65,7 @@ jobs:
           REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
           REACT_APP_FIREBASE_VAPID_KEY: ${{ secrets.REACT_APP_FIREBASE_VAPID_KEY }}
         working-directory: src/fit-style-frontend
-        run: docker build --build-arg REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY --build-arg REACT_APP_FIREBASE_VAPID_KEY=$REACT_APP_FIREBASE_VAPID_KEY -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend .
+        run: docker build --build-arg REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY --build-arg REACT_APP_FIREBASE_VAPID_KEY=$REACT_APP_FIREBASE_VAPID_KEY --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend .
 
       - name: Push Frontend Docker
         # if: steps.changes.outputs.front == 'true'
