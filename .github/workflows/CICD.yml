@@ -28,28 +28,19 @@ jobs:
               - 'src/fit-style-frontend/**'
               
       - name: Install JDK 17
-        # if: steps.changes.outputs.back == 'true'
+        if: steps.changes.outputs.back == 'true'
         uses: actions/setup-java@v3
         with:
           java-version: '17'
           distribution: 'temurin'
 
       - name: Build with Maven
-        # if: steps.changes.outputs.back == 'true'
+        if: steps.changes.outputs.back == 'true'
         working-directory: src/fit-style-backend
         run: |
           echo ${{secrets.APPLICATION_SECRET}} | base64 --decode > ./src/main/resources/application-secret.yml
           chmod 777 ./mvnw
           ./mvnw clean package -Dtestskip
-
-      # - name: Build with Maven
-      #   if: steps.changes.outputs.back == 'true'
-      #   working-directory: src/fit-style-backend
-      #   run: |
-      #     echo "Current working directory:"
-      #     pwd
-      #     echo "Listing files in the current directory:"
-      #     ls -al
 
       - name: Login to DockerHub
         # if: steps.changes.outputs.back == 'true'
@@ -60,16 +51,29 @@ jobs:
 
       - name: Build Docker
         working-directory: src/fit-style-backend
-        # if: steps.changes.outputs.back == 'true'
+        if: steps.changes.outputs.back == 'true'
         run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/schedule .
+      
       - name: Push Docker
+        if: steps.changes.outputs.back == 'true'
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/schedule:latest
-        
+
+
+      - name: Build Frontend Docker
+        # if: steps.changes.outputs.front == 'true'
+        working-directory: src/fit-style-frontend
+        run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend .
+
+      - name: Push Frontend Docker
+        # if: steps.changes.outputs.front == 'true'
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest  
+  
   deploy:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Set target IP
+        if: steps.changes.outputs.back == 'true'
         run: |
           STATUS=$(curl -o /dev/null -w "%{http_code}" "http://${{ secrets.SCHEDULE_IP }}/env")
           echo $STATUS
@@ -93,6 +97,7 @@ jobs:
           fi
           
       - name: Docker compose
+        if: steps.changes.outputs.back == 'true'
         uses: appleboy/ssh-action@master
         with:
           username: ubuntu
@@ -103,7 +108,24 @@ jobs:
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/schedule:latest
             sudo docker-compose -f docker-compose-${{env.TARGET_UPSTREAM}}.yml up -d
       
+      - name: Deploy Frontend
+        # if: steps.changes.outputs.front == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          username: ubuntu
+          host: ${{ secrets.SCHEDULE_IP }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+            sudo docker stop frontend || true
+            sudo docker rm frontend || true
+            sudo docker run -d --name frontend -p 80:80 ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+
+
+
       - name: Check deploy server URL
+        if: steps.changes.outputs.back == 'true'
         uses: jtalk/url-health-check-action@v3
         with:
           url: http://${{ secrets.SCHEDULE_IP }}:${{env.STOPPED_PORT}}/env
@@ -111,6 +133,7 @@ jobs:
           retry-delay: 10s
 
       - name: Change nginx upstream
+        if: steps.changes.outputs.back == 'true'
         uses: appleboy/ssh-action@master
         with:
           username: ubuntu
@@ -121,6 +144,7 @@ jobs:
             sudo docker exec -i nginxserver bash -c 'echo "set \$service_url ${{ env.TARGET_UPSTREAM }};" > /etc/nginx/conf.d/service-env.inc && nginx -s reload' 
 
       - name: Stop current server
+        if: steps.changes.outputs.back == 'true'
         uses: appleboy/ssh-action@master
         with:
           username: ubuntu
