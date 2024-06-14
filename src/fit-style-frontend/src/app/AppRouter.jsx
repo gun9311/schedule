@@ -19,7 +19,7 @@ const AppRouter = () => {
 
   return (
     <Switch>
-      <Route path="/oauth2/redirect" component={OAuth2RedirectHandler} />
+      <Route path="/oauth/redirect" component={OAuth2RedirectHandler} />
       {!isAuth && <Route path={[URL_LOGIN, '/']} render={props => <LoginContainer {...props} />} />}
       {isAuth && (
         <Background>

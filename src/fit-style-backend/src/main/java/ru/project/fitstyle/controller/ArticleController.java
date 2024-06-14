@@ -26,7 +26,7 @@ import ru.project.fitstyle.service.ArticleService;
 import ru.project.fitstyle.service.NewsService;
 import ru.project.fitstyle.service.StorageService;
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
 @RequestMapping("/api/article")
 @PreAuthorize("hasRole('USER') || hasRole('MODERATOR') || hasRole('COACH')")

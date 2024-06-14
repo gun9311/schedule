@@ -18,7 +18,7 @@ import ru.project.fitstyle.model.repository.FitUserRepository;
 import ru.project.fitstyle.model.repository.RoleRepository;
 import ru.project.fitstyle.model.repository.SubscriptionTypeRepository;
 
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
 @RequestMapping("/api/test")
 public class TestController {

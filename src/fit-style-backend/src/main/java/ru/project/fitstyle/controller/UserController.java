@@ -1,24 +1,40 @@
 package ru.project.fitstyle.controller;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import ru.project.fitstyle.controller.request.user.*;
+import ru.project.fitstyle.controller.request.user.AddEditUserRequest;
+import ru.project.fitstyle.controller.request.user.AskForRecoverRequest;
+import ru.project.fitstyle.controller.request.user.AssignRoleRequest;
+import ru.project.fitstyle.controller.request.user.ChangePasswordRequest;
+import ru.project.fitstyle.controller.request.user.ConfirmRecoveryRequest;
+import ru.project.fitstyle.controller.request.user.UpdateEditUserRequest;
 import ru.project.fitstyle.controller.response.SuccessMessage;
 import ru.project.fitstyle.controller.response.user.AllUsersResponse;
 import ru.project.fitstyle.model.entity.user.FitUser;
-import ru.project.fitstyle.service.*;
+import ru.project.fitstyle.service.AuthService;
+import ru.project.fitstyle.service.PasswordRecoveryService;
+import ru.project.fitstyle.service.RoleService;
+import ru.project.fitstyle.service.StorageService;
+import ru.project.fitstyle.service.SubscriptionTypeService;
+import ru.project.fitstyle.service.UserService;
 
-import java.util.List;
-
-import javax.validation.Valid;
-
-@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
+@CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
 @RequestMapping("/api/users")
 public class UserController {

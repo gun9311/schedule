@@ -1,2 +1,1 @@
-src/fit-style-backend/src/main/resources/application.yml
-src/fit-style-backend/src/main/resources/serviceAccountKey.json
+application-secret.yml

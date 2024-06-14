@@ -36,7 +36,7 @@ export const LoginContainer = () => {
     }
 
     const handleOAuthLogin = () => {
-        window.location.href = "http://localhost:8080/oauth2/authorization/google"; // 실제 백엔드 URL로 리디렉션합니다.
+        window.location.href = "https://gunryul.store/oauth2/authorization/google"; // 실제 백엔드 URL로 리디렉션합니다.
     };
 
     const handleRegister = () => {

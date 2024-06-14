@@ -1,0 +1,161 @@
+name: CICD
+
+on:
+  push:
+    branches: [ "main" ]
+    paths: 
+      - '.github/**'
+      - 'src/fit-style-frontend/**'
+      - 'src/fit-style-backend/**'
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: dorny/paths-filter@v2.11.1
+        id: changes
+        with:
+          filters: |
+            back:
+              - 'src/fit-style-backend/**'
+            front:
+              - 'src/fit-style-frontend/**'
+              
+      - name: Install JDK 17
+        # if: steps.changes.outputs.back == 'true'
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build with Maven
+        # if: steps.changes.outputs.back == 'true'
+        working-directory: src/fit-style-backend
+        run: |
+          echo ${{secrets.APPLICATION_SECRET}} | base64 --decode > ./src/main/resources/application-secret.yml
+          chmod 777 ./mvnw
+          ./mvnw clean package -Dtestskip
+
+      - name: Login to DockerHub
+        # if: steps.changes.outputs.back == 'true'
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build Docker
+        working-directory: src/fit-style-backend
+        # if: steps.changes.outputs.back == 'true'
+        run: docker build --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/schedule .
+      
+      - name: Push Docker
+        # if: steps.changes.outputs.back == 'true'
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/schedule:latest
+
+
+      - name: Build Frontend Docker
+        # if: steps.changes.outputs.front == 'true'
+        env:
+          REACT_APP_FIREBASE_API_KEY: ${{ secrets.REACT_APP_FIREBASE_API_KEY }}
+          REACT_APP_FIREBASE_VAPID_KEY: ${{ secrets.REACT_APP_FIREBASE_VAPID_KEY }}
+        working-directory: src/fit-style-frontend
+        run: docker build --build-arg REACT_APP_FIREBASE_API_KEY=$REACT_APP_FIREBASE_API_KEY --build-arg REACT_APP_FIREBASE_VAPID_KEY=$REACT_APP_FIREBASE_VAPID_KEY --platform linux/amd64 -t ${{ secrets.DOCKERHUB_USERNAME }}/frontend .
+
+      - name: Push Frontend Docker
+        # if: steps.changes.outputs.front == 'true'
+        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest  
+  
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy Frontend
+        # if: steps.changes.outputs.front == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          username: ubuntu
+          host: ${{ secrets.SCHEDULE_IP }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+            sudo docker stop frontend || true
+            sudo docker rm frontend || true
+            sudo docker-compose -f docker-compose-frontend.yml up -d
+
+
+      - name: Set target IP
+        # if: steps.changes.outputs.back == 'true'
+        run: |
+          STATUS=$(curl -o /dev/null -w "%{http_code}" -L "http://${{ secrets.SCHEDULE_DOMAIN }}/env")
+          echo $STATUS
+          if [ $STATUS = 200 ]; then
+            CURRENT_UPSTREAM=$(curl -s -L "http://${{ secrets.SCHEDULE_DOMAIN }}/env")
+          else
+            CURRENT_UPSTREAM=green
+          fi
+          echo CURRENT_UPSTREAM=$CURRENT_UPSTREAM >> $GITHUB_ENV
+          if [ $CURRENT_UPSTREAM = blue ]; then
+            echo "CURRENT_PORT=8080" >> $GITHUB_ENV
+            echo "STOPPED_PORT=8081" >> $GITHUB_ENV
+            echo "TARGET_UPSTREAM=green" >> $GITHUB_ENV
+          elif [ $CURRENT_UPSTREAM = green ]; then
+            echo "CURRENT_PORT=8081" >> $GITHUB_ENV
+            echo "STOPPED_PORT=8080" >> $GITHUB_ENV
+            echo "TARGET_UPSTREAM=blue" >> $GITHUB_ENV
+          else
+            echo "error"
+            exit 1
+          fi
+          
+      - name: Docker compose
+        # if: steps.changes.outputs.back == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          username: ubuntu
+          host: ${{ secrets.SCHEDULE_IP }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/schedule:latest
+            sudo docker-compose -f docker-compose-${{env.TARGET_UPSTREAM}}.yml up -d
+      
+
+
+
+      - name: Check deploy server URL
+        # if: steps.changes.outputs.back == 'true'
+        uses: jtalk/url-health-check-action@v3
+        with:
+          url: http://${{ secrets.SCHEDULE_IP }}:${{env.STOPPED_PORT}}/env
+          max-attempts: 5
+          retry-delay: 10s
+
+      - name: Change nginx upstream
+        # if: steps.changes.outputs.back == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          username: ubuntu
+          host: ${{ secrets.SCHEDULE_IP }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            sudo docker exec -i frontend sh -c 'echo "set \$service_url ${{ env.TARGET_UPSTREAM }};" > /etc/nginx/conf.d/service-env.inc && nginx -s reload' 
+
+      - name: Stop current server
+        # if: steps.changes.outputs.back == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          username: ubuntu
+          host: ${{ secrets.SCHEDULE_IP }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            sudo docker stop ${{env.CURRENT_UPSTREAM}}
+            sudo docker rm ${{env.CURRENT_UPSTREAM}}
