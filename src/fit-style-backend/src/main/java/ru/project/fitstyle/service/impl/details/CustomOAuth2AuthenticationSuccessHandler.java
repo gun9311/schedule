@@ -67,7 +67,6 @@ public class CustomOAuth2AuthenticationSuccessHandler implements AuthenticationS
         // String jsonResponse = new ObjectMapper().writeValueAsString(loginResponse);
         Cookie refreshTokenCookie = createRefreshTokenCookie(refreshToken);
         
-        // response.setContentType("application/json;charset=UTF-8");
         response.addCookie(refreshTokenCookie);
         // response.getWriter().write(jsonResponse);
         // 리디렉션
