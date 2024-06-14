@@ -1,5 +1,5 @@
 // ROOT //
-export const URL_ROOT = "https://gunryul.store/api";
+export const URL_ROOT = "http://gunryul.store/api";
 // TOKENS //
 export const URL_REFRESHTOKEN = "auth/refresh-token"; //auth
 // LOGIN //
