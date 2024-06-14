@@ -16,12 +16,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-// import io.jsonwebtoken.io.IOException;
-
 import lombok.extern.slf4j.Slf4j;
-import ru.project.fitstyle.controller.response.auth.LoginResponse;
 import ru.project.fitstyle.model.entity.user.FitUser;
 import ru.project.fitstyle.service.UserService;
 import ru.project.fitstyle.service.impl.token.AccessTokenService;
@@ -79,7 +74,7 @@ public class CustomOAuth2AuthenticationSuccessHandler implements AuthenticationS
         // response.sendRedirect("http://localhost:3000/oauth2/redirect");
         // URL에 쿼리 매개변수로 데이터 추가
         Long id = user.getId();
-        String redirectUrl = "http://gunryul.store/oauth2/redirect"
+        String redirectUrl = "http://gunryul.store/oauth/redirect"
                 + "?accessToken=" + accessToken
                 + "&id=" + id
                 + "&email=" + email
