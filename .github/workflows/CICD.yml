@@ -93,10 +93,10 @@ jobs:
       - name: Set target IP
         # if: steps.changes.outputs.back == 'true'
         run: |
-          STATUS=$(curl -o /dev/null -w "%{http_code}" "http://${{ secrets.SCHEDULE_DOMAIN }}/env")
+          STATUS=$(curl -o /dev/null -w "%{http_code}" -L "http://${{ secrets.SCHEDULE_DOMAIN }}/env")
           echo $STATUS
           if [ $STATUS = 200 ]; then
-            CURRENT_UPSTREAM=$(curl -s "http://${{ secrets.SCHEDULE_DOMAIN }}/env")
+            CURRENT_UPSTREAM=$(curl -s -L "http://${{ secrets.SCHEDULE_DOMAIN }}/env")
           else
             CURRENT_UPSTREAM=green
           fi
