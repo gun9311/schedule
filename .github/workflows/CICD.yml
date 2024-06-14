@@ -75,6 +75,21 @@ jobs:
     needs: build
     runs-on: ubuntu-latest
     steps:
+      - name: Deploy Frontend
+        # if: steps.changes.outputs.front == 'true'
+        uses: appleboy/ssh-action@master
+        with:
+          username: ubuntu
+          host: ${{ secrets.SCHEDULE_IP }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script_stop: true
+          script: |
+            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
+            sudo docker stop frontend || true
+            sudo docker rm frontend || true
+            sudo docker-compose -f docker-compose-frontend.yml up -d
+
+            
       - name: Set target IP
         # if: steps.changes.outputs.back == 'true'
         run: |
@@ -111,19 +126,6 @@ jobs:
             sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/schedule:latest
             sudo docker-compose -f docker-compose-${{env.TARGET_UPSTREAM}}.yml up -d
       
-      - name: Deploy Frontend
-        # if: steps.changes.outputs.front == 'true'
-        uses: appleboy/ssh-action@master
-        with:
-          username: ubuntu
-          host: ${{ secrets.SCHEDULE_IP }}
-          key: ${{ secrets.EC2_SSH_KEY }}
-          script_stop: true
-          script: |
-            sudo docker pull ${{ secrets.DOCKERHUB_USERNAME }}/frontend:latest
-            sudo docker stop frontend || true
-            sudo docker rm frontend || true
-            sudo docker-compose -f docker-compose-frontend.yml up -d
 
 
 
