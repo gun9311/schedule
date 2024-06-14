@@ -12,7 +12,7 @@ import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.UserService;
 
 
-@CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/profile")
 @PreAuthorize("hasRole('USER')")

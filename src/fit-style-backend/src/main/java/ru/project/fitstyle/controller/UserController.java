@@ -34,7 +34,7 @@ import ru.project.fitstyle.service.StorageService;
 import ru.project.fitstyle.service.SubscriptionTypeService;
 import ru.project.fitstyle.service.UserService;
 
-@CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
+@CrossOrigin(origins = "http://localhost:3000", maxAge = 3600)
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
