@@ -31,7 +31,7 @@ public class FitCrawlingService implements CrawlingService {
     private final String skateboardingUrl;
 
     private static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    private static final String CHROMEDRIVER_PATH = "/usr/bin/chromedriver";
+    private static final String CHROMEDRIVER_PATH = "/usr/lib/chromium/chromedriver";
     
     private static final String crawlTitleAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.n0jPhd.ynAwRc.MBeuO.nDgy9d";
     private static final String crawlContentAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.GI74Re.nDgy9d";
@@ -50,7 +50,7 @@ public class FitCrawlingService implements CrawlingService {
     }
 
     @Override
-    @Scheduled(cron = "00 41 13 * * ?")
+    @Scheduled(cron = "00 46 13 * * ?")
     public List<Article> crawling() {
         List<Article> articles = new ArrayList<>();
         ChromeOptions options = new ChromeOptions();
