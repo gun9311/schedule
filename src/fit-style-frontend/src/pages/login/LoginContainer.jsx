@@ -22,7 +22,6 @@ export const LoginContainer = () => {
     const handleLogin = (event) => {
         event.preventDefault();
 
-        //TODO: DELETE  - - - <<< TESTING >>>
         // const email = "AdminProfile@gmail.com";
         // const password = "AdminProfile"
         // login({email, password});
