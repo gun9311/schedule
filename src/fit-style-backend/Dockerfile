@@ -11,9 +11,18 @@ RUN apk --no-cache add \
     wget \
     bash \
     udev \
-    ttf-opensans \
-    chromium \
-    chromium-chromedriver
+    ttf-opensans
+
+# 크롬 설치
+RUN wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
+    && dpkg -i google-chrome-stable_current_amd64.deb || true \
+    && apt-get -fy install \
+    && rm google-chrome-stable_current_amd64.deb
+
+# chromedriver 설치
+RUN wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip \
+    && unzip /tmp/chromedriver.zip -d /usr/local/bin/ \
+    && rm /tmp/chromedriver.zip
 
 ARG JAR_FILE=target/*.jar
 ARG PROFILES
