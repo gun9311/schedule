@@ -50,13 +50,15 @@ public class FitCrawlingService implements CrawlingService {
     }
 
     @Override
-    @Scheduled(cron = "00 00 14 * * ?")
+    @Scheduled(cron = "30 31 14 * * ?")
     public List<Article> crawling() {
         List<Article> articles = new ArrayList<>();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--start-maximized");
-        options.addArguments("--disable-popup-blocking");
-        options.addArguments("headless");
+        options.addArguments("--headless"); // headless 모드로 실행
+        options.addArguments("--no-sandbox");
+        options.addArguments("--disable-dev-shm-usage");
+        options.addArguments("--disable-gpu");
+        options.addArguments("--remote-debugging-port=9222");
         webDriver = new ChromeDriver(options);
         for (String url : new String[]{surfingUrl, snowboardingUrl, skateboardingUrl}) {
             try {
@@ -139,7 +141,6 @@ public class FitCrawlingService implements CrawlingService {
         return calendar.getTime();
     }
 }
-
 
 // package ru.project.fitstyle.service.impl;
 
