@@ -9,12 +9,11 @@ RUN apk --no-cache add \
     ca-certificates \
     ttf-freefont \
     wget \
-    && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb \
-    && apk --no-cache add --allow-untrusted google-chrome-stable_current_amd64.deb \
-    && rm google-chrome-stable_current_amd64.deb \
-    && wget -O /tmp/chromedriver.zip https://chromedriver.storage.googleapis.com/114.0.5735.90/chromedriver_linux64.zip \
-    && unzip /tmp/chromedriver.zip -d /usr/local/bin/ \
-    && rm /tmp/chromedriver.zip
+    bash \
+    udev \
+    ttf-opensans \
+    chromium \
+    chromium-chromedriver
 
 ARG JAR_FILE=target/*.jar
 ARG PROFILES

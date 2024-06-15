@@ -31,7 +31,7 @@ public class FitCrawlingService implements CrawlingService {
     private final String skateboardingUrl;
 
     private static final String WEB_DRIVER_ID = "webdriver.chrome.driver";
-    private static final String CHROMEDRIVER_PATH = "/usr/local/bin/chromedriver";
+    private static final String CHROMEDRIVER_PATH = "/usr/bin/chromedriver";
     
     private static final String crawlTitleAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.n0jPhd.ynAwRc.MBeuO.nDgy9d";
     private static final String crawlContentAddress = "#rso > div > div > div:nth-child(%d) > div > div > a > div > div.SoAPf > div.GI74Re.nDgy9d";
