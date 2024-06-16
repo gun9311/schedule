@@ -6,20 +6,14 @@ import ru.project.fitstyle.model.dto.training.PersonalTrainingDto;
 import java.util.List;
 
 public class AllTrainingsResponse {
-    private final List<GroupTrainingDto> groupTrainings;
+    private final List<GroupTrainingDto> groupTrainingDtos;
 
-    private final List<PersonalTrainingDto> personalTrainings;
 
-    public AllTrainingsResponse(List<GroupTrainingDto> groupTrainings, List<PersonalTrainingDto> personalTrainings) {
-        this.groupTrainings = groupTrainings;
-        this.personalTrainings = personalTrainings;
+    public AllTrainingsResponse(List<GroupTrainingDto> groupTrainingDtos) {
+        this.groupTrainingDtos = groupTrainingDtos;
     }
 
     public List<GroupTrainingDto> getGroupTrainings() {
-        return groupTrainings;
-    }
-
-    public List<PersonalTrainingDto> getPersonalTrainings() {
-        return personalTrainings;
+        return groupTrainingDtos;
     }
 }

@@ -5,57 +5,31 @@ import ru.project.fitstyle.model.entity.training.ETrainingStatus;
 
 import java.util.Date;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import ru.project.fitstyle.model.entity.training.ApplyTrainingStatus;
+
+
+@Getter
+@AllArgsConstructor
 public class GroupTrainingDto {
     private final Long id;
 
     private final Date startDate;
 
-    private final Date endDate;
+    private final String title;
+    
+    private final String description;
+    
+    private final String coachId;
+    
+    private final String coachName;
+
+    private final String trainingName;
 
     private final ETrainingStatus status;
 
-    private final FitUserFullNameDto fitUser;
-
-    private final String title;
+    private final ApplyTrainingStatus apply;
 
     private final int numberOfUsers;
-
-    public GroupTrainingDto(final Long id, final Date startDate, final Date endDate, final ETrainingStatus status,
-                            final Long coachId, final String name, final String title, final int numberOfUsers) {
-        this.id = id;
-        this.startDate = startDate;
-        this.endDate = endDate;
-        this.status = status;
-        this.fitUser = new FitUserFullNameDto(coachId, name);
-        this.title = title;
-        this.numberOfUsers=numberOfUsers;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public Date getStartDate() {
-        return startDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public ETrainingStatus getStatus() {
-        return status;
-    }
-
-    public FitUserFullNameDto getFitUser() {
-        return fitUser;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public int getNumberOfUsers() {
-        return numberOfUsers;
-    }
 }

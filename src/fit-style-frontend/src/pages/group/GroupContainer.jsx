@@ -120,7 +120,7 @@ export const GroupContainer = () => {
         setGroupList(response.data.groupTrainingDtos);
       },
       (error) => {
-        ToastMessages.error("오류가 발생했습니다. 나중에 다시 시도해주세요.");
+        ToastMessages.error("존재하는 그룹이 없습니다.");
       }
     );
 

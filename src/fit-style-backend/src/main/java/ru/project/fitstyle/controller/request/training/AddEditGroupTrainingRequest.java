@@ -2,25 +2,18 @@ package ru.project.fitstyle.controller.request.training;
 
 import java.util.Date;
 
+import lombok.Getter;
+import lombok.Setter;
+
+
+@Getter
+@Setter
 public class AddEditGroupTrainingRequest {
 
+    private String title;
+    
+    private String description;
+    
     private Long trainingId;
 
-    private Date date;
-
-    public Long getTrainingId() {
-        return trainingId;
-    }
-
-    public void setTrainingId(Long trainingId) {
-        this.trainingId = trainingId;
-    }
-
-    public Date getDate() {
-        return date;
-    }
-
-    public void setDate(Date date) {
-        this.date = date;
-    }
 }
