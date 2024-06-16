@@ -33,7 +33,6 @@ public class FirebaseConfig {
             // InputStream serviceAccount = getClass().getClassLoader().getResourceAsStream("serviceAccountKey.json");
                 // new FileInputStream("src/main/resources/serviceAccountKey.json");
             
-                // JSON 파일을 읽어옴
             Resource resource = new ClassPathResource("serviceAccountKey.json");
             InputStream serviceAccountStream = resource.getInputStream();
             ObjectMapper mapper = new ObjectMapper();
