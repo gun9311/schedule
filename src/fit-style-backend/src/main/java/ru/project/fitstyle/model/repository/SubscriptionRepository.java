@@ -20,6 +20,4 @@ public interface SubscriptionRepository extends JpaRepository<Subscription, Long
             "from Subscription v " +
             "where v.fitUser.id = :id")
     List<ApplyGroupDto> checkApplybyId(@Param("id") Long id);
-
-    Boolean existsByName(String name);
 }
