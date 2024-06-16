@@ -124,6 +124,8 @@ public class TrainingController {
         GroupTraining newGroupTraining = new GroupTraining(
             new Date(),
             currentUser.getId(),
+            requeset.getTitle(),
+            request.getDescription()
             trainingService.getTrainingById(request.getTrainingId()),
             ETrainingStatus.ACTIVE,
             ApplyTrainingStatus.POSSIBLE);
