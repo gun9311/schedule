@@ -21,7 +21,7 @@ public class GroupTrainingDto {
     
     private final String description;
     
-    private final String coachId;
+    private final Long coachId;
     
     private final String coachName;
 
