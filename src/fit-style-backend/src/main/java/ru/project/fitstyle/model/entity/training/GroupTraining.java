@@ -1,5 +1,6 @@
 package ru.project.fitstyle.model.entity.training;
 
+import ru.project.fitstyle.model.entity.subscription.Subscription;
 import ru.project.fitstyle.model.entity.user.FitUser;
 
 import javax.persistence.*;
@@ -52,6 +53,9 @@ public class GroupTraining {
     @Column(name = "apply_status", length = 10,
             nullable = false)
     private ApplyTrainingStatus applyStatus;
+
+    @OneToMany(mappedBy = "groupTraining", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<Subscription> subscriptions = new ArrayList<>();
 
     public GroupTraining() {
     }

@@ -31,7 +31,7 @@ import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.PasswordRecoveryService;
 import ru.project.fitstyle.service.RoleService;
 import ru.project.fitstyle.service.StorageService;
-import ru.project.fitstyle.service.SubscriptionTypeService;
+import ru.project.fitstyle.service.SubscriptionService;
 import ru.project.fitstyle.service.UserService;
 
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
@@ -44,7 +44,7 @@ public class UserController {
 
     private final RoleService roleService;
 
-    private final SubscriptionTypeService subscriptionTypeService;
+    private final SubscriptionService subscriptionTypeService;
 
     private final StorageService imageStorageService;
 
@@ -54,7 +54,7 @@ public class UserController {
 
     @Autowired
     public UserController(PasswordEncoder encoder, UserService userService, RoleService roleService,
-                          SubscriptionTypeService subscriptionTypeService, StorageService imageStorageService,
+                          SubscriptionService subscriptionTypeService, StorageService imageStorageService,
                           PasswordRecoveryService passwordRecoveryService, AuthService authService) {
         this.encoder = encoder;
         this.userService = userService;

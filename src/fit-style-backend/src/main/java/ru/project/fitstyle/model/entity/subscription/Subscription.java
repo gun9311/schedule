@@ -1,9 +1,17 @@
 package ru.project.fitstyle.model.entity.subscription;
 
 import javax.persistence.*;
+
 import java.util.Date;
+import lombok.Getter;
+import lombok.Setter;
+
+import ru.project.fitstyle.model.entity.training.GroupTraining;
+import ru.project.fitstyle.model.entity.user.FitUser;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "subscription")
 public class Subscription {
     @Id
@@ -12,61 +20,15 @@ public class Subscription {
             nullable = false, updatable = false, unique = true)
     private Long id;
 
-    @Column(name = "begin_date",
-            nullable = false)
-    private Date beginDate;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "fit_user_id", referencedColumnName = "id")
+    private FitUser fitUser;
 
-    @Column(name = "end_date",
-            nullable = false)
-    private Date endDate;
-
-    @Column(name = "contract_number", length = 15,
-            nullable = false)
-    private String contractNumber;
-
-    @ManyToOne(optional=false)
-    @JoinColumn(name = "subscription_type_id", nullable = false)
-    private SubscriptionType subscriptionType;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "group_training_id", referencedColumnName = "id")
+    private GroupTraining groupTraining;
 
     public Subscription() {
-
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public SubscriptionType getSubscriptionType() {
-        return subscriptionType;
-    }
-
-    public void setSubscriptionType(SubscriptionType subscriptionType) {
-        this.subscriptionType = subscriptionType;
-    }
-
-    public Date getBeginDate() { return beginDate; }
-
-    public void setBeginDate(Date beginDate) {
-        this.beginDate = beginDate;
-    }
-
-    public Date getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(Date endDate) {
-        this.endDate = endDate;
-    }
-
-    public String getContractNumber() {
-        return contractNumber;
-    }
-
-    public void setContractNumber(String contractNumber) {
-        this.contractNumber = contractNumber;
-    }
 }

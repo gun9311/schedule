@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.project.fitstyle.model.entity.subscription.Subscription;
 import ru.project.fitstyle.model.entity.training.GroupTraining;
 import ru.project.fitstyle.model.entity.training.PersonalTraining;
 
@@ -77,6 +78,9 @@ public class FitUser {
             joinColumns = @JoinColumn(name = "fit_user_id", referencedColumnName = "id", nullable = false),
             inverseJoinColumns = @JoinColumn(name = "group_training_id", referencedColumnName = "id", nullable = false))
     private List<GroupTraining> groupTrainings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "fitUser", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<Subscription> subscriptions = new ArrayList<>();
 
     @OneToMany(mappedBy = "fitUser", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<PersonalTraining> personalTrainings = new ArrayList<>();
