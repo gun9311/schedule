@@ -29,7 +29,7 @@ public class GroupTrainingDto {
 
     private final ETrainingStatus status;
 
-    private final ApplyTrainingStatus apply;
+    private final ApplyTrainingStatus applyStatus;
 
     private final int numberOfUsers;
 }
