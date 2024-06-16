@@ -122,10 +122,10 @@ public class TrainingController {
         FitUser currentUser = userService.getUserByEmail(authService.getEmail());
         
         GroupTraining newGroupTraining = new GroupTraining(
+            request.getTitle(),
+            request.getDescription(),
             new Date(),
             currentUser.getId(),
-            requeset.getTitle(),
-            request.getDescription()
             trainingService.getTrainingById(request.getTrainingId()),
             ETrainingStatus.ACTIVE,
             ApplyTrainingStatus.POSSIBLE);
