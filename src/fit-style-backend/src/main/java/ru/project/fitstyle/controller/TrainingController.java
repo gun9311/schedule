@@ -114,7 +114,7 @@ public class TrainingController {
         return ResponseEntity.ok(new AllTrainingsResponse(trainingService.getAllTrainings()));
     }
 
-    @GetMapping()
+    @GetMapping("/mygroup")
     public ResponseEntity<MyTrainingResponse> getMyTrainings() {
         return ResponseEntity.ok(new MyTrainingResponse(trainingService.getMyTrainings()));
     }
