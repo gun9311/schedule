@@ -17,6 +17,7 @@ const MapComponent = () => {
       new window.google.maps.Map(ref.current, {
         center: { lat: -34.397, lng: 150.644 },
         zoom: 8,
+        mapId : '4937e255366d8f81'
       });
     }
   }, []);

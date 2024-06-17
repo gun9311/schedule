@@ -1,7 +1,9 @@
 .map-container {
     width: 100vw;
-    height: 100vh;
-    position: relative;  /* 필요에 따라 조정 */
+    height: 80vh;
+    position: absolute;
+    top: 0;
+    left: 30;
     z-index: 900;  /* 다른 요소 위에 보이도록 조정 */
 }
   
