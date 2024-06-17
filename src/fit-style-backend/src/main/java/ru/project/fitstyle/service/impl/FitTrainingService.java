@@ -2,7 +2,6 @@ package ru.project.fitstyle.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import ru.project.fitstyle.config.properties.TrainingProperties;
 import ru.project.fitstyle.model.dto.training.*;
 import ru.project.fitstyle.model.dto.user.FitUserFullNameDto;
@@ -24,6 +23,7 @@ import ru.project.fitstyle.service.exception.user.UserNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import javax.transaction.Transactional;
 
 @Service
 public class FitTrainingService implements TrainingService {
@@ -53,6 +53,7 @@ public class FitTrainingService implements TrainingService {
     }
 
     @Override
+    @Transactional
     public void saveGroupTraining(final GroupTraining groupTraining) {
         groupTrainingRepository.save(groupTraining);
     }
@@ -130,6 +131,7 @@ public class FitTrainingService implements TrainingService {
     public List<GroupTrainingDto> getAllTrainings() {
         return groupTrainingRepository.getAllTrainings();
     }
+    
     
     @Override
     public List<MyGroupTrainingDto> getMyTrainings() {

@@ -27,6 +27,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 import ru.project.fitstyle.model.entity.training.ApplyTrainingStatus;
 
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
@@ -124,6 +126,7 @@ public class TrainingController {
      * */
     @PreAuthorize("hasRole('USER') || hasRole('MODERATOR')")
     @PostMapping("/group")
+    @Transactional
     public ResponseEntity<SuccessMessage> addGroupTraining(@RequestBody final AddEditGroupTrainingRequest request) {
         FitUser currentUser = userService.getUserByEmail(authService.getEmail());
         
