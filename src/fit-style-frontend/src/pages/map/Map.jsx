@@ -20,15 +20,19 @@ const MapComponent = () => {
       });
     }
   }, []);
+  console.log("MapComponent")
 
   return <div ref={ref} style={{ width: '100%', height: '100%' }} />;
 };
 
-export const Map = () => (
+export const Map = () => {
+  console.log("Google Maps API Key:", process.env.REACT_APP_GOOGLE_MAPS_API_KEY);
+  return (
   <Wrapper apiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY} render={render}>
     <MapComponent />
   </Wrapper>
-);
+  );
+};
 
 // import React, {useState} from 'react';
 // import "./Map.css"
