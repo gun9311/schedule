@@ -22,7 +22,7 @@ const MapComponent = () => {
   }, []);
   console.log("MapComponent")
 
-  return <div ref={ref} style={{ width: '100%', height: '100%' }} />;
+  return <div ref={ref} className="map-container" />;
 };
 
 export const Map = () => {
