@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from 'react';
 import { Wrapper, Status } from '@googlemaps/react-wrapper';
+import "./Map.css"
 
 const render = (status) => {
   if (status === Status.LOADING) return <h3>Loading...</h3>;
