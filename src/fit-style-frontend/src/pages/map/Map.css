@@ -1,12 +1,15 @@
 .map-container {
-    width: 100vw;
-    height: 80vh;
-    position: absolute;
-    top: 0;
-    left: 30;
-    z-index: 900;  /* 다른 요소 위에 보이도록 조정 */
+    position: relative;
+    overflow: hidden;
+    width: 80vw; /* 원하는 너비로 설정 */
+    height: 80vh; /* 원하는 높이로 설정 */
+    margin: auto; /* 가운데 정렬 */
+    top: 50%; /* 화면의 수직 가운데로 이동 */
+    transform: translateY(-50%); /* 요소의 높이의 절반만큼 위로 이동 */
+    z-index: 1;
+    border: 1px solid #ccc; /* 선택 사항: 테두리 추가 */
 }
-  
+
 
 
 /* .map-title{
