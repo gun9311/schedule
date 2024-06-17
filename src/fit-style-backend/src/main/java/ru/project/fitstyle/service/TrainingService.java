@@ -32,6 +32,8 @@ public interface TrainingService {
     TrainingType getTrainingById(final Long id);
 
     List<GroupTrainingDto> getAllTrainings();
+    
+    List<MyGroupTrainingDto> getMyTrainings();
 
     // List<GroupTrainingDto> getCoachGroupTrainingsByCoachId(final Long id);
 

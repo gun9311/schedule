@@ -43,8 +43,8 @@ export const URL_APPLY_TRAINING_GROUP = "training/apply/group/"; //training
 export const URL_SIGN_TRAINING_PERSONAL = "training/sign/personal/"; //training
 export const URL_SIGN_TRAINING_GROUP ="training/sign/group/"; //training
 export const URL_OCCUPIED_COACH_TRAININGS = "training/coach/trainings" //training
+export const URL_MY_TRAINING = "training/mygroup"; //users
 // USERS //
-export const URL_MY_TRAINING = "users/group/"; //users
 export const URL_IMG_USER = "get-image/user/"; //users
 export const URL_DISABLE_USER = "users/disable/"; //users
 export const URL_ENABLE_USER = "users/enable/"; //users

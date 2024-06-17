@@ -130,6 +130,11 @@ public class FitTrainingService implements TrainingService {
     public List<GroupTrainingDto> getAllTrainings() {
         return groupTrainingRepository.getAllTrainings();
     }
+    
+    @Override
+    public List<MyGroupTrainingDto> getMyTrainings() {
+        return groupTrainingRepository.getMyTrainings();
+    }
 
     // @Override
     // public GroupTraining getGroupTrainingById(final Long id) {

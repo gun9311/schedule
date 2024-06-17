@@ -17,6 +17,7 @@ import ru.project.fitstyle.model.entity.training.PersonalTraining;
 import ru.project.fitstyle.model.entity.training.TrainingType;
 import ru.project.fitstyle.model.entity.user.FitUser;
 import ru.project.fitstyle.controller.response.training.AllTrainingsResponse;
+import ru.project.fitstyle.controller.response.training.MyTrainingResponse;
 import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.TrainingService;
 import ru.project.fitstyle.service.UserService;
@@ -111,6 +112,11 @@ public class TrainingController {
     @GetMapping()
     public ResponseEntity<AllTrainingsResponse> getAllTrainings() {
         return ResponseEntity.ok(new AllTrainingsResponse(trainingService.getAllTrainings()));
+    }
+
+    @GetMapping()
+    public ResponseEntity<MyTrainingResponse> getMyTrainings() {
+        return ResponseEntity.ok(new MyTrainingResponse(trainingService.getMyTrainings()));
     }
 
     /**
