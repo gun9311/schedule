@@ -5,7 +5,12 @@ import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.NewsService;
 import ru.project.fitstyle.service.StorageService;
@@ -14,7 +19,7 @@ import ru.project.fitstyle.service.UserService;
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
 @RequestMapping("/api/get-image")
-@PreAuthorize("hasRole('USER')")
+@PreAuthorize("hasRole('USER') || hasRole('MODERATOR')")
 public class GetImageController {
 
     private final AuthService authService;
@@ -45,7 +50,7 @@ public class GetImageController {
     /**
      * Get user profile image by its id
      * */
-    @PreAuthorize("hasRole('MODERATOR')")
+    @PreAuthorize("hasRole('USER') || hasRole('MODERATOR')")
     @GetMapping("/user/{id}")
     public ResponseEntity<Resource> getUserProfileImageById(@PathVariable("id") Long id) {
         return createImageResponse(imageStorageService.loadAsResource(userService.getUserById(id).getImgURL()));
