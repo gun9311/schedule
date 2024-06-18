@@ -3,7 +3,7 @@ import "./Info.css"
 import {Article} from "./Article";
 
 export const Info = () => {
-    const titles = ["휘닉스", "하이원", "용평", "비발디"]
+    const titles = ["A", "B", "C", "D"]
     return (
         <div className="info">
             <div className="info-header">

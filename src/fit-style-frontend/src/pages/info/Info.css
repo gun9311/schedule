@@ -28,9 +28,9 @@ body {
 }
 
 .episode__number {
-    font-size: 10vw;
+    font-size: 7vw;
     font-weight: 600;
-    padding: 10px 0;
+    padding: 0px 0;
     position: sticky;
     top: 0;
     text-align: center;
