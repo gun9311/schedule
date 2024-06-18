@@ -24,10 +24,10 @@ const OAuth2RedirectHandler = () => {
                 roles: roles.split(','), // Assuming roles are comma-separated in the query string
             };
             handleOAuthLogin(userData, token);
-            history.push('/home'); // Redirect to home or the desired protected route
+            history.push('/'); // Redirect to home or the desired protected route
         } else {
             ToastMessages.error("구글 로그인 실패");
-            history.push('/login'); // Redirect to login page on error
+            history.push('/sign'); // Redirect to login page on error
         }
     }, [location, handleOAuthLogin, history]);
 
