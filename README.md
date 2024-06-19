@@ -1,4 +1,4 @@
-# On Board - 취미 일정을 공유해 보세요.
+# On Board - 취미 동료들과 일정을 공유해 보세요.
 
 ## 웹 사이트
 [On-Board](https://gunryul.store/)
