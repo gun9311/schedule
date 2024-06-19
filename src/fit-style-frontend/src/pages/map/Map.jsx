@@ -42,7 +42,8 @@ const MapComponent = () => {
   console.log("MapComponent")
 
   return (
-    <div ref={ref} className="map-container">
+    <div>
+      <div ref={ref} className="map-container" />
       <input ref={inputRef} type="text" placeholder="장소를 검색하세요" className="map-search-input" />
     </div>
   );

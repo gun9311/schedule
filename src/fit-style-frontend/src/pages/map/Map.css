@@ -16,8 +16,8 @@
 
 .map-search-input {
     position: absolute;
-    top: 10px; /* 상단에서 10px 떨어진 위치 */
-    left: 10px; /* 좌측에서 10px 떨어진 위치 */
+    top: 30px; /* 상단에서 10px 떨어진 위치 */
+    left: 200px; /* 좌측에서 10px 떨어진 위치 */
     z-index: 20; /* 지도 위에 위치하도록 z-index 설정 */
     /* width: calc(100% - 40px); 반응형 너비 설정 */
     /* max-width: 300px; 최대 너비 설정 */
