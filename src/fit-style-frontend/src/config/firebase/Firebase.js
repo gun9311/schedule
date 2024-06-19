@@ -36,7 +36,7 @@ export const getFirebaseToken = async () => {
       serviceWorkerRegistration
     });
     if (currentToken) {
-      console.log("Token acquired:", currentToken);
+      // console.log("Token acquired:", currentToken);
       await firebaseToken.saveToken({ token: currentToken }).then(
         (response) => {
           console.log(response);

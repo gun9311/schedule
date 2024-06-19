@@ -1,11 +1,16 @@
 package ru.project.fitstyle.service.impl;
 
+import java.time.Instant;
+import java.util.Date;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailException;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import ru.project.fitstyle.config.properties.PasswordRecoveryProperties;
 import ru.project.fitstyle.model.entity.user.FitUser;
 import ru.project.fitstyle.model.entity.user.PasswordRecovery;
@@ -16,10 +21,6 @@ import ru.project.fitstyle.service.exception.recovery.RecoveryCodeExpiredExcepti
 import ru.project.fitstyle.service.exception.recovery.UnableToSendEmailException;
 import ru.project.fitstyle.service.exception.recovery.WrongCodeException;
 import ru.project.fitstyle.service.exception.user.UserNotFoundException;
-
-import java.time.Instant;
-import java.util.Date;
-import java.util.UUID;
 
 @Service
 public class FitPasswordRecoveryService implements PasswordRecoveryService {
@@ -51,8 +52,8 @@ public class FitPasswordRecoveryService implements PasswordRecoveryService {
             try {
                 SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
                 simpleMailMessage.setTo(toAddress);
-                simpleMailMessage.setSubject("Смена пароля на Fit-Style");
-                simpleMailMessage.setText("Здравствуйте, вот ваш код для смены пароля: " + randomCode);
+                simpleMailMessage.setSubject("On-board 비밀번호 변경");
+                simpleMailMessage.setText("안녕하세요. 비밀번호를 변경하는 코드는 다음과 같습니다. " + randomCode);
                 emailSender.send(simpleMailMessage);
             } catch (MailException ex) {
                 throw new UnableToSendEmailException("Unable to send message to the given address " + toAddress);

@@ -14,6 +14,18 @@
  
 }
 
+.map-search-input {
+    position: absolute;
+    top: 10px;
+    left: 15%;
+    transform: translateX(-50%);
+    z-index: 5;
+    width: 300px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
 
 /* .map-title{
     color: white;
