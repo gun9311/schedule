@@ -1,8 +1,8 @@
 # On Board
 ## 편리하게 취미 일정을 공유해 보세요.
 
-## 사이트 링크
-[여기 사이트 링크](https://gunryul.store/)
+## 웹 사이트
+[On-Board](https://gunryul.store/)
 
 ## 웹 애플리케이션 기능
 - 사용자 정보(이름, 사진 등)를 표시하는 프로필
