@@ -32,14 +32,18 @@
 
 ## Preview
 
-### Authorization page
-![Main_Screen](images/Authorization_page.png)
-### User Profile
-![History](images/User_Profile.png)
-### Training tab
-![History_View](images/Training_tab.png)
-### Map
-![Settings](images/Map.png)
-### Users tab
-![Select_Category](images/Users_tab.png)
+### 로그인
+![Main_Screen](images/로그인_페이지.png)
+### 메인 게시판
+![Main_Screen](images/홈_게시판.png)
+### 뉴스 피드
+![Main_Screen](images/뉴스_페이지.png)
+### 일정
+![History](images/일정_페이지.png)
+### 그룹
+![History_View](images/그룹_페이지.png)
+### 지도
+![Settings](images/지도_페이지.png)
+### 프로필
+![Select_Category](images/프로필_페이지_알림.png)
 ---
