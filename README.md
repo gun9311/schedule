@@ -1,7 +1,7 @@
 # On Board - 취미 동료들과 일정을 공유해 보세요.
 
 ## 웹 사이트
-[On-Board](https://gunryul.store/)
+<a href="https://gunryul.store/" target="_blank">On-Board</a>
 
 ## 웹 애플리케이션 기능
 - 사용자 정보(이름, 사진 등)를 표시하는 프로필
@@ -22,7 +22,10 @@
 - Java
 - Spring Data JPA
 - Spring MVC
-- PostgreSQL 
+- PostgreSQL
+
+##### Architecture:
+![Architecture](images/아키텍쳐.png)
 
 ## Preview
 
