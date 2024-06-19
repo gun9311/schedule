@@ -37,16 +37,13 @@ const MapComponent = () => {
           map.setZoom(17); // 검색 후 확대 레벨
         }
       });
-
-
     }
   }, []);
   console.log("MapComponent")
 
   return (
-    <div>
-      <input ref={inputRef} type="text" placeholder="Search for places..." className="map-search-input" />
-      <div ref={ref} className="map-container" />
+    <div ref={ref} className="map-container">
+      <input ref={inputRef} type="text" placeholder="장소를 검색하세요" className="map-search-input" />
     </div>
   );
 };

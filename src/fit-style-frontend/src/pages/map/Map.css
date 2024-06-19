@@ -16,14 +16,15 @@
 
 .map-search-input {
     position: absolute;
-    top: 10px;
-    left: 15%;
-    transform: translateX(-50%);
-    z-index: 5;
-    width: 300px;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
+    top: 10px; /* 상단에서 10px 떨어진 위치 */
+    left: 10px; /* 좌측에서 10px 떨어진 위치 */
+    z-index: 20; /* 지도 위에 위치하도록 z-index 설정 */
+    width: calc(100% - 40px); /* 반응형 너비 설정 */
+    max-width: 300px; /* 최대 너비 설정 */
+    padding: 8px; /* 입력 필드의 내부 여백 */
+    border: 1px solid #ccc; /* 테두리 설정 */
+    border-radius: 4px; /* 테두리 둥글게 설정 */
+    background-color: white; /* 배경색 설정 */
   }
 
 
