@@ -47,7 +47,7 @@ public class SubscriptionController {
     /**
      * Return all subscription types
      * */
-    @GetMapping()
+    @GetMapping("/check")
     public ResponseEntity<CheckApplyResponse> checkApplyById() {
         Long userId = userService.getUserByEmail(authService.getEmail()).getId();
         return ResponseEntity.ok(new CheckApplyResponse(subscriptionService.checkApplyById(userId)));

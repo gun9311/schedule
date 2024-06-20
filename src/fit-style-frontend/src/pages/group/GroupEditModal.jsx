@@ -92,9 +92,9 @@ const GroupEditModal = ({ isOpen, onClose, groupId, editGroup, editRendering }) 
                         <label htmlFor="trainingName">분류</label>
                         <select name="trainingName" value={formData.trainingName || ""} onChange={handleChange}>
                             <option value="">선택하세요</option>
-                            <option value="서핑">서핑</option>
-                            <option value="스노우보드">스노우보드</option>
-                            <option value="스케이트보드">스케이트보드</option>
+                            <option value="surfing">서핑</option>
+                            <option value="snowboarding">스노우보드</option>
+                            <option value="skateboarding">스케이트보드</option>
                         </select>
                     </div>
                     <div className="form-group">
