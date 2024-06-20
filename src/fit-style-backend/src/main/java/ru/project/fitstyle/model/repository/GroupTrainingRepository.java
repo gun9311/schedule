@@ -18,6 +18,11 @@ import ru.project.fitstyle.model.entity.user.FitUser;
 public interface GroupTrainingRepository extends JpaRepository<GroupTraining, Long> {
 
     @Query("select new ru.project.fitstyle.model.dto.training.GroupTrainingDto(v.id, v.startDate, v.title, v.description, w.id, w.name, v.trainingType.name, v.status, v.applyStatus, size(v.fitUsers)) " +
+       "from GroupTraining v inner join FitUser w on (v.coachId=w.id)" +
+       "where v.id = :id")
+    GroupTrainingDto getTrainingById(@Param("id") final Long id);   
+
+    @Query("select new ru.project.fitstyle.model.dto.training.GroupTrainingDto(v.id, v.startDate, v.title, v.description, w.id, w.name, v.trainingType.name, v.status, v.applyStatus, size(v.fitUsers)) " +
            "from GroupTraining v inner join FitUser w on (v.coachId=w.id)")
     List<GroupTrainingDto> getAllTrainings();
 
@@ -30,6 +35,11 @@ public interface GroupTrainingRepository extends JpaRepository<GroupTraining, Lo
            "from GroupTraining g join g.fitUsers v " +
            "where g.id= :id")
     List<FitUserDto> getGroupMember(@Param("id") final Long id);
+
+//     @Query("select w.name) " +
+//            "from GroupTraining v inner join FitUser w on (v.coachId=w.id)" +
+//            "where v.id = :id")
+//     String getCoachName(@Param("id") final Long id);
 
 //     @Query("select new ru.project.fitstyle.model.dto.training.GroupTrainingDto(v.id, v.startDate, v.endDate, v.status, w.id, w.name, v.trainingType.name, size(v.fitUsers)) " +
 //             "from GroupTraining v inner join FitUser w on (v.coachId=w.id) " +

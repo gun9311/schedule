@@ -30,7 +30,9 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import ru.project.fitstyle.controller.response.training.UpdateTrainingResponse;
 import ru.project.fitstyle.controller.response.user.GroupMembersResponse;
+import ru.project.fitstyle.model.dto.training.GroupTrainingDto;
 import ru.project.fitstyle.model.entity.training.ApplyTrainingStatus;
 
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
@@ -154,7 +156,7 @@ public class TrainingController {
     @PreAuthorize("hasRole('USER') || hasRole('MODERATOR')")
     @PutMapping("/update/{id}")
     @Transactional
-    public ResponseEntity<SuccessMessage> updateGroupTraining(@PathVariable("id") final Long id, @RequestBody final UpdateEditGroupTrainingRequest request) {
+    public ResponseEntity<UpdateTrainingResponse> updateGroupTraining(@PathVariable("id") final Long id, @RequestBody final UpdateEditGroupTrainingRequest request) {
         GroupTraining groupTraining = trainingService.getGroupTrainingById(id);
 
         groupTraining.setCoachId(request.getCoachId());
@@ -167,7 +169,7 @@ public class TrainingController {
         trainingService.saveGroupTraining(groupTraining);
 
         return ResponseEntity.ok(
-                new SuccessMessage("Success! Group training updated!")
+                new UpdateTrainingResponse(trainingService.getTrainingById(id))
         );
     }
 

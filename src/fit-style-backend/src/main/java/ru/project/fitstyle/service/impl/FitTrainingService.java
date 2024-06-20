@@ -166,6 +166,22 @@ public class FitTrainingService implements TrainingService {
     public List<FitUserDto> getGroupMember(final Long id) {
         return groupTrainingRepository.getGroupMember(id);
     }
+
+    @Override
+    public GroupTraining findById(final Long id){
+        return groupTrainingRepository.findById(id)
+                .orElseThrow(() -> new TrainingNotFoundException("Training with that id cannot be found!"));
+    }
+
+    @Override
+    public GroupTrainingDto getTrainingById(final Long id){
+        return groupTrainingRepository.getTrainingById(id);
+    }
+
+    // @Override
+    // public String getCoachName(final Long id) {
+    //     return groupTrainingRepository.getCoachName(id);
+    // }
     // @Override
     // public List<GroupTrainingDto> getCoachGroupTrainingsByCoachId(final Long id) {
     //     return groupTrainingRepository.findAllCoachTrainingsWithCoachId(id);

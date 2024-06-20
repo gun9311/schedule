@@ -17,6 +17,12 @@ public interface TrainingService {
     void saveGroupTraining(final GroupTraining groupTraining);
 
     List<FitUserDto> getGroupMember(final Long id);
+    
+    GroupTraining findById(final Long id);
+    
+    GroupTrainingDto getTrainingById(final Long id);
+
+    // String getCoachName(final Long id);
 
     // void savePersonalTraining(final PersonalTraining personalTraining);
 
