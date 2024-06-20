@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import ru.project.fitstyle.config.properties.TrainingProperties;
 import ru.project.fitstyle.model.dto.training.*;
+import ru.project.fitstyle.model.dto.user.FitUserDto;
 import ru.project.fitstyle.model.dto.user.FitUserFullNameDto;
 import ru.project.fitstyle.model.entity.training.ETrainingStatus;
 import ru.project.fitstyle.model.entity.user.FitUser;
@@ -156,6 +157,15 @@ public class FitTrainingService implements TrainingService {
                 .orElseThrow(() -> new TrainingNotFoundException("Training with that email cannot be found!"));
     }
 
+    @Override
+    public TrainingType getTrainingTypeByName(final String trainingName){
+        return trainingTypeRepository.findByName(trainingName);
+    }
+
+    @Override
+    public List<FitUserDto> getGroupMember(final Long id) {
+        return groupTrainingRepository.getGroupMember(id);
+    }
     // @Override
     // public List<GroupTrainingDto> getCoachGroupTrainingsByCoachId(final Long id) {
     //     return groupTrainingRepository.findAllCoachTrainingsWithCoachId(id);

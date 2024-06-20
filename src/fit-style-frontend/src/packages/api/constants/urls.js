@@ -36,18 +36,18 @@ export const URL_COACH_TRAININGS = "training/coach/"; //training
 export const URL_TRAINING_TYPES = "training"; //training
 export const URL_ADD_TRAINING_PERSONAL = "training/personal"; //training
 export const URL_ADD_TRAINING_GROUP = "training/group"; //training
-export const URL_UPDATE_TRAINING_GROUP = "training/group/"; //training
+export const URL_UPDATE_TRAINING_GROUP = "training/update/"; //training
 export const URL_DELETE_TRAINING_PERSONAL = "training/delete/personal/"; //training
 export const URL_DELETE_TRAINING_GROUP = "training/delete/group/"; //training
 export const URL_SIGN_TRAINING_PERSONAL = "training/sign/personal/"; //training
 export const URL_SIGN_TRAINING_GROUP ="training/sign/group/"; //training
 export const URL_OCCUPIED_COACH_TRAININGS = "training/coach/trainings" //training
-export const URL_MY_TRAINING = "training/mygroup"; //users
+export const URL_MY_TRAINING = "training/mygroup"; //training
+export const URL_GET_GROUP_MEMBER = "training/member/"; //training
 // USERS //
 export const URL_IMG_USER = "get-image/user/"; //users
 export const URL_DISABLE_USER = "users/disable/"; //users
 export const URL_ENABLE_USER = "users/enable/"; //users
-export const URL_GET_GROUP_USER = "users/"; //users
 // Subscription //
 export const URL_APPLY_TRAINING_GROUP = "subscription/apply/"; //training
 export const URL_CHECK_APPLY = "subscription/check" // subscription

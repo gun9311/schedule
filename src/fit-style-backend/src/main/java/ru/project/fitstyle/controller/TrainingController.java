@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import ru.project.fitstyle.controller.request.training.AddEditGroupTrainingRequest;
 import ru.project.fitstyle.controller.request.training.AddEditPersonalTrainingRequest;
 import ru.project.fitstyle.controller.request.training.AddEditTrainingRequest;
+import ru.project.fitstyle.controller.request.training.UpdateEditGroupTrainingRequest;
 import ru.project.fitstyle.controller.response.SuccessMessage;
 import ru.project.fitstyle.controller.response.training.AllCoachTrainingsResponse;
 import ru.project.fitstyle.controller.response.training.TrainingTypesResponse;
@@ -29,6 +30,7 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import ru.project.fitstyle.controller.response.user.GroupMembersResponse;
 import ru.project.fitstyle.model.entity.training.ApplyTrainingStatus;
 
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
@@ -147,6 +149,31 @@ public class TrainingController {
         return ResponseEntity.ok(
                 new SuccessMessage("Success! Group training created!")
         );
+    }
+
+    @PreAuthorize("hasRole('USER') || hasRole('MODERATOR')")
+    @PostMapping("/update/{id}")
+    @Transactional
+    public ResponseEntity<SuccessMessage> updateGroupTraining(@PathVariable("id") final Long id, @RequestBody final UpdateEditGroupTrainingRequest request) {
+        GroupTraining groupTraining = trainingService.getGroupTrainingById(id);
+
+        groupTraining.setCoachId(request.getCoachId());
+        groupTraining.setTitle(request.getTitle());
+        groupTraining.setDescription(request.getDescription());
+        groupTraining.setTrainingType(trainingService.getTrainingTypeByName(request.getTrainingName()));
+        groupTraining.setStatus(request.getStatus());
+        groupTraining.setApplyStatus(request.getApply());
+
+        trainingService.saveGroupTraining(groupTraining);
+
+        return ResponseEntity.ok(
+                new SuccessMessage("Success! Group training updated!")
+        );
+    }
+
+    @GetMapping("/member/{id}")
+    public ResponseEntity<GroupMembersResponse> getGroupMember(@PathVariable("id") final Long id) {
+        return ResponseEntity.ok(new GroupMembersResponse(trainingService.getGroupMember(id)));
     }
     
 

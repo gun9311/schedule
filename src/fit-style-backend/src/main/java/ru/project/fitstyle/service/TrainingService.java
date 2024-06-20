@@ -8,11 +8,15 @@ import ru.project.fitstyle.model.entity.user.FitUser;
 
 import java.util.List;
 
+import ru.project.fitstyle.model.dto.user.FitUserDto;
+
 public interface TrainingService {
 
     void saveTraining(final TrainingType trainingType);
 
     void saveGroupTraining(final GroupTraining groupTraining);
+
+    List<FitUserDto> getGroupMember(final Long id);
 
     // void savePersonalTraining(final PersonalTraining personalTraining);
 
@@ -31,6 +35,8 @@ public interface TrainingService {
     // PersonalTraining getPersonalTrainingById(final Long id);
 
     TrainingType getTrainingTypeById(final Long id);
+
+    TrainingType getTrainingTypeByName(final String trainingName);
 
     List<GroupTrainingDto> getAllTrainings();
     

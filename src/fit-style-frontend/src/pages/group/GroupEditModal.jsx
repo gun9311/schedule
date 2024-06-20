@@ -81,15 +81,15 @@ const GroupEditModal = ({ isOpen, onClose, groupId, editGroup, editRendering }) 
                         </select>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="title">제목</label>
+                        <label htmlFor="title">팀명</label>
                         <input type="text" name="title" value={formData.title} onChange={handleChange} />
                     </div>
                     <div className="form-group">
-                        <label htmlFor="description">설명</label>
+                        <label htmlFor="description">소개</label>
                         <textarea name="description" value={formData.description} onChange={handleChange}></textarea>
                     </div>
                     <div className="form-group">
-                        <label htmlFor="trainingName">훈련 종류</label>
+                        <label htmlFor="trainingName">분류</label>
                         <select name="trainingName" value={formData.trainingName || ""} onChange={handleChange}>
                             <option value="">선택하세요</option>
                             <option value="서핑">서핑</option>
@@ -101,16 +101,16 @@ const GroupEditModal = ({ isOpen, onClose, groupId, editGroup, editRendering }) 
                         <label htmlFor="status">상태</label>
                         <select name="status" value={formData.status || ""} onChange={handleChange}>
                             <option value="">선택하세요</option>
-                            <option value="ACTIVE">ACTIVE</option>
-                            <option value="INACTIVE">INACTIVE</option>
+                            <option value="ACTIVE">활성</option>
+                            <option value="INACTIVE">비활성</option>
                         </select>
                     </div>
                     <div className="form-group">
                         <label htmlFor="apply">가입 신청</label>
                         <select name="apply" value={formData.apply || ""} onChange={handleChange}>
                             <option value="">선택하세요</option>
-                            <option value="POSSIBLE">POSSIBLE</option>
-                            <option value="IMPOSSIBLE">IMPOSSIBLE</option>
+                            <option value="POSSIBLE">가능</option>
+                            <option value="IMPOSSIBLE">불가능</option>
                         </select>
                     </div>
                     <div className="button-group">

@@ -5,7 +5,7 @@ import {
   URL_IMG_USER,
   URL_DISABLE_USER,
   URL_ENABLE_USER,
-  URL_GET_GROUP_USER
+  URL_GET_GROUP_MEMBER
 } from "../constants/urls"
 
 
@@ -18,7 +18,7 @@ export const getAllUsers = () => {
 
 export const getGroupUsers = (groupId) => {
   return makeRequest({
-    url: URL_GET_GROUP_USER+groupId,
+    url: URL_GET_GROUP_MEMBER+groupId,
     method: GET,
   })
 }
