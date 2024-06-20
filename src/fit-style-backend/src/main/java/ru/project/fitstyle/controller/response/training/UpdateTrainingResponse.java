@@ -13,8 +13,3 @@ public class UpdateTrainingResponse {
         this.groupTrainingDto = groupTrainingDto;
     }
 }
-
-
-    
-
-}
