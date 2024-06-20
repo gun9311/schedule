@@ -31,4 +31,9 @@ public class Subscription {
     public Subscription() {
     }
 
+    public Subscription(FitUser fitUser, GroupTraining groupTraining) {
+        this.fitUser = fitUser;
+        this.groupTraining = groupTraining;
+    }
+
 }

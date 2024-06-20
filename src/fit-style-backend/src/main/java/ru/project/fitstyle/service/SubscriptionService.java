@@ -9,6 +9,8 @@ public interface SubscriptionService {
 
     List<ApplyGroupDto> checkApplyById(final Long id);
 
+    void save(final Subscription subscription);
+
     // List<SubscriptionTypeDto> getAllSubscriptionTypes();
 
     // Subscription createFitUserSubscription(final Long subscriptionTypeId, final String contractNumber);

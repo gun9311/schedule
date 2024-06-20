@@ -26,11 +26,11 @@ public interface TrainingService {
 
     // void deletePersonalTraining(final Long id);
 
-    // GroupTraining getGroupTrainingById(final Long id);
+    GroupTraining getGroupTrainingById(final Long id);
 
     // PersonalTraining getPersonalTrainingById(final Long id);
 
-    TrainingType getTrainingById(final Long id);
+    TrainingType getTrainingTypeById(final Long id);
 
     List<GroupTrainingDto> getAllTrainings();
     

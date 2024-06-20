@@ -23,6 +23,11 @@ public class FitSubscriptionService implements SubscriptionService {
     public FitSubscriptionService(final SubscriptionRepository subscriptionRepository) {
         this.subscriptionRepository = subscriptionRepository;
     }
+
+    @Override
+    public void save(final Subscription subscription) {
+        subscriptionRepository.save(subscription);
+    }
     
     @Override
     public List<ApplyGroupDto> checkApplyById(final Long id) {

@@ -138,11 +138,11 @@ public class FitTrainingService implements TrainingService {
         return groupTrainingRepository.getMyTrainings(fitUser);
     }
 
-    // @Override
-    // public GroupTraining getGroupTrainingById(final Long id) {
-    //     return groupTrainingRepository.findById(id)
-    //             .orElseThrow(() -> new TrainingNotFoundException("Group training with that id cannot be found!"));
-    // }
+    @Override
+    public GroupTraining getGroupTrainingById(final Long id) {
+        return groupTrainingRepository.findById(id)
+                .orElseThrow(() -> new TrainingNotFoundException("Group training with that id cannot be found!"));
+    }
 
     // @Override
     // public PersonalTraining getPersonalTrainingById(final Long id) {
@@ -151,7 +151,7 @@ public class FitTrainingService implements TrainingService {
     // }
 
     @Override
-    public TrainingType getTrainingById(final Long id) {
+    public TrainingType getTrainingTypeById(final Long id) {
         return trainingTypeRepository.findById(id)
                 .orElseThrow(() -> new TrainingNotFoundException("Training with that email cannot be found!"));
     }

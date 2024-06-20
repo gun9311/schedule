@@ -136,7 +136,7 @@ public class TrainingController {
             request.getDescription(),
             new Date(),
             currentUser.getId(),
-            trainingService.getTrainingById(request.getTrainingId()),
+            trainingService.getTrainingTypeById(request.getTrainingId()),
             ETrainingStatus.ACTIVE,
             ApplyTrainingStatus.POSSIBLE);
 
@@ -148,6 +148,7 @@ public class TrainingController {
                 new SuccessMessage("Success! Group training created!")
         );
     }
+    
 
     /**
      * Delete group training
