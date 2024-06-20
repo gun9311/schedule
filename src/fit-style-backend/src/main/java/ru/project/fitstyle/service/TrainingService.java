@@ -4,6 +4,7 @@ import ru.project.fitstyle.model.dto.training.*;
 import ru.project.fitstyle.model.entity.training.GroupTraining;
 import ru.project.fitstyle.model.entity.training.PersonalTraining;
 import ru.project.fitstyle.model.entity.training.TrainingType;
+import ru.project.fitstyle.model.entity.user.FitUser;
 
 import java.util.List;
 
@@ -33,7 +34,7 @@ public interface TrainingService {
 
     List<GroupTrainingDto> getAllTrainings();
     
-    List<MyGroupTrainingDto> getMyTrainings();
+    List<MyGroupTrainingDto> getMyTrainings(final FitUser fitUser);
 
     // List<GroupTrainingDto> getCoachGroupTrainingsByCoachId(final Long id);
 

@@ -118,7 +118,8 @@ public class TrainingController {
 
     @GetMapping("/mygroup")
     public ResponseEntity<MyTrainingResponse> getMyTrainings() {
-        return ResponseEntity.ok(new MyTrainingResponse(trainingService.getMyTrainings()));
+        FitUser fitUser = userService.getUserByEmail(authService.getEmail());
+        return ResponseEntity.ok(new MyTrainingResponse(trainingService.getMyTrainings(fitUser)));
     }
 
     /**

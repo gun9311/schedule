@@ -4,11 +4,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
+
 import ru.project.fitstyle.model.dto.training.GroupTrainingDto;
 import ru.project.fitstyle.model.dto.training.MyGroupTrainingDto;
 import ru.project.fitstyle.model.entity.training.GroupTraining;
 
 import java.util.List;
+
+import ru.project.fitstyle.model.entity.user.FitUser;
 
 @Repository
 public interface GroupTrainingRepository extends JpaRepository<GroupTraining, Long> {
@@ -18,8 +21,9 @@ public interface GroupTrainingRepository extends JpaRepository<GroupTraining, Lo
     List<GroupTrainingDto> getAllTrainings();
 
     @Query("select new ru.project.fitstyle.model.dto.training.MyGroupTrainingDto(v.id, v.startDate, v.title, v.description, w.id, w.name, v.trainingType.name, v.status, size(v.fitUsers)) " +
-           "from GroupTraining v inner join FitUser w on (v.coachId=w.id)")
-    List<MyGroupTrainingDto> getMyTrainings();
+           "from GroupTraining v inner join FitUser w on (v.coachId=w.id)" +
+           "where :fitUser member of v.fitUsers")
+    List<MyGroupTrainingDto> getMyTrainings(@Param("fitUser") final FitUser fitUser);
 
 //     @Query("select new ru.project.fitstyle.model.dto.training.GroupTrainingDto(v.id, v.startDate, v.endDate, v.status, w.id, w.name, v.trainingType.name, size(v.fitUsers)) " +
 //             "from GroupTraining v inner join FitUser w on (v.coachId=w.id) " +
