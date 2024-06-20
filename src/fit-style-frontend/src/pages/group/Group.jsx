@@ -35,8 +35,8 @@ export const Group = ({ groupData, applyList, sequence, myGroupIds }) => {
       <td className="group-id">{groupData.trainingName}</td>
       <td className="group-id">{groupData.status}</td>
       <td className="text-center group-status">
-        <button disabled={isApplied || isMyGroup || groupData.apply !== 'POSSIBLE'} onClick={handleApplyButtonClick}>
-          {isMyGroup ? "가입 완료" : isApplied ? "신청 완료" : (groupData.apply === 'POSSIBLE' ? "신청" : "불가")}
+        <button disabled={isApplied || isMyGroup || groupData.applyStatus !== 'POSSIBLE'} onClick={handleApplyButtonClick}>
+          {isMyGroup ? "가입 완료" : isApplied ? "신청 완료" : (groupData.applyStatus === 'POSSIBLE' ? "신청" : "불가")}
         </button>
       </td>
     </tr>
