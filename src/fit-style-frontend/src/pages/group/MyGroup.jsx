@@ -54,18 +54,16 @@ export const MyGroup = ({ myGroupList, sequence, onOpenSubscriptionModal, onOpen
             <td className="group-id">
                 <span>{myGroupList.status}</span>
             </td>
-            {isGroupOwner(myGroupList.coachId) && (
-            <td>
-                <button onClick={handleEditGroup}>편집</button>
-                <button onClick={handleSubscription}>가입 요청</button>
-            </td>     
-            )}
-            
-            {/* <td className="text-center group-status">
-            <button disabled={isApplied || groupData.apply !== 'POSSIBLE'} onClick={handleApplyButtonClick}>
-                    {isApplied ? "신청 완료" : (groupData.apply === 'POSSIBLE' ? "신청" : "불가")}
-            </button>
-            </td> */}
+            <td className="group-id">
+                {isGroupOwner(myGroupList.coachId) ? (
+                    <>
+                        <button onClick={handleEditGroup}>편집</button>
+                        <button onClick={handleSubscription}>가입 요청</button>
+                    </>
+                ) : (
+                    <span>관리 권한 없음</span>
+                )}
+            </td>
         </tr>
     );
 };

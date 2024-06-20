@@ -178,7 +178,8 @@ export const GroupContainer = () => {
                     <th className="text-center"><span>시작날짜</span></th>
                     <th className="text-center"><span>분류</span></th>
                     <th className="text-center"><span>활동</span></th>
-                    {!showMyGroup && <th className="text-center"><span>가입</span></th>}
+                    {/* {!showMyGroup && <th className="text-center"><span>가입</span></th>} */}
+                    <th className="text-center"><span>{showMyGroup ? '관리' : '가입'}</span></th>
                   </tr>
                 </thead>
                 <tbody>
