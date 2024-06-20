@@ -37,7 +37,7 @@ const GroupEditModal = ({ isOpen, onClose, groupId, editGroup, editRendering }) 
                 description: editGroup.description,
                 trainingName: editGroup.trainingName,
                 status: editGroup.status,
-                apply: editGroup.apply,
+                apply: editGroup.applyStatus,
             });
         }
     }, [isOpen, editGroup]);

@@ -18,7 +18,7 @@ import ru.project.fitstyle.service.UserService;
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
 @RequestMapping("/api/subscription")
-@PreAuthorize("hasRole('MODERATOR')")
+@PreAuthorize("hasRole('MODERATOR') || hasRole('USER')")
 public class SubscriptionController {
 
     private final SubscriptionService subscriptionService;

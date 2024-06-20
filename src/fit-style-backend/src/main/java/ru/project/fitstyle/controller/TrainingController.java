@@ -152,7 +152,7 @@ public class TrainingController {
     }
 
     @PreAuthorize("hasRole('USER') || hasRole('MODERATOR')")
-    @PostMapping("/update/{id}")
+    @PutMapping("/update/{id}")
     @Transactional
     public ResponseEntity<SuccessMessage> updateGroupTraining(@PathVariable("id") final Long id, @RequestBody final UpdateEditGroupTrainingRequest request) {
         GroupTraining groupTraining = trainingService.getGroupTrainingById(id);
