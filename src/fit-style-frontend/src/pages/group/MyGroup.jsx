@@ -54,10 +54,10 @@ export const MyGroup = ({ myGroupList, sequence, onOpenSubscriptionModal, onOpen
             <td className="group-id">
                 <span>{myGroupList.status}</span>
             </td>
-            <td className="group-id">
+            <td className="text-center group-status">
                 {isGroupOwner(myGroupList.coachId) ? (
                     <>
-                        <button onClick={handleEditGroup}>편집</button>
+                        <button onClick={handleEditGroup}>그룹 수정</button>
                         <button onClick={handleSubscription}>가입 요청</button>
                     </>
                 ) : (
