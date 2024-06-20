@@ -37,7 +37,7 @@ public class SubscriptionController {
 
     
     @PostMapping("/apply/{id}")
-    public ResponseEntity<MyTrainingResponse> applyTraining(@PathVariable("id") final Long id) {
+    public ResponseEntity<SuccessMessage> applyTraining(@PathVariable("id") final Long id) {
         FitUser fitUser = userService.getUserByEmail(authService.getEmail());
         GroupTraining group = trainingService.getGroupTrainingById(id);
         subscriptionService.save(new Subscription(fitUser, group));
