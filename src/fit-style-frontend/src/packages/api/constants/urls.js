@@ -56,7 +56,7 @@ export const URL_SUBSCRIPTION_ACCEPT = "subscription/accept/" // subscription
 export const URL_SUBSCRIPTION_REFUSE = "subscription/refuse/" // subscription
 
 // Schedule //
-export const URL_ADD_SCHEDULE = "schedule" // schedule
+export const URL_ADD_SCHEDULE = "schedule/add" // schedule
 export const URL_GET_SCHEDULE = "schedule/" // schedule
 // Firebase //
 export const URL_SAVE_TOKEN = "firebase" // firebase

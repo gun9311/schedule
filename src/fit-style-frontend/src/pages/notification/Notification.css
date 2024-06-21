@@ -2,7 +2,7 @@
     position: fixed;
     top: 70px;
     right: 100px;
-    z-index: 1000; /* Ensure it's on top of other elements */
+    z-index: 80; /* Ensure it's on top of other elements */
 }
 
 .notification-icon {

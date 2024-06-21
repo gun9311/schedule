@@ -1,7 +1,9 @@
 .calendar-container{
     background-color: white;
-    margin:0 0 0 auto;
-    max-width: 1200px;
+    margin:0 auto;
+    max-width: 1800px;
+    width: 85%;
+    margin-left: calc(5% + 50px);
 }
 .calendar-title{
     text-align: center;

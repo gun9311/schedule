@@ -1,5 +1,6 @@
 .news-board{
     max-width: 1200px;
+    margin-left: calc(2% + 50px);
 }
 .block-news {
     cursor: default;

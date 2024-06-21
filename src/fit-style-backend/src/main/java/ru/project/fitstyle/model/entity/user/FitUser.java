@@ -20,6 +20,7 @@ import javax.persistence.UniqueConstraint;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.project.fitstyle.model.entity.schedule.Schedule;
 import ru.project.fitstyle.model.entity.subscription.Subscription;
 import ru.project.fitstyle.model.entity.training.GroupTraining;
 import ru.project.fitstyle.model.entity.training.PersonalTraining;
@@ -81,6 +82,9 @@ public class FitUser {
 
     @OneToMany(mappedBy = "fitUser", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Subscription> subscriptions = new ArrayList<>();
+
+    @OneToMany(mappedBy = "fitUser", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<Schedule> schedules = new ArrayList<>();
 
     @OneToMany(mappedBy = "fitUser", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<PersonalTraining> personalTrainings = new ArrayList<>();

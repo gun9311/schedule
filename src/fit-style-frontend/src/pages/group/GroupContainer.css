@@ -1,11 +1,14 @@
 /* 전체 레이아웃 및 스타일 */
 .container {
   /* margin-top: 20px; */
-  margin: 20px auto 20px 90px;
+  margin: 20px auto;
   padding: 20px;
   background: #f0f2f5;
   border-radius: 10px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 85%;
+  max-width: 1600px;
+  margin-left: calc(5% + 70px);
 }
 
 /* 버튼 스타일 */

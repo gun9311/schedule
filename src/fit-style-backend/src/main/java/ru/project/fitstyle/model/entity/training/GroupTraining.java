@@ -4,9 +4,12 @@ import ru.project.fitstyle.model.entity.subscription.Subscription;
 import ru.project.fitstyle.model.entity.user.FitUser;
 
 import javax.persistence.*;
+
 import java.util.*;
+
 import lombok.Getter;
 import lombok.Setter;
+import ru.project.fitstyle.model.entity.schedule.Schedule;
 
 @Getter
 @Setter
@@ -57,6 +60,8 @@ public class GroupTraining {
     @OneToMany(mappedBy = "groupTraining", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Subscription> subscriptions = new ArrayList<>();
 
+    @OneToMany(mappedBy = "groupTraining", fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    private List<Schedule> schedules = new ArrayList<>();
     public GroupTraining() {
     }
     
