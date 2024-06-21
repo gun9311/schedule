@@ -64,9 +64,11 @@ public class ScheduleController {
         LocalDateTime startDateTime = LocalDateTime.parse(request.getSt(), formatter);
         LocalDateTime endDateTime = LocalDateTime.parse(request.getEt(), formatter);
 
+        ZoneId koreaZoneId = ZoneId.of("Asia/Seoul");
+
         Schedule newSchedule = new Schedule(request.getLocation(), request.getDescription(), 
-            Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
-            Date.from(endDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
+            Date.from(startDateTime.atZone(koreaZoneId).toInstant()), 
+            Date.from(endDateTime.atZone(koreaZoneId).toInstant()), 
             fitUser, groupTraining);
 
         scheduleService.save(newSchedule);

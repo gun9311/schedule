@@ -37,7 +37,7 @@ export const ScheduleContainer = () => {
         if (selectGroup !== "DEFAULT") {
             schedule.getSchedule(selectGroup).then(
                 (response) => {
-                    console.log(response.data.scheduleDtos);
+                    // console.log(response.data.scheduleDtos);
                     setEventList(response.data.scheduleDtos);
                 },
                 (error) => {

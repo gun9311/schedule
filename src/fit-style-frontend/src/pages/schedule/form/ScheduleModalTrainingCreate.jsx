@@ -9,7 +9,7 @@ export const ScheduleModalTrainingCreate = ({ setActive, selectGroup, slotInfo, 
     const [startTime, setStartTime] = useState(slotInfo ? slotInfo.start : new Date());
     const [endTime, setEndTime] = useState(slotInfo ? slotInfo.end : new Date());
 
-    console.log(slotInfo);
+    // console.log(slotInfo);
     const handleSave = () => {
         const st = startTime.toISOString()
         const et = endTime.toISOString()
