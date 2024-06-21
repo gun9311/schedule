@@ -1,5 +1,8 @@
 package ru.project.fitstyle.controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
 import javax.validation.Valid;
@@ -55,7 +58,17 @@ public class ScheduleController {
     public ResponseEntity<SuccessMessage> addSchedule(@RequestBody final AddScheduleRequest request) {
         FitUser fitUser = userService.getUserByEmail(authService.getEmail());
         GroupTraining groupTraining = trainingService.getGroupTrainingById(request.getGroupId());
-        Schedule newSchedule = new Schedule(request.getLocation(), request.getDescription(), new Date(request.getSt()), new Date(request.getEt()), fitUser, groupTraining);
+        
+        // Schedule newSchedule = new Schedule(request.getLocation(), request.getDescription(), new Date(request.getSt()), new Date(request.getEt()), fitUser, groupTraining);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        LocalDateTime startDateTime = LocalDateTime.parse(request.getSt(), formatter);
+        LocalDateTime endDateTime = LocalDateTime.parse(request.getEt(), formatter);
+
+        Schedule newSchedule = new Schedule(request.getLocation(), request.getDescription(), 
+            Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
+            Date.from(endDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
+            fitUser, groupTraining);
+
         scheduleService.save(newSchedule);
         return ResponseEntity.ok(
                 new SuccessMessage("Success! Schedule created!")
