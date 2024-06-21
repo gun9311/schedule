@@ -68,7 +68,7 @@ public class ScheduleController {
             Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
             Date.from(endDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
             fitUser, groupTraining);
-            
+
         scheduleService.save(newSchedule);
         return ResponseEntity.ok(
                 new SuccessMessage("Success! Schedule created!")
