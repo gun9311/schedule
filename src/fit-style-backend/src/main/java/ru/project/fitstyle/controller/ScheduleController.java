@@ -59,16 +59,13 @@ public class ScheduleController {
         FitUser fitUser = userService.getUserByEmail(authService.getEmail());
         GroupTraining groupTraining = trainingService.getGroupTrainingById(request.getGroupId());
         
-        // Schedule newSchedule = new Schedule(request.getLocation(), request.getDescription(), new Date(request.getSt()), new Date(request.getEt()), fitUser, groupTraining);
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
         LocalDateTime startDateTime = LocalDateTime.parse(request.getSt(), formatter);
         LocalDateTime endDateTime = LocalDateTime.parse(request.getEt(), formatter);
 
-        ZoneId koreaZoneId = ZoneId.of("Asia/Seoul");
-
         Schedule newSchedule = new Schedule(request.getLocation(), request.getDescription(), 
-            Date.from(startDateTime.atZone(koreaZoneId).toInstant()), 
-            Date.from(endDateTime.atZone(koreaZoneId).toInstant()), 
+            Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
+            Date.from(endDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
             fitUser, groupTraining);
 
         scheduleService.save(newSchedule);
