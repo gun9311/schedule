@@ -26,7 +26,7 @@ const Schedule = ({ groupList, selectedGroup, eventList, handleGroupSelectChange
                     <option value="DEFAULT">그룹 선택</option>
                     {groupList.map((group) => (
                         <option key={group.id} value={group.id}>
-                            {group.name}
+                            {group.title}
                         </option>
                     ))}
                 </select>

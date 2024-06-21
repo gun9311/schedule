@@ -5,11 +5,15 @@ import ru.project.fitstyle.model.entity.subscription.Subscription;
 
 import java.util.List;
 
+import ru.project.fitstyle.model.dto.subscription.SubscriptionDto;
+
 public interface SubscriptionService {
 
     List<ApplyGroupDto> checkApplyById(final Long id);
 
     void save(final Subscription subscription);
+
+    List<SubscriptionDto> getApplyUser(final Long id);
 
     // List<SubscriptionTypeDto> getAllSubscriptionTypes();
 

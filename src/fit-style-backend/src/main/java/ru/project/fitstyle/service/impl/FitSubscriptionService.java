@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import ru.project.fitstyle.model.dto.subscription.ApplyGroupDto;
+import ru.project.fitstyle.model.dto.subscription.SubscriptionDto;
 import ru.project.fitstyle.model.entity.subscription.Subscription;
 import ru.project.fitstyle.model.repository.SubscriptionRepository;
 import ru.project.fitstyle.service.SubscriptionService;
@@ -32,6 +33,11 @@ public class FitSubscriptionService implements SubscriptionService {
     @Override
     public List<ApplyGroupDto> checkApplyById(final Long id) {
         return subscriptionRepository.checkApplybyId(id);
+    }
+
+    @Override
+    public List<SubscriptionDto> getApplyUser(final Long id) {
+        return subscriptionRepository.getApplyUser(id);
     }
 
     // @Override

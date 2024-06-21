@@ -1,11 +1,14 @@
 package ru.project.fitstyle.controller;
 
+import java.util.Date;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
+
 import ru.project.fitstyle.controller.response.SuccessMessage;
 import ru.project.fitstyle.controller.response.subscription.CheckApplyResponse;
-import ru.project.fitstyle.controller.response.training.MyTrainingResponse;
+import ru.project.fitstyle.controller.response.subscription.GetApplyResponse;
 import ru.project.fitstyle.model.entity.subscription.Subscription;
 import ru.project.fitstyle.model.entity.training.GroupTraining;
 import ru.project.fitstyle.model.entity.user.FitUser;
@@ -40,8 +43,14 @@ public class SubscriptionController {
     public ResponseEntity<SuccessMessage> applyTraining(@PathVariable("id") final Long id) {
         FitUser fitUser = userService.getUserByEmail(authService.getEmail());
         GroupTraining group = trainingService.getGroupTrainingById(id);
-        subscriptionService.save(new Subscription(fitUser, group));
+        subscriptionService.save(new Subscription(fitUser, group, new Date()));
         return ResponseEntity.ok(new SuccessMessage("신청 완료!"));
+    }
+
+
+    @GetMapping("/group/{id}")
+    public ResponseEntity<GetApplyResponse> getApplyUser(@PathVariable("id") final Long id) {
+        return ResponseEntity.ok(new GetApplyResponse(subscriptionService.getApplyUser(id)));
     }
 
     /**

@@ -28,12 +28,17 @@ public class Subscription {
     @JoinColumn(name = "group_training_id", referencedColumnName = "id")
     private GroupTraining groupTraining;
 
+    @Column(name = "apply_date",
+            nullable = false)
+    private Date applyDate;
+
     public Subscription() {
     }
 
-    public Subscription(FitUser fitUser, GroupTraining groupTraining) {
+    public Subscription(FitUser fitUser, GroupTraining groupTraining, Date applyDate) {
         this.fitUser = fitUser;
         this.groupTraining = groupTraining;
+        this.applyDate = applyDate;
     }
 
 }
