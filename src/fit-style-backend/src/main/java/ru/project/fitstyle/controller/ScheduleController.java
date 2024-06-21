@@ -2,6 +2,7 @@ package ru.project.fitstyle.controller;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 
@@ -59,9 +60,12 @@ public class ScheduleController {
         FitUser fitUser = userService.getUserByEmail(authService.getEmail());
         GroupTraining groupTraining = trainingService.getGroupTrainingById(request.getGroupId());
         
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
-        LocalDateTime startDateTime = LocalDateTime.parse(request.getSt(), formatter);
-        LocalDateTime endDateTime = LocalDateTime.parse(request.getEt(), formatter);
+        DateTimeFormatter formatter = DateTimeFormatter.ISO_DATE_TIME;
+        ZonedDateTime startZonedDateTime = ZonedDateTime.parse(request.getSt(), formatter);
+        ZonedDateTime endZonedDateTime = ZonedDateTime.parse(request.getEt(), formatter);
+
+        LocalDateTime startDateTime = startZonedDateTime.toLocalDateTime();
+        LocalDateTime endDateTime = endZonedDateTime.toLocalDateTime();
 
         Schedule newSchedule = new Schedule(request.getLocation(), request.getDescription(), 
             Date.from(startDateTime.atZone(ZoneId.systemDefault()).toInstant()), 
