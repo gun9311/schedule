@@ -11,9 +11,9 @@ export const ScheduleModalTrainingCreate = ({ setActive, selectGroup, slotInfo, 
 
     // console.log(slotInfo);
     const handleSave = () => {
-        // Local time string without converting to UTC
-        const st = moment(startTime).format("YYYY-MM-DDTHH:mm:ss");
-        const et = moment(endTime).format("YYYY-MM-DDTHH:mm:ss");
+         // Local time string without converting to UTC
+         const st = moment(startTime).format("YYYY-MM-DD'T'HH:mm:ss");
+         const et = moment(endTime).format("YYYY-MM-DD'T'HH:mm:ss");
         const newEvent = {
             groupId: selectGroup, // 그룹 ID
             location,
