@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 
 import org.springframework.http.ResponseEntity;
@@ -65,6 +66,7 @@ public class ScheduleController {
 
     @PostMapping("/add")
     @PreAuthorize("hasRole('MODERATOR') || hasRole('USER')")
+    @Transactional
     public ResponseEntity<SuccessMessage> addSchedule(@RequestBody final AddScheduleRequest request) {
         FitUser fitUser = userService.getUserByEmail(authService.getEmail());
         GroupTraining groupTraining = trainingService.getGroupTrainingById(request.getGroupId());
@@ -95,7 +97,7 @@ public class ScheduleController {
             }
         }
         
-        if (fcmTokens.isEmpty()) {
+        if (!fcmTokens.isEmpty()) {
             for (String fcmToken2 : fcmTokens) {
                 fcmService.sendNotification(fcmToken2, title, body); 
             }

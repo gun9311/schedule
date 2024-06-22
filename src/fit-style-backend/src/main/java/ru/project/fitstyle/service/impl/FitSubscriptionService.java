@@ -58,6 +58,7 @@ public class FitSubscriptionService implements SubscriptionService {
     }   
 
     @Override
+    @Transactional
     public void deleteById(final Long id){
         subscriptionRepository.deleteById(id);
     }
