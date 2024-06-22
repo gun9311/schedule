@@ -54,6 +54,7 @@ public class FitSubscriptionService implements SubscriptionService {
     public void acceptApply(final Long id) {
         Subscription subscription = this.findById(id);
         subscription.getGroupTraining().addFitUser(subscription.getFitUser());
+        this.deleteById(id);
     }   
 
     @Override
