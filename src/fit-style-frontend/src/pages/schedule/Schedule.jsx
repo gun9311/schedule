@@ -56,7 +56,8 @@ const Schedule = ({ groupList, selectedGroup, eventList, handleGroupSelectChange
                     startTime: new Date(event.startTime),  // 시작 시간
                     endTime: new Date(event.endTime), // 끝 시간
                     // end: moment(new Date(event.endTime)).format("YYYY-MM-DDTHH:mm"), // 끝 시간
-                    user: event.userName, // 유저이름
+                    userName: event.userName, // 유저이름
+                    description: event.description,
                     location: event.location, // 장소
                 }))}
                 eventPropGetter={event => ({

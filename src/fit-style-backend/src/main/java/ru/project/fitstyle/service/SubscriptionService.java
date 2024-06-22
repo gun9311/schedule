@@ -14,6 +14,10 @@ public interface SubscriptionService {
     void save(final Subscription subscription);
 
     List<SubscriptionDto> getApplyUser(final Long id);
+    
+    Subscription findById(final Long id);
+
+    void deleteById(final Long id);
 
     // List<SubscriptionTypeDto> getAllSubscriptionTypes();
 

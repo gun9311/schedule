@@ -103,7 +103,7 @@ export const NewsBoard = () => {
                             </span>
                         </button>
                     }
-                    <h1 className="news-title">ON THE BOARD</h1>
+                    <h1 className="news-title">ON BOARD</h1>
                     {isModer &&
                         <button className="add-news" onClick={() => setModalActive(true)}>
                             <span className='text'>추가</span>

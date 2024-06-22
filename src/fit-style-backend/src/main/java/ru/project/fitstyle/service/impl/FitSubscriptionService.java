@@ -10,6 +10,7 @@ import ru.project.fitstyle.model.repository.SubscriptionRepository;
 import ru.project.fitstyle.service.SubscriptionService;
 import ru.project.fitstyle.service.exception.subscription.SubscriptionAlreadyExistsException;
 import ru.project.fitstyle.service.exception.subscription.SubscriptionTypeNotFoundException;
+import ru.project.fitstyle.service.exception.training.TrainingNotFoundException;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -38,6 +39,17 @@ public class FitSubscriptionService implements SubscriptionService {
     @Override
     public List<SubscriptionDto> getApplyUser(final Long id) {
         return subscriptionRepository.getApplyUser(id);
+    }
+
+    @Override
+    public Subscription findById(final Long id) {
+        return subscriptionRepository.findById(id)
+        .orElseThrow(() -> new TrainingNotFoundException("Subscription with that id cannot be found!"));
+    }
+
+    @Override
+    public void deleteById(final Long id){
+        subscriptionRepository.deleteById(id);
     }
 
     // @Override

@@ -62,6 +62,19 @@ public class SubscriptionController {
         return ResponseEntity.ok(new CheckApplyResponse(subscriptionService.checkApplyById(userId)));
     }
 
+    @PostMapping("/accept/{id}")
+    public ResponseEntity<SuccessMessage> acceptApply(@PathVariable("id") final Long id) {
+        Subscription subscription = subscriptionService.findById(id);
+        subscription.getGroupTraining().addFitUser(subscription.getFitUser());
+        return ResponseEntity.ok(new SuccessMessage("수락 완료"));
+    }
+
+    @PostMapping("/refuse/{id}")
+    public ResponseEntity<SuccessMessage> refuseApply(@PathVariable("id") final Long id) {
+        subscriptionService.deleteById(id);
+        return ResponseEntity.ok(new SuccessMessage("거절 완료"));
+    }
+
     // @PostMapping()
     // public ResponseEntity<SuccessMessage> add(@RequestBody AddSubscriptionTypeRequest request) {
     //     SubscriptionType subscriptionType =
