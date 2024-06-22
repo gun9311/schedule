@@ -4,7 +4,9 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -33,6 +35,8 @@ import ru.project.fitstyle.service.ScheduleService;
 import ru.project.fitstyle.service.TrainingService;
 import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.UserService;
+import ru.project.fitstyle.service.impl.firebase.FcmService;
+import ru.project.fitstyle.service.impl.token.FirebaseTokenService;
 
 
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
@@ -44,14 +48,19 @@ public class ScheduleController {
     private final AuthService authService;
     private final UserService userService;
     private final TrainingService trainingService;
+    private final FirebaseTokenService firebaseTokenService;
+    private final FcmService fcmService;
+    
 
     public ScheduleController(final ScheduleService scheduleService, final AuthService authService,
-                            final UserService userService, final TrainingService trainingService) {
+                            final UserService userService, final TrainingService trainingService,
+                            final FirebaseTokenService firebaseTokenService, final FcmService fcmService) {
         this.scheduleService = scheduleService;
         this.authService = authService;
         this.userService = userService;
         this.trainingService = trainingService;
-
+        this.firebaseTokenService = firebaseTokenService;
+        this.fcmService = fcmService;
     }
 
     @PostMapping("/add")
@@ -70,6 +79,28 @@ public class ScheduleController {
             fitUser, groupTraining);
 
         scheduleService.save(newSchedule);
+
+
+        String title = "일정";
+        String body = String.format("%s 일정이 추가되었습니다.", groupTraining.getTitle());
+
+        List<String> fcmTokens = new ArrayList<>();
+        List<FitUser> fitUsers = groupTraining.getFitUsers();
+
+        for (FitUser fitUser2 : fitUsers) {
+            Long fitUserId = fitUser2.getId();
+            String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
+            if (fcmToken != null && !fcmToken.isEmpty()) {
+                fcmTokens.add(fcmToken);
+            }
+        }
+        
+        if (fcmTokens.isEmpty()) {
+            for (String fcmToken2 : fcmTokens) {
+                fcmService.sendNotification(fcmToken2, title, body); 
+            }
+        }
+        
         return ResponseEntity.ok(
                 new SuccessMessage("Success! Schedule created!")
         );
@@ -79,5 +110,4 @@ public class ScheduleController {
     public ResponseEntity<ScheduleResponse> getScheduleByGroupId(@PathVariable("id") final Long id) {
         return ResponseEntity.ok(new ScheduleResponse(scheduleService.getScheduleByGroupId(id)));
     }
-
 }
