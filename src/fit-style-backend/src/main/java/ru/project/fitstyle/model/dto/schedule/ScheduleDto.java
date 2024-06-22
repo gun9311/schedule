@@ -12,6 +12,8 @@ public class ScheduleDto {
     private Long id;
     
     private String location;
+
+    private String description;
     
     private Date startTime;
 

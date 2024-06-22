@@ -1,6 +1,5 @@
 import React from 'react';
 import DateFormat from "../../../utils/DateConvert";
-import TrainingService from "../../../services/training/ScheduleService";
 
 export const ScheduleModalTrainingInfo = ({ setActive, eventInfo }) => {
     return (
@@ -9,11 +8,11 @@ export const ScheduleModalTrainingInfo = ({ setActive, eventInfo }) => {
                 <h4 className="title">일정 정보</h4>
                 <div className="d-flex justify-content-around">
                     <div>
-                        <label> 시작 시간 </label>
-                        <p><strong>{DateFormat.convertDataToTime(eventInfo.startTime)}, {DateFormat.convertDataToNormalData(eventInfo.startTime)}</strong></p>
+                        <label> 시작 </label>
+                        <p><strong>{DateFormat.convertDataToNormalData(eventInfo.startTime)}, {DateFormat.convertDataToTime(eventInfo.startTime)}</strong></p>
                     </div>
                     <div>
-                        <label> 종료 시간 </label>
+                        <label> 종료 </label>
                         <p><strong>{DateFormat.convertDataToTime(eventInfo.endTime)}, {DateFormat.convertDataToNormalData(eventInfo.endTime)}</strong></p>
                     </div>
                     <div>
@@ -21,8 +20,12 @@ export const ScheduleModalTrainingInfo = ({ setActive, eventInfo }) => {
                         <p><strong>{eventInfo.location}</strong></p>
                     </div>
                     <div>
-                        <label> 사용자 이름 </label>
+                        <label> 이름 </label>
                         <p><strong>{eventInfo.userName}</strong></p>
+                    </div>
+                    <div>
+                        <label> 설명 </label>
+                        <p><strong>{eventInfo.description}</strong></p>
                     </div>
                 </div>
                 <center>
@@ -33,6 +36,7 @@ export const ScheduleModalTrainingInfo = ({ setActive, eventInfo }) => {
             null
     );
 }
+
 
 
 // import React from 'react';

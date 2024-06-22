@@ -14,7 +14,7 @@ class DateConvert {
             year: 'numeric',
         };
 
-        return date.toLocaleString('ru', time ? optionsTime : options);
+        return date.toLocaleString('ko', time ? optionsTime : options);
     }
     convertDataToTime(str) {
         const date = new Date(str);
@@ -22,7 +22,7 @@ class DateConvert {
             hour: 'numeric',
             minute: 'numeric',
         };
-        return date.toLocaleString('ru', optionsTime);
+        return date.toLocaleString('ko', optionsTime);
     }
     convertDataTimeToData(str) {
         var time = this.convertDataToNormalData(str.split('T')[0]);
