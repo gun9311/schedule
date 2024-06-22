@@ -19,6 +19,8 @@ public interface SubscriptionService {
 
     void deleteById(final Long id);
 
+    void acceptApply(final Long id);
+
     // List<SubscriptionTypeDto> getAllSubscriptionTypes();
 
     // Subscription createFitUserSubscription(final Long subscriptionTypeId, final String contractNumber);

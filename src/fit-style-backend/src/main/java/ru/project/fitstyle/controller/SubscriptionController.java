@@ -64,8 +64,7 @@ public class SubscriptionController {
 
     @PostMapping("/accept/{id}")
     public ResponseEntity<SuccessMessage> acceptApply(@PathVariable("id") final Long id) {
-        Subscription subscription = subscriptionService.findById(id);
-        subscription.getGroupTraining().addFitUser(subscription.getFitUser());
+        subscriptionService.acceptApply(id);
         return ResponseEntity.ok(new SuccessMessage("수락 완료"));
     }
 

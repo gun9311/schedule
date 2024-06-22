@@ -12,7 +12,7 @@ class ToastMessages {
         return cogoToast.loading(msg, options);
     }
     defaultError() {
-        cogoToast.error("Произошла ошибка, повторите попытку позже", { position: TOP_RIGHT });
+        cogoToast.error("오류가 발생했습니다. 나중에 다시 시도하세요.", { position: TOP_RIGHT });
     }
 }
 

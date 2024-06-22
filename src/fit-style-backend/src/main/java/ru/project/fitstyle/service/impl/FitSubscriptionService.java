@@ -16,6 +16,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.transaction.Transactional;
+
 @Service
 public class FitSubscriptionService implements SubscriptionService {
 
@@ -48,10 +50,16 @@ public class FitSubscriptionService implements SubscriptionService {
     }
 
     @Override
+    @Transactional
+    public void acceptApply(final Long id) {
+        Subscription subscription = this.findById(id);
+        subscription.getGroupTraining().addFitUser(subscription.getFitUser());
+    }   
+
+    @Override
     public void deleteById(final Long id){
         subscriptionRepository.deleteById(id);
     }
-
     // @Override
     // public List<SubscriptionTypeDto> getAllSubscriptionTypes() {
     //     return subscriptionTypeRepository.findAllSubscriptions()
