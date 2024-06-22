@@ -21,7 +21,8 @@ const MemberListModal = ({ isOpen, onClose, groupId }) => {
     <div className="member-modal-backdrop" onClick={onClose}>
       <div className="member-modal-content" onClick={(e) => e.stopPropagation()}>
         <span className="close" onClick={onClose}>&times;</span>
-        <h2>{groupId}의 회원 목록</h2>
+        {/* <h2>{groupId}의 회원 목록</h2> */}
+        <h2>회원 목록</h2>
         <ul className="member-list">
           {members.map((member, index) => (
             <li key={member.id}>

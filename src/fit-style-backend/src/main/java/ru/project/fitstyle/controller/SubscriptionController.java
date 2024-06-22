@@ -16,6 +16,8 @@ import ru.project.fitstyle.service.SubscriptionService;
 import ru.project.fitstyle.service.TrainingService;
 import ru.project.fitstyle.service.AuthService;
 import ru.project.fitstyle.service.UserService;
+import ru.project.fitstyle.service.impl.firebase.FcmService;
+import ru.project.fitstyle.service.impl.token.FirebaseTokenService;
 
 
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
@@ -28,13 +30,18 @@ public class SubscriptionController {
     private final TrainingService trainingService;
     private final AuthService authService;
     private final UserService userService;
+    private final FirebaseTokenService firebaseTokenService;
+    private final FcmService fcmService;
 
     public SubscriptionController(final SubscriptionService subscriptionService, final TrainingService trainingService,
-                                final AuthService authService, final UserService userService) {
+                                final AuthService authService, final UserService userService,
+                                final FirebaseTokenService firebaseTokenService, final FcmService fcmService) {
         this.subscriptionService = subscriptionService;
         this.trainingService = trainingService;
         this.authService = authService;
         this.userService = userService;
+        this.firebaseTokenService = firebaseTokenService;
+        this.fcmService = fcmService;
     }
 
 
@@ -44,6 +51,11 @@ public class SubscriptionController {
         FitUser fitUser = userService.getUserByEmail(authService.getEmail());
         GroupTraining group = trainingService.getGroupTrainingById(id);
         subscriptionService.save(new Subscription(fitUser, group, new Date()));
+        
+        String title = "그룹"; // 필요에 따라 본문 메시지 설정
+        String body = String.format("%s 가입 요청이 있습니다.", group.getTitle()); // id를 제목에 포함
+        String fcmToken = firebaseTokenService.getTokenByUserId(group.getCoachId());
+        fcmService.sendNotification(fcmToken,title, body);
         return ResponseEntity.ok(new SuccessMessage("신청 완료!"));
     }
 
@@ -65,12 +77,28 @@ public class SubscriptionController {
     @PostMapping("/accept/{id}")
     public ResponseEntity<SuccessMessage> acceptApply(@PathVariable("id") final Long id) {
         subscriptionService.acceptApply(id);
+        
+        Long fitUserId = subscriptionService.findById(id).getFitUser().getId();
+        String groupName = subscriptionService.findById(id).getGroupTraining().getTitle();
+
+        String title = "그룹";
+        String body = String.format("%s 가입이 수락되었습니다.", groupName);
+        String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
+        fcmService.sendNotification(fcmToken,title, body);
         return ResponseEntity.ok(new SuccessMessage("수락 완료"));
     }
 
     @PostMapping("/refuse/{id}")
     public ResponseEntity<SuccessMessage> refuseApply(@PathVariable("id") final Long id) {
         subscriptionService.deleteById(id);
+
+        Long fitUserId = subscriptionService.findById(id).getFitUser().getId();
+        String groupName = subscriptionService.findById(id).getGroupTraining().getTitle();
+
+        String title = "그룹";
+        String body = String.format("%s 가입이 거절되었습니다.", groupName);
+        String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
+        fcmService.sendNotification(fcmToken,title, body);
         return ResponseEntity.ok(new SuccessMessage("거절 완료"));
     }
 

@@ -1,9 +1,12 @@
 package ru.project.fitstyle.service.impl.firebase;
 
+import org.springframework.stereotype.Service;
+
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
 import com.google.firebase.messaging.Notification;
 
+@Service
 public class FcmService {
 
     public String sendNotification(String token, String title, String body) {

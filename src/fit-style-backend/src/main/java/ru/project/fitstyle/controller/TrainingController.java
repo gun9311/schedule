@@ -30,10 +30,13 @@ import java.util.List;
 
 import javax.transaction.Transactional;
 
+import com.sun.org.apache.xpath.internal.functions.FunctionMultiArgs;
+
 import ru.project.fitstyle.controller.response.training.UpdateTrainingResponse;
 import ru.project.fitstyle.controller.response.user.GroupMembersResponse;
 import ru.project.fitstyle.model.dto.training.GroupTrainingDto;
 import ru.project.fitstyle.model.entity.training.ApplyTrainingStatus;
+import ru.project.fitstyle.service.impl.firebase.FcmService;
 
 @CrossOrigin(origins = "https://gunryul.store", maxAge = 3600)
 @RestController
