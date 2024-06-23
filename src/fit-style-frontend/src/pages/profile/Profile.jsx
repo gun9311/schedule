@@ -24,7 +24,7 @@ const Profile = ({ userInfo, setUserInfo,originalId }) => {
     };
 
     return (
-        <div className="container profile-info center-block">
+        <div className="profile-container profile-info center-block">
             <div className="d-flex justify-content-between">
                 <div className="left-image d-flex flex-column">
                     {/* <img className="picture-profile" src={userInfo.imgURL ?? ProfilePicture} alt={userInfo.name + " photo"} /> */}
