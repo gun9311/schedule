@@ -116,7 +116,7 @@ public class AuthController {
      * Logout. Used if jwt and refresh token are expired
      * */
     @GetMapping("/logout")
-    @PreAuthorize("hasRole('USER')")
+    @PreAuthorize("hasRole('USER') || hasRole('MODERATOR')")
     public ResponseEntity<SuccessMessage> logoutUser() {
         userService.logoutUserByEmail(authService.getEmail());
         return ResponseEntity.ok(
