@@ -84,7 +84,7 @@ public class ScheduleController {
 
 
         String title = "일정";
-        String body = String.format("%s 일정이 추가되었습니다.", groupTraining.getTitle());
+        String body = String.format("'%s' 일정이 추가되었습니다.", groupTraining.getTitle());
 
         List<String> fcmTokens = new ArrayList<>();
         List<FitUser> fitUsers = groupTraining.getFitUsers();

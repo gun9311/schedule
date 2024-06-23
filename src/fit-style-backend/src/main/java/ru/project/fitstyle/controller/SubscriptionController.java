@@ -52,8 +52,8 @@ public class SubscriptionController {
         GroupTraining group = trainingService.getGroupTrainingById(id);
         subscriptionService.save(new Subscription(fitUser, group, new Date()));
         
-        String title = "그룹"; // 필요에 따라 본문 메시지 설정
-        String body = String.format("%s 가입 요청이 있습니다.", group.getTitle()); 
+        String title = "그룹"; 
+        String body = String.format("'%s' 가입 요청이 있습니다.", group.getTitle()); 
         String fcmToken = firebaseTokenService.getTokenByUserId(group.getCoachId());
 
         if (fcmToken != null && !fcmToken.isEmpty()) {
@@ -79,31 +79,35 @@ public class SubscriptionController {
 
     @PostMapping("/accept/{id}")
     public ResponseEntity<SuccessMessage> acceptApply(@PathVariable("id") final Long id) {
-        subscriptionService.acceptApply(id);
         
-        Long fitUserId = subscriptionService.findById(id).getFitUser().getId();
-        String groupName = subscriptionService.findById(id).getGroupTraining().getTitle();
+        Subscription subscription = subscriptionService.findById(id);
+        Long fitUserId = subscription.getFitUser().getId();
+        String groupName = subscription.getGroupTraining().getTitle();
+        
+        subscriptionService.acceptApply(id);
 
         String title = "그룹";
-        String body = String.format("%s 가입이 수락되었습니다.", groupName);
+        String body = String.format("'%s' 가입이 수락되었습니다.", groupName);
         String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
         
         if (fcmToken != null && !fcmToken.isEmpty()) {
             fcmService.sendNotification(fcmToken, title, body); 
         }
-
+        
         return ResponseEntity.ok(new SuccessMessage("수락 완료"));
     }
 
     @PostMapping("/refuse/{id}")
     public ResponseEntity<SuccessMessage> refuseApply(@PathVariable("id") final Long id) {
+        
+        Subscription subscription = subscriptionService.findById(id);
+        Long fitUserId = subscription.getFitUser().getId();
+        String groupName = subscription.getGroupTraining().getTitle();
+        
         subscriptionService.deleteById(id);
 
-        Long fitUserId = subscriptionService.findById(id).getFitUser().getId();
-        String groupName = subscriptionService.findById(id).getGroupTraining().getTitle();
-
         String title = "그룹";
-        String body = String.format("%s 가입이 거절되었습니다.", groupName);
+        String body = String.format("'%s' 가입이 거절되었습니다.", groupName);
         String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
         
         if (fcmToken != null && !fcmToken.isEmpty()) {
