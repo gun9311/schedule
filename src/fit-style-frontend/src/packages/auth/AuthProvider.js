@@ -68,7 +68,7 @@ export function AuthProvider({ children }) {
       .logout()
       .then(
         () => {
-          ToastMessages.success("До встречи!", TOP_RIGHT);
+          ToastMessages.success("또 봐요!", TOP_RIGHT);
         },
         (error) => {
           console.error(error);
