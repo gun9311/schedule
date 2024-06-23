@@ -11,6 +11,8 @@ import ru.project.fitstyle.service.SubscriptionService;
 import ru.project.fitstyle.service.exception.subscription.SubscriptionAlreadyExistsException;
 import ru.project.fitstyle.service.exception.subscription.SubscriptionTypeNotFoundException;
 import ru.project.fitstyle.service.exception.training.TrainingNotFoundException;
+import ru.project.fitstyle.service.impl.firebase.FcmService;
+import ru.project.fitstyle.service.impl.token.FirebaseTokenService;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -22,10 +24,15 @@ import javax.transaction.Transactional;
 public class FitSubscriptionService implements SubscriptionService {
 
     private final SubscriptionRepository subscriptionRepository;
+    private final FirebaseTokenService firebaseTokenService;
+    private final FcmService fcmService;
 
     @Autowired
-    public FitSubscriptionService(final SubscriptionRepository subscriptionRepository) {
+    public FitSubscriptionService(final SubscriptionRepository subscriptionRepository,
+                                final FirebaseTokenService firebaseTokenService, final FcmService fcmService) {
         this.subscriptionRepository = subscriptionRepository;
+        this.firebaseTokenService = firebaseTokenService;
+        this.fcmService = fcmService;
     }
 
     @Override
@@ -54,14 +61,41 @@ public class FitSubscriptionService implements SubscriptionService {
     public void acceptApply(final Long id) {
         Subscription subscription = this.findById(id);
         subscription.getGroupTraining().addFitUser(subscription.getFitUser());
+
+        Long fitUserId = subscription.getFitUser().getId();
+        String groupName = subscription.getGroupTraining().getTitle();
+        
+        String title = "그룹";
+        String body = String.format("'%s' 가입이 수락되었습니다.", groupName);
+        String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
+        
+        if (fcmToken != null && !fcmToken.isEmpty()) {
+            fcmService.sendNotification(fcmToken, title, body); 
+        }
+
         this.deleteById(id);
     }   
 
     @Override
     @Transactional
     public void deleteById(final Long id){
+
+        Subscription subscription = this.findById(id);
+        Long fitUserId = subscription.getFitUser().getId();
+        String groupName = subscription.getGroupTraining().getTitle();
+        
+
+        String title = "그룹";
+        String body = String.format("'%s' 가입이 거절되었습니다.", groupName);
+        String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
+        
+        if (fcmToken != null && !fcmToken.isEmpty()) {
+            fcmService.sendNotification(fcmToken, title, body); 
+        }
+        
         subscriptionRepository.deleteById(id);
     }
+    
     // @Override
     // public List<SubscriptionTypeDto> getAllSubscriptionTypes() {
     //     return subscriptionTypeRepository.findAllSubscriptions()

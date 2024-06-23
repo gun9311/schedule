@@ -80,39 +80,16 @@ public class SubscriptionController {
     @PostMapping("/accept/{id}")
     public ResponseEntity<SuccessMessage> acceptApply(@PathVariable("id") final Long id) {
         
-        Subscription subscription = subscriptionService.findById(id);
-        Long fitUserId = subscription.getFitUser().getId();
-        String groupName = subscription.getGroupTraining().getTitle();
-        
         subscriptionService.acceptApply(id);
-
-        String title = "그룹";
-        String body = String.format("'%s' 가입이 수락되었습니다.", groupName);
-        String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
-        
-        if (fcmToken != null && !fcmToken.isEmpty()) {
-            fcmService.sendNotification(fcmToken, title, body); 
-        }
         
         return ResponseEntity.ok(new SuccessMessage("수락 완료"));
     }
 
     @PostMapping("/refuse/{id}")
     public ResponseEntity<SuccessMessage> refuseApply(@PathVariable("id") final Long id) {
-        
-        Subscription subscription = subscriptionService.findById(id);
-        Long fitUserId = subscription.getFitUser().getId();
-        String groupName = subscription.getGroupTraining().getTitle();
+    
         
         subscriptionService.deleteById(id);
-
-        String title = "그룹";
-        String body = String.format("'%s' 가입이 거절되었습니다.", groupName);
-        String fcmToken = firebaseTokenService.getTokenByUserId(fitUserId);
-        
-        if (fcmToken != null && !fcmToken.isEmpty()) {
-            fcmService.sendNotification(fcmToken, title, body); 
-        }
         
         return ResponseEntity.ok(new SuccessMessage("거절 완료"));
     }
