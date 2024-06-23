@@ -29,7 +29,11 @@ export const ArticleBoard = () => {
         article.getArticle(rowNum).then(
             response => {
                 let rowArticleData = response.data.article;
-                rowArticleData.map(value => value.time = DateFormat.convertDataTimeToData(value.time))
+                rowArticleData.map(value => {
+                    console.log("original time", value.time)
+                    value.time = DateFormat.convertDataTimeToData(value.time)
+                    console.log("chage time", value.time)
+                });
                 // getArticleImages(rowArticleData).then(
                 //     response => {
                 //         rowArticleData = response;
