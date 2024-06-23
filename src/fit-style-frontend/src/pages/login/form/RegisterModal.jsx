@@ -35,9 +35,9 @@ export const RegisterModal = ({ isActive, setIsActive }) => {
             validationErrors.name = "이름을 입력하세요.";
         }
 
-        if (isEmpty(gender)) {
-            validationErrors.gender = "성별을 선택하세요.";
-        }
+        // if (isEmpty(gender)) {
+        //     validationErrors.gender = "성별을 선택하세요.";
+        // }
 
         if (!isEmpty(phoneNumber.value) && !/^\d{3}\d{3,4}\d{4}$/.test(phoneNumber.value)) {
             validationErrors.phoneNumber = "전화번호를 올바르게 입력하세요 (01012345678)";

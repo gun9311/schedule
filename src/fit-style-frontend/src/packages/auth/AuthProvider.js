@@ -46,7 +46,7 @@ export function AuthProvider({ children }) {
       .catch((error) => {
         console.log(error);
         if (error?.response?.data?.message === "Bad credentials") {
-          ToastMessages.error("Неверные данные");
+          ToastMessages.error("아이디 또는 비밀번호가 틀렸습니다");
         } else {
           ToastMessages.defaultError();
         }

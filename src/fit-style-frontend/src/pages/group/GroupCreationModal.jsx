@@ -5,24 +5,28 @@ const GroupCreationModal = ({ isOpen, onClose, onSubmitCreate }) => {
   const [title, setTeamName] = useState('');
   const [description, setDescription] = useState('');
   const [category, setCategory] = useState('서핑'); 
-
+  const [error, setError] = useState('');
 
   const typeId = (category) => {
     if (category === "서핑") {
-        return 1
+        return 1;
     } else if(category === "스노우보드"){
-        return 2
+        return 2;
+    } else {
+        return 3;
     }
-    else {
-        return 3
-    }
-  }
+  };
 
   const handleSubmit = () => {
+    if (!title || !description) {
+      setError('팀명과 소개는 반드시 입력해야 합니다.');
+      return;
+    }
+
     const newGroup = {
       title,
       description,
-      trainingId : typeId(category),
+      trainingId: typeId(category),
     };
     onSubmitCreate(newGroup);
     onClose(); 
@@ -39,19 +43,26 @@ const GroupCreationModal = ({ isOpen, onClose, onSubmitCreate }) => {
         onClick={(e) => e.stopPropagation()} 
       >
         <h2>그룹 생성</h2>
+        {error && <p className="error-message">{error}</p>}
         <div className="form-group"> {/* 폼 그룹 */}
           <label>팀명</label>
           <input
             type="text"
             value={title}
-            onChange={(e) => setTeamName(e.target.value)} 
+            onChange={(e) => {
+              setTeamName(e.target.value);
+              setError('');
+            }}
           />
         </div>
         <div className="form-group"> 
           <label>소개</label>
           <textarea
             value={description}
-            onChange={(e) => setDescription(e.target.value)} 
+            onChange={(e) => {
+              setDescription(e.target.value);
+              setError('');
+            }} 
           />
         </div>
         <div className="form-group"> 
@@ -65,9 +76,9 @@ const GroupCreationModal = ({ isOpen, onClose, onSubmitCreate }) => {
             <option value="스케이트보드">스케이트보드</option>
           </select>
         </div>
-        <div className="butto-group">
-            <button className="button" onClick={handleSubmit}>생성하기</button>
-            <button className="button" onClick={onClose}>취소</button>
+        <div className="button-group">
+          <button className="button" onClick={handleSubmit}>생성하기</button>
+          <button className="button" onClick={onClose}>취소</button>
         </div>
       </div>
     </div>
