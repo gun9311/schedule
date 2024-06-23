@@ -34,9 +34,9 @@ class DateConvert {
     
     //     return `${yearFormatted}-${monthFormatted}-${dayFormatted}`; // 원하는 형식으로 반환
     // }
-    convertDataTimeToData(str)  {
+    convertDataTimeToData(str) {
         // 문자열에서 T를 기준으로 분리
-        const dateTimeParts = str.split(' ');
+        const dateTimeParts = str.split('T');
         const datePart = dateTimeParts[0];
         
         // 날짜 형식을 연, 월, 일로 분리
