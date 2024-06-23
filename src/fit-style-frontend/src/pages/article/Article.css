@@ -81,7 +81,7 @@
     left: 35%;
     transition: 0.1s ease-in;
     text-align: center;
-    font-size: 0.8rem;
+    font-size: 1rem;
 }
 
 .content-news-text::-webkit-scrollbar {

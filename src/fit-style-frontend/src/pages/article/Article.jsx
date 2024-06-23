@@ -29,13 +29,13 @@ const Article = ({deleteMode, content, deleteArticle}) => {
             {deleteMode && <CloseBtn onClickEvent={() => deleteArticle(content.id)}/> }
             <h4 className="title">{content.title}</h4>
             <div className="dateTime">
-                <h5>{content.time}</h5>
+                <p>{content.time}</p>
             </div>
             <div className="content-news d-flex flex-column"  onClick={() => handleClick(content.href)}>
                 <h3 className="title-news">{content.title}</h3>
                 <h6 className="content-news-text fw-light">{content.content}</h6>
                 <div>
-                    <h5>{content.time}</h5>
+                    <p>{content.time}</p>
                 </div>
             </div>
         </div>
